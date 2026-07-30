@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AdminBilingualEditor from "./AdminBilingualEditor";
 
 export const metadata: Metadata = {
   title: "Admin Design Preview",
@@ -121,6 +122,7 @@ export default function AdminPage() {
             ఇది విజువల్ డిజైన్ ప్రివ్యూ మాత్రమే. Supabase Auth, RLS మరియు admin
             allowlist కనెక్ట్ అయ్యే వరకు ఎడిటింగ్ ఉద్దేశపూర్వకంగా నిలిపివేయబడింది.
           </div>
+          <AdminBilingualEditor />
         </section>
       </div>
     </main>
