@@ -1,30 +1,36 @@
 <header class="site-header">
   <div class="site-header__inner container">
-    <a class="brand" href="#home" aria-label="Pratyusha Mangalagiri home">
+    <a
+      class="brand"
+      [href]="localeService.isTelugu() ? '/te#home' : '/#home'"
+      aria-label="Pratyusha Mangalagiri home"
+    >
       <span class="brand__mark" aria-hidden="true"><span>PM</span></span>
       <span class="brand__name">
         <strong>Pratyusha</strong>
-        <small>CLARITY · PRESENCE · GROWTH</small>
+        <small>{{ content().brandTagline }}</small>
       </span>
     </a>
 
-    <app-desktop-navigation [label]="copy().navLabel" [links]="copy().links" />
+    <app-desktop-navigation [label]="content().navLabel" [links]="content().nav" />
 
     <div class="site-header__actions">
       <app-language-switcher
         class="site-header__language"
-        [locale]="localeService.locale()"
-        [label]="copy().languageLabel"
-        (localeChange)="localeService.setLocale($event)"
+        [locale]="localeService.language()"
+        [label]="content().languageLabel"
+        [englishLabel]="content().englishSwitchLabel"
+        [teluguLabel]="content().teluguSwitchLabel"
+        (localeChange)="changeLanguage($event)"
       />
-      <app-ui-button class="site-header__cta" href="#contact" [label]="copy().cta" />
+      <app-ui-button class="site-header__cta" href="#contact" [label]="content().headerCta" />
       <button
         #menuButton
         type="button"
         class="menu-trigger"
         aria-controls="mobile-navigation"
         [attr.aria-expanded]="menuOpen()"
-        [attr.aria-label]="copy().openLabel"
+        [attr.aria-label]="content().openMenu"
         (click)="menuOpen.set(true)"
       >
         <span></span><span></span><span></span>
@@ -36,11 +42,14 @@
 <app-mobile-navigation
   id="mobile-navigation"
   [open]="menuOpen()"
-  [links]="copy().links"
-  [label]="copy().mobileLabel"
-  [closeLabel]="copy().closeLabel"
-  [note]="copy().note"
-  [locale]="localeService.locale()"
-  (localeChange)="localeService.setLocale($event)"
+  [links]="content().nav"
+  [label]="content().mobileNavLabel"
+  [closeLabel]="content().closeMenu"
+  [note]="content().mobileNote"
+  [locale]="localeService.language()"
+  [languageLabel]="content().languageLabel"
+  [englishLabel]="content().englishSwitchLabel"
+  [teluguLabel]="content().teluguSwitchLabel"
+  (localeChange)="changeLanguage($event)"
   (closeMenu)="closeMenu()"
 />

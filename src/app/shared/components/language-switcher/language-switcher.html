@@ -3,9 +3,10 @@
     type="button"
     [class.is-active]="locale() === 'en'"
     [attr.aria-pressed]="locale() === 'en'"
+    [attr.aria-label]="englishLabel()"
     (click)="select('en')"
   >
-    EN
+    English
   </button>
   <span aria-hidden="true"></span>
   <button
@@ -13,6 +14,7 @@
     lang="te"
     [class.is-active]="locale() === 'te'"
     [attr.aria-pressed]="locale() === 'te'"
+    [attr.aria-label]="teluguLabel()"
     (click)="select('te')"
   >
     తెలుగు

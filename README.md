@@ -1,6 +1,6 @@
 # Pratyusha Mangalagiri — Angular application
 
-Production-oriented Angular SSR foundation and bilingual premium design system for the Pratyusha Mangalagiri website. Step 2 includes the shared public layout, reusable UI components, and local design preview without backend integration.
+Production-oriented Angular SSR website for Pratyusha Mangalagiri. Step 3 includes the complete bilingual English/Telugu public sales page, accessible route-aware language switching, local preference persistence, and a non-submitting reactive enquiry form.
 
 ## Runtime
 
@@ -54,16 +54,16 @@ src/app/
     settings/
 ```
 
-See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, and `docs/react-reference-inventory.md` for the read-only inventory of the approved reference branch.
+See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, `docs/react-reference-inventory.md` for the read-only reference inventory, and `docs/STEP_3_REPORT.md` for approved and pending content.
 
 ## Environment and secrets
 
 `.env.example` documents future server-side configuration. Real `.env` files are ignored. Never commit private keys, service-role credentials, tokens, customer data, or production connection strings. Values shipped to browser bundles must be treated as public.
 
-## Step 2 boundaries
+## Step 3 boundaries
 
 - No React, Vite, Vinext, or Next.js runtime has been copied into this application.
-- The public UI is a bilingual design-system preview, not a backend-connected production page.
-- Form controls never submit or store lead information.
+- The public UI serves English at `/` and Telugu at `/te`.
+- The reactive enquiry form validates locally and never submits, logs, or stores lead information.
 - No document export or generation feature or dependency is included.
 - Local approval artifacts under `output/` remain ignored and uncommitted.

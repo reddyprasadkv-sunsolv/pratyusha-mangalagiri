@@ -1,0 +1,6 @@
+<section class="legal-placeholder container" aria-labelledby="legal-title">
+  <p>{{ copy().eyebrow }}</p>
+  <h1 id="legal-title">{{ title() }}</h1>
+  <div role="status">{{ copy().notice }}</div>
+  <a [href]="localeService.isTelugu() ? '/te' : '/'">{{ copy().home }} →</a>
+</section>

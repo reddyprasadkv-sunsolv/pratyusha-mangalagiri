@@ -1,0 +1,42 @@
+.legal-placeholder {
+  min-height: 60vh;
+  padding-block: var(--section-space);
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.5rem;
+}
+
+.legal-placeholder > p {
+  color: var(--color-accent-700);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+h1 {
+  color: var(--color-brand-950);
+  font-family: var(--font-serif-en);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+}
+
+[role='status'] {
+  max-width: 42rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--color-accent-600);
+  background: var(--color-surface-100);
+  color: var(--color-text-muted);
+}
+
+a {
+  color: var(--color-brand-800);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+:host-context([data-locale='te']) h1 {
+  font-family: var(--font-serif-te);
+  line-height: 1.65;
+}

@@ -12,6 +12,8 @@ import { Locale } from '../../models/public-site.models';
 export class LanguageSwitcher {
   readonly locale = input.required<Locale>();
   readonly label = input('Choose language');
+  readonly englishLabel = input('English selected');
+  readonly teluguLabel = input('Switch website language to Telugu');
   readonly localeChange = output<Locale>();
 
   protected select(locale: Locale): void {

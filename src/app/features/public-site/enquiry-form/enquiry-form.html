@@ -1,0 +1,134 @@
+<form class="enquiry-form" [formGroup]="form" (ngSubmit)="submitPreview()" novalidate>
+  <h3>{{ copy().heading }}</h3>
+
+  <div class="enquiry-form__row">
+    <app-form-field [label]="copy().name" controlId="enquiry-name" [error]="errorFor('name')">
+      <input
+        id="enquiry-name"
+        class="form-control"
+        type="text"
+        formControlName="name"
+        autocomplete="name"
+        maxlength="80"
+        [placeholder]="copy().namePlaceholder"
+        [attr.aria-invalid]="errorFor('name') ? 'true' : null"
+        [attr.aria-describedby]="errorFor('name') ? 'enquiry-name-error' : null"
+      />
+    </app-form-field>
+
+    <app-form-field [label]="copy().mobile" controlId="enquiry-mobile" [error]="errorFor('mobile')">
+      <input
+        id="enquiry-mobile"
+        class="form-control"
+        type="tel"
+        inputmode="numeric"
+        formControlName="mobile"
+        autocomplete="tel"
+        maxlength="10"
+        [placeholder]="copy().mobilePlaceholder"
+        [attr.aria-invalid]="errorFor('mobile') ? 'true' : null"
+        [attr.aria-describedby]="errorFor('mobile') ? 'enquiry-mobile-error' : null"
+      />
+    </app-form-field>
+  </div>
+
+  <div class="enquiry-form__row">
+    <app-form-field
+      [label]="copy().email"
+      controlId="enquiry-email"
+      [optionalLabel]="copy().optional"
+      [error]="errorFor('email')"
+    >
+      <input
+        id="enquiry-email"
+        class="form-control"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        maxlength="120"
+        [placeholder]="copy().emailPlaceholder"
+        [attr.aria-invalid]="errorFor('email') ? 'true' : null"
+        [attr.aria-describedby]="errorFor('email') ? 'enquiry-email-error' : null"
+      />
+    </app-form-field>
+
+    <app-form-field
+      [label]="copy().city"
+      controlId="enquiry-city"
+      [optionalLabel]="copy().optional"
+      [error]="errorFor('city')"
+    >
+      <input
+        id="enquiry-city"
+        class="form-control"
+        type="text"
+        formControlName="city"
+        autocomplete="address-level2"
+        maxlength="80"
+        [placeholder]="copy().cityPlaceholder"
+        [attr.aria-invalid]="errorFor('city') ? 'true' : null"
+        [attr.aria-describedby]="errorFor('city') ? 'enquiry-city-error' : null"
+      />
+    </app-form-field>
+  </div>
+
+  <app-form-field
+    [label]="copy().requirement"
+    controlId="enquiry-requirement"
+    [error]="errorFor('requirement')"
+  >
+    <select
+      id="enquiry-requirement"
+      class="form-control"
+      formControlName="requirement"
+      [attr.aria-invalid]="errorFor('requirement') ? 'true' : null"
+      [attr.aria-describedby]="errorFor('requirement') ? 'enquiry-requirement-error' : null"
+    >
+      <option value="">{{ copy().requirementPlaceholder }}</option>
+      @for (option of copy().requirementOptions; track option[0]) {
+        <option [value]="option[0]">{{ option[1] }}</option>
+      }
+    </select>
+  </app-form-field>
+
+  <app-form-field
+    [label]="copy().message"
+    controlId="enquiry-message"
+    [optionalLabel]="copy().optional"
+    [error]="errorFor('message')"
+  >
+    <textarea
+      id="enquiry-message"
+      class="form-control"
+      formControlName="message"
+      maxlength="1000"
+      [placeholder]="copy().messagePlaceholder"
+      [attr.aria-invalid]="errorFor('message') ? 'true' : null"
+      [attr.aria-describedby]="errorFor('message') ? 'enquiry-message-error' : null"
+    ></textarea>
+  </app-form-field>
+
+  <div class="enquiry-form__consent">
+    <label>
+      <input
+        type="checkbox"
+        formControlName="consent"
+        [attr.aria-invalid]="errorFor('consent') ? 'true' : null"
+        [attr.aria-describedby]="errorFor('consent') ? 'enquiry-consent-error' : null"
+      />
+      <span>{{ copy().consent }}</span>
+    </label>
+    @if (errorFor('consent'); as consentError) {
+      <p id="enquiry-consent-error" role="alert">{{ consentError }}</p>
+    }
+  </div>
+
+  <div class="enquiry-form__footer">
+    <app-ui-button [label]="copy().submit" type="submit" />
+    <p>{{ copy().privacy }}</p>
+  </div>
+
+  @if (developmentMessage(); as notice) {
+    <p class="enquiry-form__notice" role="status">{{ notice }}</p>
+  }
+</form>

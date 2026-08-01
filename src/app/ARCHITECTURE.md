@@ -13,4 +13,4 @@ The application keeps reusable design primitives separate from public feature co
 - `features/legal/`: bilingual legal routes and content
 - `features/settings/`: site, integration, and account settings
 
-The Step 2 public preview is implemented under `features/public-site/design-system-page`. Shared components remain input-driven and backend-independent so future public, legal, and administrative pages can reuse them.
+The Step 3 page is implemented under `features/public-site/public-sales-page`, with a typed local content layer under `features/public-site/content` and the non-submitting reactive form under `features/public-site/enquiry-form`. Shared components remain input-driven and backend-independent so later Supabase-backed content can replace local content without rebuilding the presentation layer.

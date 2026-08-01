@@ -1,12 +1,13 @@
 <figure class="image-card">
   <div class="image-card__frame">
     <img
-      [src]="src()"
+      [ngSrc]="src()"
       [alt]="alt()"
       width="1086"
       height="1448"
-      [attr.fetchpriority]="priority() ? 'high' : 'auto'"
-      [attr.loading]="priority() ? 'eager' : 'lazy'"
+      ngSrcset="360w, 720w, 1086w"
+      sizes="(max-width: 768px) 84vw, 38vw"
+      [priority]="priority()"
     />
     @if (badge()) {
       <span class="image-card__badge">{{ badge() }}</span>

@@ -4,4 +4,7 @@
     {{ actionLabel() }}
     <span aria-hidden="true">→</span>
   </a>
+  @if (dismissible()) {
+    <button type="button" [attr.aria-label]="closeLabel()" (click)="dismiss.emit()">×</button>
+  }
 </aside>
