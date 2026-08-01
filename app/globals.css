@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Serif+Telugu:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -13,7 +14,7 @@
   --line: rgba(75, 34, 56, 0.16);
   --serif-te: "Noto Serif Telugu", Georgia, serif;
   --sans-te: "Noto Sans Telugu", "Nirmala UI", sans-serif;
-  --sans-en: "DM Sans", Arial, sans-serif;
+  --sans-en: "Manrope", Arial, sans-serif;
 }
 
 * {
@@ -33,6 +34,18 @@ body {
   line-height: 1.75;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+body[data-locale="en"] {
+  font-family: var(--sans-en);
+}
+
+main[data-locale="en"] h1,
+main[data-locale="en"] h2,
+main[data-locale="en"] h3,
+main[data-locale="en"] blockquote {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.025em;
 }
 
 a {
@@ -168,6 +181,52 @@ img {
   font-weight: 500;
 }
 
+.language-switcher {
+  min-height: 44px;
+  padding: 3px;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 253, 248, 0.76);
+  color: var(--muted);
+}
+
+.language-switcher > span {
+  color: var(--line);
+  font-size: 12px;
+}
+
+.language-switcher button {
+  min-width: 74px;
+  min-height: 38px;
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--sans-en), var(--sans-te);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.language-switcher button.is-active {
+  background: var(--plum);
+  color: white;
+  box-shadow: 0 5px 13px rgba(75, 34, 56, 0.16);
+}
+
+.language-switcher button:not(.is-active):hover {
+  color: var(--plum);
+}
+
+.language-switcher--compact button {
+  min-width: 63px;
+}
+
 .desktop-nav a {
   position: relative;
 }
@@ -275,6 +334,12 @@ img {
 .mobile-menu > p {
   width: min(540px, calc(100% - 48px));
   margin-inline: auto;
+}
+
+.mobile-menu__language {
+  width: min(540px, calc(100% - 48px));
+  margin: 0 auto 18px;
+  display: none;
 }
 
 .mobile-menu nav {
@@ -495,6 +560,11 @@ img {
   object-fit: cover;
   object-position: 73% center;
   transform: scale(1.04);
+}
+
+.hero__image-frame--client img {
+  object-position: 50% 18%;
+  transform: none;
 }
 
 .hero__image-overlay {
@@ -1110,6 +1180,11 @@ img {
   transform: scale(1.38);
 }
 
+.about-portrait--client img {
+  object-position: 50% 12%;
+  transform: scale(1.02);
+}
+
 .about-portrait::after {
   content: "";
   position: absolute;
@@ -1643,6 +1718,12 @@ img {
   justify-content: space-between;
 }
 
+.simple-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
 .simple-header__inner > a:last-child {
   color: var(--plum);
   font-size: 12px;
@@ -1925,6 +2006,219 @@ img {
   font-size: 10px;
 }
 
+.admin-editor {
+  margin-top: 18px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: white;
+}
+
+.admin-editor__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.admin-editor__heading small {
+  color: var(--gold);
+  font-family: var(--sans-en);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+}
+
+.admin-editor__heading h2 {
+  margin: 4px 0 0;
+  color: var(--plum);
+  font-family: var(--serif-te);
+  font-size: 22px;
+}
+
+.admin-editor__heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.admin-language-tabs {
+  margin-top: 24px;
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-language-tabs button {
+  min-height: 45px;
+  padding: 8px 18px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.admin-language-tabs button.is-active {
+  border-color: var(--gold);
+  color: var(--plum);
+  font-weight: 700;
+}
+
+.admin-language-tabs button span {
+  margin-left: 8px;
+  padding: 3px 7px;
+  border-radius: 20px;
+  background: #f4efe8;
+  color: var(--muted);
+  font-size: 7px;
+}
+
+.admin-editor__grid {
+  padding-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 30px;
+}
+
+.admin-content-form {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-content-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--plum);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.admin-content-form input,
+.admin-content-form textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  outline: 0;
+  background: #fffdf9;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 400;
+  resize: vertical;
+}
+
+.admin-content-form input:focus,
+.admin-content-form textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184, 148, 86, 0.12);
+}
+
+.admin-content-form label small,
+.admin-field-note {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.admin-workflow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-workflow button,
+.admin-workflow a,
+.admin-media-actions button {
+  min-height: 38px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: white;
+  color: var(--plum);
+  font-size: 9px;
+}
+
+.admin-workflow a {
+  border-color: var(--plum);
+  background: var(--plum);
+  color: white;
+}
+
+.admin-workflow button:disabled,
+.admin-media-actions button:disabled {
+  color: #a99ea2;
+  cursor: not-allowed;
+}
+
+.admin-field-note {
+  margin: -5px 0 0;
+}
+
+.admin-media-preview {
+  padding: 16px;
+  border: 1px solid #eee6df;
+  border-radius: 6px;
+  background: #faf7f2;
+}
+
+.admin-media-preview__image {
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #ded3c8;
+}
+
+.admin-media-preview__image img {
+  object-fit: cover;
+  object-position: 50% 15%;
+}
+
+.admin-media-preview h3 {
+  margin: 13px 0 0;
+  color: var(--plum);
+  font-size: 12px;
+}
+
+.admin-media-preview > p {
+  margin: 2px 0 10px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.admin-media-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.admin-media-actions button:last-child {
+  grid-column: 1 / -1;
+}
+
+.admin-media-preview > small {
+  margin-top: 10px;
+  display: block;
+  color: var(--muted);
+  font-size: 7px;
+  line-height: 1.6;
+}
+
+.admin-editor__meta {
+  margin-top: 22px;
+  padding-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 8px;
+}
+
 @media (max-width: 1050px) {
   .desktop-nav {
     display: none;
@@ -1934,8 +2228,12 @@ img {
     display: block;
   }
 
-  .header__cta {
+  .header__inner > .language-switcher {
     margin-left: auto;
+  }
+
+  .header__cta {
+    margin-left: 0;
   }
 
   .hero__grid {
@@ -1974,6 +2272,10 @@ img {
 
   .header__cta {
     display: none;
+  }
+
+  .mobile-menu__language {
+    display: block;
   }
 
   .hero__grid,
@@ -2096,6 +2398,10 @@ img {
   .admin-grid {
     grid-template-columns: 1fr;
   }
+
+  .admin-editor__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 520px) {
@@ -2109,6 +2415,23 @@ img {
 
   .brand small {
     font-size: 6px;
+  }
+
+  .header__inner > .language-switcher {
+    display: none;
+  }
+
+  .simple-header__actions > .language-switcher {
+    display: none;
+  }
+
+  .simple-header__actions > a {
+    font-size: 0;
+  }
+
+  .simple-header__actions > a::after {
+    content: "←";
+    font-size: 18px;
   }
 
   .hero__actions {
@@ -2196,6 +2519,23 @@ img {
 
   .admin-stats {
     grid-template-columns: 1fr;
+  }
+
+  .admin-editor {
+    padding: 18px;
+  }
+
+  .admin-editor__heading {
+    flex-direction: column;
+  }
+
+  .admin-language-tabs button {
+    flex: 1;
+    padding-inline: 8px;
+  }
+
+  .admin-language-tabs button span {
+    display: none;
   }
 
   .lead-table th:nth-child(3),

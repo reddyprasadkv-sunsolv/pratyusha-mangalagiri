@@ -1,11 +1,23 @@
-import { policies, type PolicyKey } from "../content";
+import {
+  localeLabels,
+  policyContent,
+  type Locale,
+  type PolicyKey,
+} from "../i18n";
 import SimpleHeader from "./SimpleHeader";
 
-export default function PolicyPage({ policyKey }: { policyKey: PolicyKey }) {
-  const policy = policies[policyKey];
+export default function PolicyPage({
+  policyKey,
+  locale,
+}: {
+  policyKey: PolicyKey;
+  locale: Locale;
+}) {
+  const policy = policyContent[locale][policyKey];
+  const labels = localeLabels[locale];
   return (
-    <main>
-      <SimpleHeader />
+    <main data-locale={locale}>
+      <SimpleHeader locale={locale} path={`/${policyKey}`} />
       <section className="policy-hero">
         <div className="container">
           <p className="eyebrow">
@@ -13,9 +25,7 @@ export default function PolicyPage({ policyKey }: { policyKey: PolicyKey }) {
           </p>
           <h1>{policy.title}</h1>
           <p>{policy.intro}</p>
-          <span className="draft-badge">
-            క్లయింట్ సమీక్షకు డ్రాఫ్ట్ కంటెంట్
-          </span>
+          <span className="draft-badge">{labels.draft}</span>
         </div>
       </section>
       <section className="container policy-body">
@@ -26,8 +36,8 @@ export default function PolicyPage({ policyKey }: { policyKey: PolicyKey }) {
           </article>
         ))}
         <div className="policy-meta">
-          <span>చివరి నవీకరణ: 30 జూలై 2026</span>
-          <span>ప్రశ్నలు: hello@pratyusha.example</span>
+          <span>{labels.lastUpdated}</span>
+          <span>{labels.questions}</span>
         </div>
       </section>
     </main>
