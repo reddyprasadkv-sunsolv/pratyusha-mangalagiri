@@ -1,0 +1,24 @@
+<footer class="footer">
+  <div class="footer__inner container">
+    <div class="footer__brand">
+      <a href="#home" aria-label="Pratyusha Mangalagiri home">
+        <span aria-hidden="true">PM</span>
+        <strong>Pratyusha</strong>
+      </a>
+      <p>{{ statement() }}</p>
+    </div>
+
+    @for (group of groups(); track group.heading) {
+      <nav [attr.aria-label]="group.heading">
+        <strong>{{ group.heading }}</strong>
+        @for (link of group.links; track link.href) {
+          <a [href]="link.href">{{ link.label }}</a>
+        }
+      </nav>
+    }
+  </div>
+  <div class="footer__bottom container">
+    <p>© 2026 Pratyusha. {{ note() }}</p>
+    <a href="#home">{{ backToTop() }} <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>

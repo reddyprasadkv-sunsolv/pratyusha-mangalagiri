@@ -1,0 +1,28 @@
+.state {
+  min-height: 11rem;
+  padding: 1.5rem;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-50);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.state__spinner {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid var(--color-accent-300);
+  border-right-color: var(--color-brand-800);
+  border-radius: 50%;
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

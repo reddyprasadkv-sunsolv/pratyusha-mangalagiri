@@ -1,0 +1,89 @@
+.accordion {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.accordion__item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+h3 {
+  margin: 0;
+}
+
+button {
+  width: 100%;
+  min-height: 5rem;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-brand-900);
+  cursor: pointer;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-align: left;
+}
+
+.accordion__icon {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.accordion__icon::before,
+.accordion__icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--color-brand-800);
+  transform: translate(-50%, -50%);
+}
+
+.accordion__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  transition: transform var(--transition-base);
+}
+
+.is-open .accordion__icon {
+  background: var(--color-brand-800);
+  transform: rotate(180deg);
+}
+
+.is-open .accordion__icon::before,
+.is-open .accordion__icon::after {
+  background: #fff;
+}
+
+.is-open .accordion__icon::after {
+  transform: translate(-50%, -50%) rotate(0);
+}
+
+.accordion__panel {
+  max-width: 48rem;
+  padding: 0 4rem 1.7rem 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+}
+
+@media (max-width: 30rem) {
+  button {
+    min-height: 4.5rem;
+    gap: 1rem;
+  }
+
+  .accordion__panel {
+    padding-right: 0;
+  }
+}

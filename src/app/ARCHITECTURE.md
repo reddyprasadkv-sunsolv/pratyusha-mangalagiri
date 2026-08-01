@@ -1,6 +1,6 @@
 # Application structure
 
-This scaffold reserves feature boundaries without implementing product UI in Step 1.
+The application keeps reusable design primitives separate from public feature composition.
 
 - `core/`: application-wide services, guards, interceptors, and configuration
 - `shared/`: reusable presentation components, directives, pipes, and utilities
@@ -13,4 +13,4 @@ This scaffold reserves feature boundaries without implementing product UI in Ste
 - `features/legal/`: bilingual legal routes and content
 - `features/settings/`: site, integration, and account settings
 
-Feature implementation begins only after this scaffold is approved.
+The Step 2 public preview is implemented under `features/public-site/design-system-page`. Shared components remain input-driven and backend-independent so future public, legal, and administrative pages can reuse them.

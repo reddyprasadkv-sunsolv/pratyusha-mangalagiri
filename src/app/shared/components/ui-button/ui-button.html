@@ -1,0 +1,28 @@
+@if (href(); as link) {
+  <a
+    class="button"
+    [class.button--secondary]="variant() === 'secondary'"
+    [href]="link"
+    [attr.aria-label]="ariaLabel()"
+  >
+    <span>{{ label() }}</span>
+    <span class="button__arrow" aria-hidden="true">→</span>
+  </a>
+} @else {
+  <button
+    class="button"
+    [class.button--secondary]="variant() === 'secondary'"
+    [attr.type]="type()"
+    [disabled]="disabled() || loading()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-busy]="loading()"
+  >
+    @if (loading()) {
+      <span class="button__spinner" aria-hidden="true"></span>
+    }
+    <span>{{ label() }}</span>
+    @if (!loading()) {
+      <span class="button__arrow" aria-hidden="true">→</span>
+    }
+  </button>
+}

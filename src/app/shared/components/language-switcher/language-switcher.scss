@@ -1,0 +1,35 @@
+.language-switcher {
+  min-height: 2.75rem;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-50);
+}
+
+.language-switcher button {
+  min-width: 2.8rem;
+  min-height: 2.2rem;
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.language-switcher button[lang='te'] {
+  min-width: 4.2rem;
+  font-family: var(--font-sans-te);
+  letter-spacing: 0;
+}
+
+.language-switcher button.is-active {
+  background: var(--color-brand-800);
+  color: #fff;
+  box-shadow: var(--shadow-xs);
+}

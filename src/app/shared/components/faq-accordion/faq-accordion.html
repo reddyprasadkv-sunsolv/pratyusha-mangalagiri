@@ -1,0 +1,27 @@
+<div class="accordion">
+  @for (item of items(); track item.question; let index = $index) {
+    <article class="accordion__item" [class.is-open]="openIndex() === index">
+      <h3>
+        <button
+          type="button"
+          [id]="instanceId + '-trigger-' + index"
+          [attr.aria-expanded]="openIndex() === index"
+          [attr.aria-controls]="instanceId + '-panel-' + index"
+          (click)="toggle(index)"
+        >
+          <span>{{ item.question }}</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div
+        class="accordion__panel"
+        [id]="instanceId + '-panel-' + index"
+        role="region"
+        [attr.aria-labelledby]="instanceId + '-trigger-' + index"
+        [hidden]="openIndex() !== index"
+      >
+        <p>{{ item.answer }}</p>
+      </div>
+    </article>
+  }
+</div>

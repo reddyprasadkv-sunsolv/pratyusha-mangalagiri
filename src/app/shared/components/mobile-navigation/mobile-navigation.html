@@ -1,0 +1,33 @@
+@if (open()) {
+  <div class="mobile-menu__backdrop" aria-hidden="true" (click)="closeMenu.emit()"></div>
+  <aside class="mobile-menu" role="dialog" aria-modal="true" [attr.aria-label]="label()">
+    <div class="mobile-menu__top">
+      <span class="mobile-menu__eyebrow">MENU</span>
+      <button
+        #closeButton
+        type="button"
+        class="mobile-menu__close"
+        [attr.aria-label]="closeLabel()"
+        (click)="closeMenu.emit()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <nav [attr.aria-label]="label()">
+      @for (link of links(); track link.href; let index = $index) {
+        <a [href]="link.href" (click)="closeMenu.emit()">
+          <span aria-hidden="true">0{{ index + 1 }}</span>
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <p>{{ note() }}</p>
+    <app-language-switcher
+      [locale]="locale()"
+      [label]="label()"
+      (localeChange)="localeChange.emit($event)"
+    />
+  </aside>
+}

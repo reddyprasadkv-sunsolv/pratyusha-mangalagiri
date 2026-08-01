@@ -1,0 +1,5 @@
+<nav class="desktop-nav" [attr.aria-label]="label()">
+  @for (link of links(); track link.href) {
+    <a [href]="link.href">{{ link.label }}</a>
+  }
+</nav>

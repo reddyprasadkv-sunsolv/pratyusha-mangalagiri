@@ -1,0 +1,9 @@
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta__ornament" aria-hidden="true"></div>
+  <div class="cta__content">
+    <p>{{ eyebrow() }}</p>
+    <h2 id="cta-title">{{ title() }}</h2>
+    <span>{{ body() }}</span>
+  </div>
+  <app-ui-button [href]="href()" [label]="action()" />
+</section>

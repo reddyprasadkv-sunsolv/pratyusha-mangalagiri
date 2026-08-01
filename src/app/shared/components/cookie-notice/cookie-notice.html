@@ -1,0 +1,14 @@
+<section class="cookie" aria-labelledby="cookie-title">
+  <div>
+    <strong id="cookie-title">{{ title() }}</strong>
+    <p>{{ body() }}</p>
+  </div>
+  <div class="cookie__actions">
+    <button type="button" class="cookie__settings" (click)="openSettings.emit()">
+      {{ settingsLabel() }}
+    </button>
+    <button type="button" class="cookie__accept" (click)="accept.emit()">
+      {{ acceptLabel() }}
+    </button>
+  </div>
+</section>

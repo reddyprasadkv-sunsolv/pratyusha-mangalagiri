@@ -1,0 +1,26 @@
+<a class="skip-link" href="#main-content">{{ copy().skipLink }}</a>
+<app-announcement-bar
+  [message]="copy().announcement"
+  [actionLabel]="copy().announcementAction"
+  actionHref="#contact"
+/>
+<app-public-header />
+<main id="main-content" tabindex="-1">
+  <ng-content />
+</main>
+<app-public-footer
+  [statement]="copy().footerStatement"
+  [groups]="copy().groups"
+  [note]="copy().footerNote"
+  [backToTop]="copy().backToTop"
+/>
+@if (showCookieNotice()) {
+  <app-cookie-notice
+    [title]="copy().cookieTitle"
+    [body]="copy().cookieBody"
+    [acceptLabel]="copy().cookieAccept"
+    [settingsLabel]="copy().cookieSettings"
+    (accept)="showCookieNotice.set(false)"
+    (openSettings)="showCookieNotice.set(false)"
+  />
+}

@@ -1,0 +1,46 @@
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="brand" href="#home" aria-label="Pratyusha Mangalagiri home">
+      <span class="brand__mark" aria-hidden="true"><span>PM</span></span>
+      <span class="brand__name">
+        <strong>Pratyusha</strong>
+        <small>CLARITY · PRESENCE · GROWTH</small>
+      </span>
+    </a>
+
+    <app-desktop-navigation [label]="copy().navLabel" [links]="copy().links" />
+
+    <div class="site-header__actions">
+      <app-language-switcher
+        class="site-header__language"
+        [locale]="localeService.locale()"
+        [label]="copy().languageLabel"
+        (localeChange)="localeService.setLocale($event)"
+      />
+      <app-ui-button class="site-header__cta" href="#contact" [label]="copy().cta" />
+      <button
+        #menuButton
+        type="button"
+        class="menu-trigger"
+        aria-controls="mobile-navigation"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="copy().openLabel"
+        (click)="menuOpen.set(true)"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<app-mobile-navigation
+  id="mobile-navigation"
+  [open]="menuOpen()"
+  [links]="copy().links"
+  [label]="copy().mobileLabel"
+  [closeLabel]="copy().closeLabel"
+  [note]="copy().note"
+  [locale]="localeService.locale()"
+  (localeChange)="localeService.setLocale($event)"
+  (closeMenu)="closeMenu()"
+/>

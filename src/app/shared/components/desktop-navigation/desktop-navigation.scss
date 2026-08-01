@@ -1,0 +1,38 @@
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: clamp(1rem, 2.3vw, 2rem);
+}
+
+.desktop-nav a {
+  position: relative;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  right: 50%;
+  bottom: 0.25rem;
+  left: 50%;
+  height: 1px;
+  background: var(--color-accent-600);
+  transition: inset var(--transition-base);
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a:focus-visible::after {
+  right: 0;
+  left: 0;
+}
+
+@media (min-width: 56rem) {
+  .desktop-nav {
+    display: flex;
+  }
+}

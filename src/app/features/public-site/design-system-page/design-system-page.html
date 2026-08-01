@@ -1,0 +1,222 @@
+<div class="design-page" [attr.data-locale]="localeService.locale()">
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero__inner container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">{{ content().studioLabel }}</p>
+        <h1 id="hero-title">
+          <span>{{ content().heroLine1 }}</span>
+          <em>{{ content().heroEmphasis1 }}</em>
+          <span>{{ content().heroLine2 }}</span>
+          <em>{{ content().heroEmphasis2 }}</em>
+        </h1>
+        <p class="hero__body">{{ content().heroBody }}</p>
+        <div class="hero__actions">
+          <app-ui-button href="#contact" [label]="content().heroPrimary" />
+          <app-ui-button variant="secondary" href="#services" [label]="content().heroSecondary" />
+        </div>
+      </div>
+
+      <app-image-card
+        src="/images/client-traditional-saree.webp"
+        [alt]="content().heroAlt"
+        [badge]="content().heroBadge"
+        [priority]="true"
+      />
+    </div>
+    <div class="hero__trust container" aria-label="Trust principles">
+      @for (item of content().trustItems; track $index; let index = $index) {
+        <div>
+          <span>0{{ index + 1 }}</span>
+          <p>{{ item }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="section services" id="services">
+    <div class="container">
+      <app-section-heading
+        [eyebrow]="content().servicesEyebrow"
+        [title]="content().servicesTitle"
+        [emphasis]="content().servicesEmphasis"
+        [description]="content().servicesBody"
+      />
+      <div class="services__grid">
+        @for (service of content().services; track service.number) {
+          <app-content-card
+            [number]="service.number"
+            [title]="service.title"
+            [body]="service.body"
+            [tag]="service.tag"
+          />
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section typography section--tinted" id="about">
+    <div class="typography__inner container">
+      <div>
+        <app-section-heading
+          [eyebrow]="content().typographyEyebrow"
+          [title]="content().typographyTitle"
+          [emphasis]="content().typographyEmphasis"
+          [description]="content().typographyBody"
+        />
+        <blockquote>{{ content().quote }}</blockquote>
+      </div>
+      <div class="typography__specimen" aria-label="Typography specimens">
+        <span>English / తెలుగు</span>
+        <strong lang="en">Clarity with warmth.</strong>
+        <strong lang="te">స్పష్టతతో కూడిన ఆప్యాయత.</strong>
+        <p>Manrope · Noto Sans Telugu · Noto Serif Telugu</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section palette" aria-labelledby="palette-title">
+    <div class="container">
+      <p class="palette__eyebrow">DESIGN TOKENS</p>
+      <h2 id="palette-title">A warm, grounded palette</h2>
+      <div class="palette__grid">
+        @for (color of colors; track color[0]) {
+          <div class="swatch">
+            <span [style.background]="color[1]"></span>
+            <strong>{{ color[0] }}</strong>
+            <small>{{ color[1] }}</small>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section proof section--tinted">
+    <div class="container">
+      <app-section-heading
+        [eyebrow]="content().testimonialEyebrow"
+        [title]="content().testimonialTitle"
+        [emphasis]="content().testimonialEmphasis"
+      />
+      <div class="proof__grid">
+        <app-testimonial-card
+          [quote]="content().testimonialQuote"
+          [name]="content().testimonialName"
+          [role]="content().testimonialRole"
+          [sampleLabel]="content().sampleLabel"
+        />
+        <div class="proof__principles">
+          @for (item of content().trustItems; track $index; let index = $index) {
+            <div>
+              <span>0{{ index + 1 }}</span>
+              <p>{{ item }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="faq__inner container">
+      <app-section-heading
+        [eyebrow]="content().faqEyebrow"
+        [title]="content().faqTitle"
+        [emphasis]="content().faqEmphasis"
+      />
+      <app-faq-accordion [items]="content().faqs" />
+    </div>
+  </section>
+
+  <section class="section form-preview section--tinted" id="contact">
+    <div class="form-preview__inner container">
+      <app-section-heading
+        [eyebrow]="content().formEyebrow"
+        [title]="content().formTitle"
+        [emphasis]="content().formEmphasis"
+        [description]="content().formBody"
+      />
+
+      <form class="form-shell" aria-describedby="form-preview-note">
+        <div class="form-shell__row">
+          <app-form-field [label]="content().fullName" controlId="preview-name">
+            <input
+              id="preview-name"
+              class="form-control"
+              type="text"
+              [placeholder]="content().namePlaceholder"
+              autocomplete="name"
+            />
+          </app-form-field>
+          <app-form-field
+            [label]="content().email"
+            controlId="preview-email"
+            [optionalLabel]="content().optional"
+          >
+            <input
+              id="preview-email"
+              class="form-control"
+              type="email"
+              placeholder="name@example.com"
+              autocomplete="email"
+            />
+          </app-form-field>
+        </div>
+        <app-form-field [label]="content().requirement" controlId="preview-requirement">
+          <select id="preview-requirement" class="form-control">
+            <option value="">{{ content().requirementPlaceholder }}</option>
+            @for (option of content().requirementOptions; track $index) {
+              <option>{{ option }}</option>
+            }
+          </select>
+        </app-form-field>
+        <app-form-field
+          [label]="content().message"
+          controlId="preview-message"
+          [optionalLabel]="content().optional"
+        >
+          <textarea
+            id="preview-message"
+            class="form-control"
+            [placeholder]="content().messagePlaceholder"
+          ></textarea>
+        </app-form-field>
+        <label class="consent">
+          <input type="checkbox" />
+          <span>{{ content().consent }}</span>
+        </label>
+        <div class="form-shell__footer">
+          <app-ui-button [label]="content().previewAction" [disabled]="true" />
+          <p id="form-preview-note">{{ content().formNote }}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section states" id="legal">
+    <div class="container">
+      <app-section-heading
+        [eyebrow]="content().statesEyebrow"
+        [title]="content().statesTitle"
+        [emphasis]="content().statesEmphasis"
+      />
+      <div class="states__grid">
+        <app-loading-state [label]="content().loading" />
+        <app-empty-state [title]="content().emptyTitle" [body]="content().emptyBody" />
+        <app-error-state
+          [title]="content().errorTitle"
+          [body]="content().errorBody"
+          [retryLabel]="content().retry"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="closing container">
+    <app-cta-section
+      [eyebrow]="content().ctaEyebrow"
+      [title]="content().ctaTitle"
+      [body]="content().ctaBody"
+      [action]="content().ctaAction"
+    />
+  </section>
+</div>

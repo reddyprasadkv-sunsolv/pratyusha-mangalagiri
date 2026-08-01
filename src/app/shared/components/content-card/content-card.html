@@ -1,0 +1,13 @@
+<article class="content-card">
+  <div class="content-card__top">
+    @if (number()) {
+      <span class="content-card__number">{{ number() }}</span>
+    }
+    @if (tag()) {
+      <span class="content-card__tag">{{ tag() }}</span>
+    }
+  </div>
+  <h3>{{ title() }}</h3>
+  <p>{{ body() }}</p>
+  <span class="content-card__line" aria-hidden="true"></span>
+</article>

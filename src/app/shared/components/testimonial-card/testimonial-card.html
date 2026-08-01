@@ -1,0 +1,14 @@
+<figure class="testimonial-card">
+  <span class="testimonial-card__mark" aria-hidden="true">“</span>
+  <blockquote>{{ quote() }}</blockquote>
+  <figcaption>
+    <span class="testimonial-card__avatar" aria-hidden="true">{{ name().charAt(0) }}</span>
+    <span>
+      <strong>{{ name() }}</strong>
+      <small>{{ role() }}</small>
+    </span>
+    @if (sampleLabel()) {
+      <em>{{ sampleLabel() }}</em>
+    }
+  </figcaption>
+</figure>

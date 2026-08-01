@@ -1,0 +1,6 @@
+<div class="state" role="alert">
+  <span class="state__mark" aria-hidden="true">!</span>
+  <strong>{{ title() }}</strong>
+  <p>{{ body() }}</p>
+  <button type="button" (click)="retry.emit()">{{ retryLabel() }}</button>
+</div>

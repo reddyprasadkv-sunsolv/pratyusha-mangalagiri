@@ -1,0 +1,90 @@
+:root {
+  color-scheme: light;
+
+  --color-brand-950: #2d1222;
+  --color-brand-900: #3a192b;
+  --color-brand-800: #4b2238;
+  --color-brand-700: #63334b;
+  --color-brand-600: #7b4f63;
+  --color-accent-700: #8f6b32;
+  --color-accent-600: #a77e3f;
+  --color-accent-500: #b89456;
+  --color-accent-300: #d7bd8a;
+  --color-accent-150: #eee0c4;
+  --color-surface-0: #fffdf8;
+  --color-surface-50: #fcf8f1;
+  --color-surface-100: #f8f3ea;
+  --color-surface-200: #efe5d7;
+  --color-text-strong: #251a1f;
+  --color-text: #43373c;
+  --color-text-muted: #6f6267;
+  --color-success: #2f6b50;
+  --color-warning: #956b22;
+  --color-error: #a33a43;
+  --color-focus: #8a642d;
+
+  --border-subtle: rgba(75, 34, 56, 0.14);
+  --border-strong: rgba(75, 34, 56, 0.28);
+  --shadow-xs: 0 1px 2px rgba(45, 18, 34, 0.06);
+  --shadow-sm: 0 10px 28px rgba(45, 18, 34, 0.08);
+  --shadow-md: 0 22px 60px rgba(45, 18, 34, 0.13);
+  --shadow-lg: 0 34px 90px rgba(45, 18, 34, 0.18);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2.25rem;
+  --radius-pill: 999px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --section-space: clamp(4.5rem, 8vw, 8.5rem);
+
+  --container-sm: 44rem;
+  --container-md: 64rem;
+  --container-lg: 74rem;
+  --container-xl: 82rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  --font-sans-en: 'Manrope', 'Avenir Next', Arial, sans-serif;
+  --font-sans-te: 'Noto Sans Telugu', 'Nirmala UI', sans-serif;
+  --font-serif-te: 'Noto Serif Telugu', 'Nirmala UI', serif;
+  --font-serif-en: Georgia, 'Times New Roman', serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1.04rem + 0.35vw, 1.35rem);
+  --text-xl: clamp(1.4rem, 1.16rem + 1vw, 2rem);
+  --text-2xl: clamp(2rem, 1.46rem + 2.2vw, 3.5rem);
+  --text-hero: clamp(2.65rem, 1.5rem + 4.2vw, 6.2rem);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-slow: 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --z-base: 0;
+  --z-sticky: 30;
+  --z-overlay: 60;
+  --z-modal: 80;
+  --z-toast: 100;
+}
+
+$bp-xs: 20rem;
+$bp-sm: 22.5rem;
+$bp-md: 48rem;
+$bp-lg: 64rem;
+$bp-xl: 80rem;
+$bp-2xl: 90rem;
+$bp-wide: 120rem;

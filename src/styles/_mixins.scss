@@ -1,0 +1,22 @@
+@mixin container($max: var(--container-lg)) {
+  width: min(#{$max}, calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+}
+
+@mixin focus-ring {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@mixin card-surface {
+  background: var(--color-surface-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin reduce-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

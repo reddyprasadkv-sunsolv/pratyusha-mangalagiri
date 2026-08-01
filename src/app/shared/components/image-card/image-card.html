@@ -1,0 +1,18 @@
+<figure class="image-card">
+  <div class="image-card__frame">
+    <img
+      [src]="src()"
+      [alt]="alt()"
+      width="1086"
+      height="1448"
+      [attr.fetchpriority]="priority() ? 'high' : 'auto'"
+      [attr.loading]="priority() ? 'eager' : 'lazy'"
+    />
+    @if (badge()) {
+      <span class="image-card__badge">{{ badge() }}</span>
+    }
+  </div>
+  @if (caption()) {
+    <figcaption>{{ caption() }}</figcaption>
+  }
+</figure>

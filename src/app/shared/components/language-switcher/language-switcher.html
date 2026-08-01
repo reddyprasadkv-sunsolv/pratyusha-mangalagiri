@@ -1,0 +1,20 @@
+<div class="language-switcher" role="group" [attr.aria-label]="label()">
+  <button
+    type="button"
+    [class.is-active]="locale() === 'en'"
+    [attr.aria-pressed]="locale() === 'en'"
+    (click)="select('en')"
+  >
+    EN
+  </button>
+  <span aria-hidden="true"></span>
+  <button
+    type="button"
+    lang="te"
+    [class.is-active]="locale() === 'te'"
+    [attr.aria-pressed]="locale() === 'te'"
+    (click)="select('te')"
+  >
+    తెలుగు
+  </button>
+</div>

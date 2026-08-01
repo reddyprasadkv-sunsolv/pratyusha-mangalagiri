@@ -1,0 +1,35 @@
+.announcement {
+  min-height: 2.5rem;
+  padding: 0.5rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  background: var(--color-brand-900);
+  color: var(--color-surface-0);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.announcement a {
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-accent-300);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.announcement a:hover {
+  color: #fff;
+}
+
+@media (max-width: 30rem) {
+  .announcement {
+    align-items: flex-start;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
