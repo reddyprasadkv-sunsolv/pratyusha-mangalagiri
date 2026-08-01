@@ -8,16 +8,16 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  ["కొత్త లీడ్స్", "12"],
-  ["ఫాలో-అప్", "07"],
-  ["పబ్లిష్డ్ పేజీలు", "06"],
-  ["డ్రాఫ్ట్స్", "03"],
+  ["కొత్త లీడ్స్", "—"],
+  ["ఫాలో-అప్", "—"],
+  ["పబ్లిష్డ్ పేజీలు", "—"],
+  ["డ్రాఫ్ట్స్", "—"],
 ];
 
 const leads = [
-  ["సౌమ్య రెడ్డి", "Brand Clarity", "కొత్తది"],
-  ["అనిల్ కుమార్", "Website", "సంప్రదించారు"],
-  ["కావ్య శ్రీ", "Growth Strategy", "ఫాలో-అప్"],
+  ["డెమో లీడ్ 01", "Brand Clarity", "డెమో"],
+  ["డెమో లీడ్ 02", "Website", "డెమో"],
+  ["డెమో లీడ్ 03", "Growth Strategy", "డెమో"],
 ];
 
 export default function AdminPage() {
@@ -64,7 +64,7 @@ export default function AdminPage() {
           <div className="admin-grid">
             <article className="admin-panel">
               <div className="admin-panel__heading">
-                <h2>ఇటీవలి లీడ్స్</h2>
+                <h2>డెమో లీడ్స్</h2>
                 <span>అన్నీ చూడండి →</span>
               </div>
               <table className="lead-table">

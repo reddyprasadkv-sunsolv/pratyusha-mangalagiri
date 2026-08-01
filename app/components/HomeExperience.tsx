@@ -135,15 +135,25 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
     }
 
     window.localStorage.setItem("site_language", locale);
-    const storedDraft = window.sessionStorage.getItem("pratyusha_lead_draft");
-    if (storedDraft) {
-      try {
-        setDraft({ ...emptyDraft, ...JSON.parse(storedDraft) });
-      } catch {
+  }, [locale, pathname, router]);
+
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      const storedDraft = window.sessionStorage.getItem(
+        "pratyusha_lead_draft",
+      );
+      if (storedDraft) {
+        try {
+          setDraft({ ...emptyDraft, ...JSON.parse(storedDraft) });
+        } catch {
+          // Invalid browser data is discarded below.
+        }
         window.sessionStorage.removeItem("pratyusha_lead_draft");
       }
-    }
-  }, [locale, pathname, router]);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -151,13 +161,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
-
-  useEffect(() => {
-    window.sessionStorage.setItem(
-      "pratyusha_lead_draft",
-      JSON.stringify(draft),
-    );
-  }, [draft]);
 
   const switchLanguage = useCallback(
     (nextLocale: Locale) => {

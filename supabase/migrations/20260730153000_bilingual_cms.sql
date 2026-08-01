@@ -111,15 +111,15 @@ create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
   full_name text not null check (char_length(full_name) between 2 and 120),
   mobile text not null check (char_length(mobile) between 8 and 18),
-  email text,
-  city text,
-  requirement text not null,
-  message text,
+  email text check (email is null or char_length(email) <= 254),
+  city text check (city is null or char_length(city) <= 120),
+  requirement text not null check (char_length(requirement) between 2 and 120),
+  message text check (message is null or char_length(message) <= 2000),
   submission_language text not null check (submission_language in ('en', 'te')),
-  source_url text not null,
-  utm_source text,
-  utm_medium text,
-  utm_campaign text,
+  source_url text not null check (char_length(source_url) <= 2048),
+  utm_source text check (utm_source is null or char_length(utm_source) <= 200),
+  utm_medium text check (utm_medium is null or char_length(utm_medium) <= 200),
+  utm_campaign text check (utm_campaign is null or char_length(utm_campaign) <= 200),
   consent_status boolean not null check (consent_status = true),
   status text not null default 'new'
     check (status in ('new', 'contacted', 'qualified', 'closed', 'spam')),
@@ -188,16 +188,6 @@ create policy "Admins manage media metadata"
   to authenticated
   using (public.is_cms_admin())
   with check (public.is_cms_admin());
-
-create policy "Public can submit consented bilingual leads"
-  on public.leads for insert
-  to anon, authenticated
-  with check (
-    submission_language in ('en', 'te')
-    and consent_status = true
-    and char_length(full_name) between 2 and 120
-    and char_length(mobile) between 8 and 18
-  );
 
 create policy "Admins manage leads"
   on public.leads for all
@@ -295,7 +285,8 @@ revoke all on public.content_sections from anon;
 revoke all on public.legal_pages from anon;
 revoke all on public.media_assets from anon;
 revoke all on public.leads from anon;
-grant insert on public.leads to anon;
+revoke all on public.leads from authenticated;
+grant select, insert, update, delete on public.leads to authenticated;
 grant select on public.published_content_en to anon, authenticated;
 grant select on public.published_content_te to anon, authenticated;
 grant select on public.published_legal_en to anon, authenticated;
@@ -343,4 +334,4 @@ comment on table public.content_sections is
 comment on table public.legal_pages is
   'Legal copy must be reviewed and approved by the client legal adviser before publication.';
 comment on table public.leads is
-  'Lead records include submission locale, source URL, consent, and UTM attribution.';
+  'Private lead records include submission locale, source URL, consent, and UTM attribution. Anonymous direct inserts stay disabled; a rate-limited, server-validated endpoint must own public submissions.';

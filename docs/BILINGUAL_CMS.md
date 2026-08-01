@@ -29,8 +29,13 @@ the same route structure.
 6. Verify the published English and Telugu views return only content whose
    matching locale status is `published`.
 7. Connect authenticated admin mutations and audit logging.
-8. Connect the lead form to the `leads` insert policy and add server-side rate
-   limiting before public launch.
+8. Create a server-only lead endpoint with validation, spam protection, and
+   rate limiting before public launch. Keep direct anonymous table access
+   disabled and keep the service-role key out of browser bundles.
+
+The `owner`, `admin`, and `editor` values currently identify equally trusted
+CMS allowlist members. Introduce role-specific policies only after the client
+approves a capability matrix; do not infer different privileges from the labels.
 
 Do not remove a legacy content field until its values are backed up, mapped,
 reviewed, and confirmed in both locale views. Rollback is achieved by disabling
