@@ -1,0 +1,10 @@
+dist
+node_modules
+coverage
+output
+playwright-report
+test-results
+.angular
+.openai/source-assets
+.vinext
+.wrangler
