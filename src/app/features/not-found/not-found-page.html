@@ -1,0 +1,6 @@
+<section class="not-found container" aria-labelledby="not-found-title">
+  <p class="eyebrow">{{ copy().eyebrow }}</p>
+  <h1 id="not-found-title">{{ copy().title }}</h1>
+  <p>{{ copy().body }}</p>
+  <a [routerLink]="language() === 'te' ? '/te' : '/'">{{ copy().action }} →</a>
+</section>
