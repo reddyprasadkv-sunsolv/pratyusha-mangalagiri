@@ -22,7 +22,8 @@ RLS is enabled on every application table. PostgreSQL grants are restricted sepa
 
 ## Helper security
 
-- `current_admin_role()`, `is_active_admin()`, `is_owner()`, and `is_editor_or_owner()` use `auth.uid()`, accept no target user ID, use no dynamic SQL, and have a fixed `search_path`.
+- `current_admin_role()`, `current_admin_profile()`, `is_active_admin()`, `is_owner()`, and `is_editor_or_owner()` use `auth.uid()`, accept no target user ID, use no dynamic SQL, and have a fixed `search_path`.
+- `current_admin_profile()` returns only the caller's active profile fields required by the Angular administration shell; normal authenticated and inactive users receive no row.
 - Anonymous execution is revoked. Only `authenticated` receives execute rights.
 - The functions read the allowlist as definer functions so RLS cannot recursively block their checks.
 - Editors receive no policy on `admin_profiles`; therefore they cannot promote themselves, create owners, or reactivate accounts.

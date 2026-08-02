@@ -1,6 +1,6 @@
 # Pratyusha Mangalagiri — Angular application
 
-Production-oriented Angular SSR website for Pratyusha Mangalagiri. Step 5 adds a version-controlled, secure Supabase backend foundation while preserving the request-time bilingual public page, approved four-product scope, local content, and non-submitting enquiry form.
+Production-oriented Angular SSR website for Pratyusha Mangalagiri. Step 6A adds a client-rendered, noindex, secure administration login/shell/dashboard foundation while preserving the request-time bilingual public page, approved four-product scope, local content, and non-submitting enquiry form.
 
 ## Runtime
 
@@ -55,7 +55,7 @@ src/app/
     settings/
 ```
 
-See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, `docs/react-reference-inventory.md` for the read-only reference inventory, `docs/STEP_3_REPORT.md` for the original bilingual implementation, `docs/STEP_3C_REPORT.md` for product-asset validation, `docs/STEP_4_SEO_REPORT.md` for SSR/SEO validation, and `docs/STEP_5_SUPABASE_REPORT.md` for the backend foundation.
+See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, `docs/react-reference-inventory.md` for the read-only reference inventory, `docs/STEP_3_REPORT.md` for the original bilingual implementation, `docs/STEP_3C_REPORT.md` for product-asset validation, `docs/STEP_4_SEO_REPORT.md` for SSR/SEO validation, `docs/STEP_5_SUPABASE_REPORT.md` for the backend foundation, and `docs/STEP_6A_ADMIN_FOUNDATION_REPORT.md` for administration architecture and validation.
 
 ## Environment and secrets
 
@@ -81,5 +81,5 @@ When `PUBLIC_SITE_URL` is omitted during a normal HTTP request, SSR derives the 
 - Local approval artifacts under `output/` remain ignored and uncommitted.
 - Only `/` and `/te` are indexable. Draft legal routes return a bilingual, accessible, `noindex` HTTP 404 until their content is approved.
 - Open Graph and Twitter image tags remain intentionally absent until an approved 1200×630 social-sharing image is supplied.
-- No live Supabase content, administration UI, email, payment, appointment, or PDF integration is enabled.
-- The Supabase schema and client/auth foundation now exist, but no remote project is linked, no migration is remotely applied, no admin UI exists, and the public page is not switched to live data.
+- No live Supabase content, CMS editors, email, payment, appointment, or PDF integration is enabled.
+- The Supabase schema, client/auth foundation, protected administration login/shell/dashboard, and typed CMS repository contracts now exist. No remote project is linked, no migration is remotely applied, no owner exists, and the public page is not switched to live data.

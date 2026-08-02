@@ -54,4 +54,4 @@ Publication is rejected rather than silently cleaning data.
 
 ## Future Step 6 mapping
 
-Step 6 may map approved rows into dedicated CMS forms and generated `Database` types. The public page remains on `PUBLIC_CONTENT` during Step 5. Admin forms must preserve the separate bilingual fields, status transition, audit attribution, and nullable unapproved fields rather than flattening records into one JSON document.
+Step 6A adds `current_admin_profile()` for secure self-profile validation and typed repository contracts without enabling live editors. A future Step 6B may map approved rows into dedicated CMS forms and generated `Database` types. The public page remains on `PUBLIC_CONTENT`. Admin forms must preserve the separate bilingual fields, status transition, audit attribution, and nullable unapproved fields rather than flattening records into one JSON document.
