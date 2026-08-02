@@ -63,6 +63,17 @@ export class SeoService {
     });
   }
 
+  applyAdminPage(pageTitle: string): void {
+    this.removeManagedElements();
+    this.title.setTitle(`${pageTitle} | Pratyusha Administration`);
+    this.document.documentElement.lang = 'en';
+    this.addNamedMeta(
+      'description',
+      'Secure administration access for authorised Pratyusha content administrators.',
+    );
+    this.addNamedMeta('robots', 'noindex, nofollow');
+  }
+
   private apply(configuration: SeoPageConfiguration): void {
     this.removeManagedElements();
     this.title.setTitle(configuration.title);

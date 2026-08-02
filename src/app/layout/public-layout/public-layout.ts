@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PublicContentService } from '../../features/public-site/content/public-content.service';
@@ -11,7 +12,7 @@ import { FooterLinkGroup } from '../../shared/models/public-site.models';
 @Component({
   selector: 'app-public-layout',
   standalone: true,
-  imports: [AnnouncementBar, CookieNotice, PublicFooter, PublicHeader],
+  imports: [AnnouncementBar, CookieNotice, PublicFooter, PublicHeader, RouterOutlet],
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
