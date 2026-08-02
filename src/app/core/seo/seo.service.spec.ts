@@ -101,6 +101,22 @@ describe('SeoService', () => {
     expect(document.head.querySelector('script[type="application/ld+json"]')).toBeNull();
   });
 
+  it('isolates admin noindex metadata and restores complete public metadata afterwards', () => {
+    service.applyHomepage('en', PUBLIC_CONTENT.en.faqs);
+    service.applyAdminPage('Administration Login');
+
+    expect(meta('robots')).toBe('noindex, nofollow');
+    expect(link('canonical')).toBeNull();
+    expect(propertyMeta('og:title')).toBeNull();
+    expect(document.head.querySelector('script[type="application/ld+json"]')).toBeNull();
+
+    service.applyHomepage('te', PUBLIC_CONTENT.te.faqs);
+    expect(meta('robots')).toBe('index, follow');
+    expect(link('canonical')?.href).toBe('https://example.com/te');
+    expect(propertyMeta('og:title')).toBe(HOME_SEO_CONTENT.ogTitle.te);
+    expect(document.head.querySelector('script[type="application/ld+json"]')).not.toBeNull();
+  });
+
   function meta(name: string): string | null {
     return document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)?.content ?? null;
   }

@@ -42,6 +42,12 @@ describe('Supabase migration security contract', () => {
     expect(migrations).toContain(
       'grant execute on function public.current_admin_role() to authenticated',
     );
+    expect(migrations).toContain(
+      'revoke all on function public.current_admin_profile() from public, anon',
+    );
+    expect(migrations).toContain(
+      'grant execute on function public.current_admin_profile() to authenticated',
+    );
   });
 
   it('has no anonymous CMS, storage, or lead write policy', () => {

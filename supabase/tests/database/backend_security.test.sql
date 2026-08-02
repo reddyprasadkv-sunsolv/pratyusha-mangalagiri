@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions, auth, storage;
-select plan(28);
+select plan(30);
 
 insert into auth.users (
   instance_id,
@@ -177,6 +177,11 @@ select results_eq(
   $$values (1) limit 0$$,
   'A normal authenticated user cannot manage CMS content'
 );
+select results_eq(
+  $$select count(*)::bigint from public.current_admin_profile()$$,
+  array[0::bigint],
+  'A normal authenticated user receives no administrator profile'
+);
 reset role;
 
 select set_config('request.jwt.claim.sub', '10000000-0000-0000-0000-000000000003', true);
@@ -193,6 +198,11 @@ set local role authenticated;
 select lives_ok(
   $$update public.products set display_order = 7 where product_key = 'draft-test'$$,
   'An editor may manage permitted content'
+);
+select results_eq(
+  $$select display_name, role::text from public.current_admin_profile()$$,
+  $$values ('Test Editor'::text, 'editor'::text)$$,
+  'An active editor may load only their own safe administrator profile'
 );
 select results_eq(
   $$update public.admin_profiles set role = 'owner' where user_id = '10000000-0000-0000-0000-000000000002' returning role::text$$,

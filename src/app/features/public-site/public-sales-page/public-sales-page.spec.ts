@@ -10,10 +10,12 @@ describe('Public crystal sales page configuration', () => {
   });
 
   it('publishes only the approved English and Telugu home routes', () => {
-    expect(routes.map((route) => route.path)).toEqual(['', 'te', '**']);
-    expect(routes[0].data?.['language']).toBe('en');
-    expect(routes[1].data?.['language']).toBe('te');
-    expect(routes.some((route) => route.path?.includes('privacy-policy'))).toBe(false);
+    const publicRoutes = routes.find((route) => route.path === '')?.children ?? [];
+
+    expect(publicRoutes.map((route) => route.path)).toEqual(['', 'te', '**']);
+    expect(publicRoutes[0].data?.['language']).toBe('en');
+    expect(publicRoutes[1].data?.['language']).toBe('te');
+    expect(publicRoutes.some((route) => route.path?.includes('privacy-policy'))).toBe(false);
   });
 
   it('publishes exactly the four approved products in the approved order', () => {
