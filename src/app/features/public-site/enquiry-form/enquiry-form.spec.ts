@@ -20,7 +20,7 @@ describe('EnquiryForm', () => {
     fixture.componentInstance.form.patchValue({
       name: 'Pratyusha',
       mobile: '9876543210',
-      requirement: 'brand',
+      requirement: 'success',
       consent: true,
     });
 
@@ -47,6 +47,33 @@ describe('EnquiryForm', () => {
 
     form.controls.email.setValue('not-an-email');
     expect(form.controls.email.invalid).toBe(true);
+
+    form.controls.city.setValue('   ');
+    form.controls.message.setValue('   ');
+    expect(form.controls.city.invalid).toBe(true);
+    expect(form.controls.message.invalid).toBe(true);
+  });
+
+  it('trims text values before the development-safe submit action', () => {
+    const fixture = TestBed.createComponent(EnquiryForm);
+    fixture.detectChanges();
+    fixture.componentInstance.form.patchValue({
+      name: '  Pratyusha  ',
+      mobile: ' 9876543210 ',
+      email: ' name@example.com ',
+      city: ' Hyderabad ',
+      requirement: 'success',
+      message: ' Please share details. ',
+      consent: true,
+    });
+
+    const formElement = fixture.nativeElement.querySelector('form') as HTMLFormElement;
+    formElement.dispatchEvent(new Event('submit'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.form.controls.name.value).toBe('Pratyusha');
+    expect(fixture.componentInstance.form.controls.city.value).toBe('Hyderabad');
+    expect(fixture.nativeElement.textContent).toContain('Your details were not sent or stored.');
   });
 
   it('does not expose a real submission endpoint or log personal data', () => {
