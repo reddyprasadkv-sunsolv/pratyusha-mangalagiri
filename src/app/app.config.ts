@@ -3,6 +3,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
+import { CONTENT_REPOSITORY_PROVIDER } from './core/data/content-repository.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
     ),
     provideClientHydration(withEventReplay()),
+    CONTENT_REPOSITORY_PROVIDER,
   ],
 };
