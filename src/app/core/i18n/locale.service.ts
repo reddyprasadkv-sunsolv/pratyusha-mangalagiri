@@ -11,7 +11,7 @@ export class LocaleService {
   private readonly document = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
-  private readonly activeLanguage = signal<SupportedLanguage>(this.restoreLanguage());
+  private readonly activeLanguage = signal<SupportedLanguage>('en');
 
   readonly language = this.activeLanguage.asReadonly();
   readonly locale = this.language;
@@ -34,7 +34,8 @@ export class LocaleService {
       return;
     }
 
-    const scrollPosition = this.isBrowser() ? window.scrollY : 0;
+    const view = this.document.defaultView;
+    const scrollPosition = this.isBrowser() ? (view?.scrollY ?? 0) : 0;
     this.applyLanguage(language, true);
     const mappedUrl = this.mapEquivalentUrl(this.router.url, language);
 
@@ -42,8 +43,8 @@ export class LocaleService {
       await this.router.navigateByUrl(mappedUrl);
     }
 
-    if (this.isBrowser() && scrollPosition > 0) {
-      requestAnimationFrame(() => window.scrollTo({ top: scrollPosition, behavior: 'instant' }));
+    if (this.isBrowser() && view && scrollPosition > 0) {
+      view.requestAnimationFrame(() => view.scrollTo({ top: scrollPosition, behavior: 'instant' }));
     }
   }
 
@@ -62,17 +63,12 @@ export class LocaleService {
     this.updateDocumentLanguage(language);
 
     if (persist && this.isBrowser()) {
-      localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, language);
+      try {
+        this.document.defaultView?.localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, language);
+      } catch {
+        // The route remains the source of truth when storage is unavailable.
+      }
     }
-  }
-
-  private restoreLanguage(): SupportedLanguage {
-    if (!this.isBrowser()) {
-      return 'en';
-    }
-
-    const stored = localStorage.getItem(SITE_LANGUAGE_STORAGE_KEY);
-    return this.isSupportedLanguage(stored) ? stored : 'en';
   }
 
   private isSupportedLanguage(value: unknown): value is SupportedLanguage {

@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
 import { LocaleService } from '../../../core/i18n/locale.service';
+import { SeoService } from '../../../core/seo/seo.service';
 import { CtaSection } from '../../../shared/components/cta-section/cta-section';
 import { FaqAccordion } from '../../../shared/components/faq-accordion/faq-accordion';
 import { ImageCard } from '../../../shared/components/image-card/image-card';
@@ -31,15 +32,17 @@ import { EnquiryForm } from '../enquiry-form/enquiry-form';
 })
 export class PublicSalesPage {
   private readonly route = inject(ActivatedRoute);
+  private readonly seoService = inject(SeoService);
   protected readonly localeService = inject(LocaleService);
   protected readonly contentService = inject(PublicContentService);
   protected readonly content = computed(() => this.contentService.content());
   protected readonly failedImages = signal<ReadonlySet<string>>(new Set());
 
   constructor() {
-    this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
-      const language: SupportedLanguage = params.get('language') === 'te' ? 'te' : 'en';
+    this.route.data.pipe(takeUntilDestroyed()).subscribe((data) => {
+      const language: SupportedLanguage = data['language'] === 'te' ? 'te' : 'en';
       this.localeService.setLanguageFromRoute(language);
+      this.seoService.applyHomepage(language, this.contentService.content().faqs);
     });
   }
 

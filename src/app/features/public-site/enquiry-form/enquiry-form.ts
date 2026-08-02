@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { PublicContentService } from '../content/public-content.service';
 import { FormField } from '../../../shared/components/form-field/form-field';
 import { UiButton } from '../../../shared/components/ui-button/ui-button';
-
-const INDIAN_MOBILE_PATTERN = /^[6-9]\d{9}$/;
-const NON_WHITESPACE_PATTERN = /\S/;
+import { EnquiryDraftService } from './enquiry-draft.service';
 
 @Component({
   selector: 'app-enquiry-form',
@@ -18,43 +16,11 @@ const NON_WHITESPACE_PATTERN = /\S/;
 })
 export class EnquiryForm {
   private readonly contentService = inject(PublicContentService);
+  private readonly draftService = inject(EnquiryDraftService);
   protected readonly copy = computed(() => this.contentService.content().form);
   protected readonly developmentMessage = signal<string | null>(null);
 
-  readonly form = new FormGroup({
-    name: new FormControl('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.pattern(NON_WHITESPACE_PATTERN),
-        Validators.maxLength(80),
-      ],
-    }),
-    mobile: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(INDIAN_MOBILE_PATTERN)],
-    }),
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.email, Validators.maxLength(120)],
-    }),
-    city: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.pattern(NON_WHITESPACE_PATTERN), Validators.maxLength(80)],
-    }),
-    requirement: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    message: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.pattern(NON_WHITESPACE_PATTERN), Validators.maxLength(1000)],
-    }),
-    consent: new FormControl(false, {
-      nonNullable: true,
-      validators: [Validators.requiredTrue],
-    }),
-  });
+  readonly form = this.draftService.form;
 
   protected submitPreview(): void {
     this.developmentMessage.set(null);
