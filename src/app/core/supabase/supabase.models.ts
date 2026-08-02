@@ -5,21 +5,39 @@ export type AdministratorRole = 'owner' | 'editor';
 
 export interface ActiveAdminProfile {
   readonly userId: string;
+  readonly displayName: string;
   readonly role: AdministratorRole;
   readonly isActive: true;
 }
 
 export type AdminSessionStatus =
-  'idle' | 'loading' | 'signed-out' | 'signed-in' | 'unavailable' | 'error';
+  | 'idle'
+  | 'checking'
+  | 'signed-out'
+  | 'authenticating'
+  | 'authenticated'
+  | 'unauthorized'
+  | 'expired'
+  | 'configuration-missing'
+  | 'error';
 
 export interface AdminSessionState {
   readonly status: AdminSessionStatus;
   readonly profile: ActiveAdminProfile | null;
   readonly errorCode: AdminAuthErrorCode | null;
+  readonly safeMessage: string | null;
 }
 
 export type AdminAuthErrorCode =
-  'invalid-credentials' | 'inactive-admin' | 'not-authorized' | 'service-unavailable' | 'unknown';
+  | 'invalid-credentials'
+  | 'inactive-admin'
+  | 'not-authorized'
+  | 'session-expired'
+  | 'service-unavailable'
+  | 'configuration-incomplete'
+  | 'network-error'
+  | 'validation-error'
+  | 'unknown';
 
 export interface CmsPageSectionRow {
   readonly id: string;

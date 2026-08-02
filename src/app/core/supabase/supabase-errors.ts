@@ -17,5 +17,9 @@ export function mapSupabaseAuthError(error: AuthError | Error | null): SafeAdmin
     }
   }
 
+  if (error instanceof TypeError) {
+    return { code: 'network-error', message: 'The administration service could not be reached.' };
+  }
+
   return { code: 'unknown', message: 'Sign-in could not be completed.' };
 }

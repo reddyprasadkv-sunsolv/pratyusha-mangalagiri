@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
+import { SupabaseConfigurationStatus } from './supabase.config';
 import { SUPABASE_CONFIG, SUPABASE_SAFE_LOGGER } from './supabase.tokens';
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +42,14 @@ export class SupabaseClientService {
 
   get available(): boolean {
     return this.client !== null;
+  }
+
+  get configurationStatus(): SupabaseConfigurationStatus {
+    return this.config.status;
+  }
+
+  get enabled(): boolean {
+    return this.config.enabled;
   }
 
   private warnConfiguration(): void {
