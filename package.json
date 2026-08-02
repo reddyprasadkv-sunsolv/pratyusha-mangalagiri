@@ -13,6 +13,7 @@
     "lint": "ng lint",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit && tsc -p tsconfig.e2e.json --noEmit",
     "test": "ng test --watch=false",
+    "pretest:e2e": "npm run build",
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

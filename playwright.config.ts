@@ -18,8 +18,14 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm start -- --host 127.0.0.1 --port 4200',
+    command: 'npm run serve:ssr',
     url: 'http://127.0.0.1:4200',
-    reuseExistingServer: !process.env['CI'],
+    reuseExistingServer: false,
+    env: {
+      PUBLIC_SITE_URL: 'http://127.0.0.1:4200',
+      PUBLIC_INDEXING_ENABLED: 'true',
+      NG_ALLOWED_HOSTS: '127.0.0.1,localhost',
+      PORT: '4200',
+    },
   },
 });

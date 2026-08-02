@@ -30,11 +30,13 @@ describe('LocaleService', () => {
     expect(document.documentElement.lang).toBe('te');
   });
 
-  it('restores a valid stored preference', () => {
+  it('keeps the route authoritative when a stored preference conflicts', () => {
     localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, 'te');
 
     const service = TestBed.inject(LocaleService);
 
+    expect(service.language()).toBe('en');
+    service.setLanguageFromRoute('te');
     expect(service.language()).toBe('te');
   });
 
@@ -46,7 +48,7 @@ describe('LocaleService', () => {
     expect(service.language()).toBe('en');
   });
 
-  it('restores English and maps equivalent English, Telugu, and legal routes', async () => {
+  it('restores English and maps equivalent English and Telugu paths', async () => {
     const service = TestBed.inject(LocaleService);
     const router = TestBed.inject(Router);
     await router.navigateByUrl('/te/privacy-policy?source=test#details');

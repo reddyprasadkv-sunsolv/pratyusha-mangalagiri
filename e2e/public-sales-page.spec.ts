@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test';
 
+const englishTitle = 'Crystal Bracelets with 21-Day Guidance | Pratyusha';
+const teluguTitle = '21-Day మార్గదర్శనంతో క్రిస్టల్ బ్రేస్‌లెట్లు | Pratyusha';
+const siteUrl = 'http://127.0.0.1:4200';
+
 const futureProducts = [
   "Tiger's Eye Bracelet",
   'Pyrite Clusters',
@@ -17,6 +21,25 @@ test('renders the English homepage and four approved products by default', async
   await expect(page.locator('[data-product-id]')).toHaveCount(4);
 });
 
+test('returns complete English SEO in the server-rendered response', async ({ request }) => {
+  const response = await request.get('/');
+  const html = await response.text();
+
+  expect(response.status()).toBe(200);
+  expect(html).toContain(`<html lang="en"`);
+  expect(html).toContain(`<title>${englishTitle}</title>`);
+  expect(html).toContain('name="description"');
+  expect(html).toContain(`rel="canonical" href="${siteUrl}/"`);
+  expect(html).toContain('hreflang="en"');
+  expect(html).toContain('hreflang="te"');
+  expect(html).toContain('hreflang="x-default"');
+  expect(html).toContain('property="og:locale" content="en_IN"');
+  expect(html).toContain('name="twitter:card" content="summary_large_image"');
+  expect(html).toContain('type="application/ld+json"');
+  expect(html).toContain('<h1');
+  expect(html.toLowerCase()).not.toContain('client input required');
+});
+
 test('renders Telugu content and Telugu product alt text', async ({ page }) => {
   await page.goto('/te');
 
@@ -25,6 +48,21 @@ test('renders Telugu content and Telugu product alt text', async ({ page }) => {
   await expect(
     page.getByAltText('చేతిలో చూపించిన వివిధ రంగుల క్రిస్టల్ సక్సెస్ బ్రేస్‌లెట్').first(),
   ).toBeVisible();
+});
+
+test('returns complete Telugu SEO on direct SSR navigation', async ({ request }) => {
+  const response = await request.get('/te');
+  const html = await response.text();
+
+  expect(response.status()).toBe(200);
+  expect(html).toContain(`<html lang="te"`);
+  expect(html).toContain(`<title>${teluguTitle}</title>`);
+  expect(html).toContain('name="description"');
+  expect(html).toContain(`rel="canonical" href="${siteUrl}/te"`);
+  expect(html).toContain('property="og:locale" content="te_IN"');
+  expect(html).toContain('property="og:locale:alternate" content="en_IN"');
+  expect(html).toContain('type="application/ld+json"');
+  expect(html).toContain('<h1');
 });
 
 test('switches languages both ways and persists the selection after refresh', async ({ page }) => {
@@ -40,6 +78,38 @@ test('switches languages both ways and persists the selection after refresh', as
   await page.getByRole('button', { name: 'వెబ్‌సైట్ భాషను ఆంగ్లంలోకి మార్చండి' }).click();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('does not duplicate metadata after repeated client-side language navigation', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Switch website language to Telugu' }).click();
+  await page.getByRole('button', { name: 'వెబ్‌సైట్ భాషను ఆంగ్లంలోకి మార్చండి' }).click();
+  await page.getByRole('button', { name: 'Switch website language to Telugu' }).click();
+
+  await expect(page.locator('head link[rel="canonical"]')).toHaveCount(1);
+  await expect(page.locator('head link[rel="alternate"][hreflang]')).toHaveCount(3);
+  await expect(page.locator('head meta[name="description"]')).toHaveCount(1);
+  await expect(page).toHaveTitle(teluguTitle);
+});
+
+test('hydrates without visible errors or console hydration warnings', async ({ page }) => {
+  const consoleWarnings: string[] = [];
+  const pageErrors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'warning' || message.type() === 'error') {
+      consoleWarnings.push(message.text());
+    }
+  });
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+
+  await page.goto('/te');
+  await page.getByRole('heading', { level: 1 }).waitFor();
+
+  expect(pageErrors).toEqual([]);
+  expect(consoleWarnings.filter((message) => /hydration|NG05\d{2}/i.test(message))).toEqual([]);
+  await expect(page.locator('body')).not.toContainText('Application error');
 });
 
 test('retains enquiry form values and consent while switching language', async ({ page }) => {
@@ -134,13 +204,40 @@ test('uses claim-neutral image presentation and renders the wellness disclaimer'
   ).toBeVisible();
 });
 
-test('keeps legal links on bilingual non-broken draft routes', async ({ page }) => {
-  await page.goto('/privacy-policy');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Privacy Policy');
+test('returns accessible noindex 404 pages without exposing draft legal links', async ({
+  page,
+}) => {
+  const response = await page.goto('/privacy-policy');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('not here');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+  await expect(page.locator('footer a[href*="privacy-policy"]')).toHaveCount(0);
 
-  await page.goto('/te/privacy-policy');
+  const teluguResponse = await page.goto('/te/missing-page');
+  expect(teluguResponse?.status()).toBe(404);
   await expect(page.locator('html')).toHaveAttribute('lang', 'te');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('గోప్యతా విధానం');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('ఇక్కడ లేదు');
+});
+
+test('serves a constrained bilingual sitemap and production-safe robots policy', async ({
+  request,
+}) => {
+  const sitemapResponse = await request.get('/sitemap.xml');
+  const sitemap = await sitemapResponse.text();
+  expect(sitemapResponse.status()).toBe(200);
+  expect(sitemapResponse.headers()['content-type']).toContain('application/xml');
+  expect(sitemap.match(/<url>/g)).toHaveLength(2);
+  expect(sitemap).toContain(`<loc>${siteUrl}/</loc>`);
+  expect(sitemap).toContain(`<loc>${siteUrl}/te</loc>`);
+  expect(sitemap).not.toContain('privacy-policy');
+  expect(sitemap).not.toContain('/admin');
+
+  const robotsResponse = await request.get('/robots.txt');
+  const robots = await robotsResponse.text();
+  expect(robotsResponse.status()).toBe(200);
+  expect(robots).toContain(`Sitemap: ${siteUrl}/sitemap.xml`);
+  expect(robots).not.toContain('Disallow: /te');
 });
 
 test('does not expose appointment, payment, backend, or PDF functionality', async ({ page }) => {

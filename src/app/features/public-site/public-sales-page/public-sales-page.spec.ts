@@ -1,6 +1,4 @@
-import { UrlSegment } from '@angular/router';
-
-import { publicHomeMatcher, publicLegalMatcher } from '../../../app.routes';
+import { routes } from '../../../app.routes';
 import { PUBLIC_CONTENT } from '../content/public-content.data';
 
 describe('Public crystal sales page configuration', () => {
@@ -11,13 +9,11 @@ describe('Public crystal sales page configuration', () => {
     expect(PUBLIC_CONTENT.te.form.name).toBe('పూర్తి పేరు');
   });
 
-  it('matches English, Telugu, and bilingual legal routes', () => {
-    expect(publicHomeMatcher([])?.posParams?.['language'].path).toBe('en');
-    expect(publicHomeMatcher([new UrlSegment('te', {})])?.posParams?.['language'].path).toBe('te');
-    expect(publicLegalMatcher([new UrlSegment('privacy-policy', {})])).toBeTruthy();
-    expect(
-      publicLegalMatcher([new UrlSegment('te', {}), new UrlSegment('privacy-policy', {})]),
-    ).toBeTruthy();
+  it('publishes only the approved English and Telugu home routes', () => {
+    expect(routes.map((route) => route.path)).toEqual(['', 'te', '**']);
+    expect(routes[0].data?.['language']).toBe('en');
+    expect(routes[1].data?.['language']).toBe('te');
+    expect(routes.some((route) => route.path?.includes('privacy-policy'))).toBe(false);
   });
 
   it('publishes exactly the four approved products in the approved order', () => {
