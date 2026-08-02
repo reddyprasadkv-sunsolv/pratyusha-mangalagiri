@@ -1,0 +1,12 @@
+<section
+  class="backend-status"
+  [class]="'backend-status backend-status--' + backend().tone"
+  aria-labelledby="backend-status-title"
+  role="status"
+>
+  <span class="backend-status__indicator" aria-hidden="true"></span>
+  <div>
+    <strong id="backend-status-title">{{ backend().label }}</strong>
+    <p>{{ backend().message }}</p>
+  </div>
+</section>

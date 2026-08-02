@@ -1,0 +1,45 @@
+<header class="dashboard-heading">
+  <div>
+    <p>Administration dashboard</p>
+    <h1>Welcome, {{ profile()?.displayName }}</h1>
+    <span class="dashboard-heading__role">Role: {{ profile()?.role }}</span>
+  </div>
+  <app-admin-backend-status />
+</header>
+
+<section class="dashboard-grid" aria-label="Administration readiness">
+  <article>
+    <p class="dashboard-card__label">Content management</p>
+    <h2>Module foundation ready</h2>
+    <p>
+      Page content, products, ritual, FAQs, founder, testimonials, contact, SEO, legal, media, leads
+      and settings have typed repository contracts for the next approved step.
+    </p>
+  </article>
+  <article>
+    <p class="dashboard-card__label">Publishing workflow</p>
+    <h2>Review before publication</h2>
+    <p>
+      Draft → Client review → Approved → Published. Archived records remain available for history.
+    </p>
+  </article>
+  <article>
+    <p class="dashboard-card__label">Client inputs</p>
+    <h2>Approval remains required</h2>
+    <p>
+      Verify contact details, credentials, testimonials, legal copy and publishing decisions before
+      activating them.
+    </p>
+  </article>
+</section>
+
+<section class="dashboard-readiness" aria-labelledby="step-6b-title">
+  <div>
+    <p class="dashboard-card__label">Step 6B readiness</p>
+    <h2 id="step-6b-title">Live editing is intentionally not active</h2>
+  </div>
+  <p>
+    Live dashboard metrics will be enabled after the approved Supabase project is linked and
+    migrated. No placeholder counts or analytics are shown.
+  </p>
+</section>

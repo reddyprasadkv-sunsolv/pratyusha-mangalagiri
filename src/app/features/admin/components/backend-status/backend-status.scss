@@ -1,0 +1,47 @@
+.backend-status {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-50);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+
+  > div {
+    min-width: 0;
+  }
+
+  strong {
+    display: block;
+    color: var(--color-text-strong);
+  }
+
+  p {
+    margin-top: 0.15rem;
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+}
+
+.backend-status__indicator {
+  width: 0.65rem;
+  height: 0.65rem;
+  flex: 0 0 auto;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.backend-status--success .backend-status__indicator {
+  background: var(--color-success);
+}
+
+.backend-status--warning .backend-status__indicator {
+  background: var(--color-warning);
+}
+
+.backend-status--error .backend-status__indicator {
+  background: var(--color-error);
+}

@@ -1,0 +1,20 @@
+<div class="notifications" aria-live="polite" aria-atomic="false">
+  @for (notification of notifications.notifications(); track notification.id) {
+    <div
+      class="notification"
+      [class]="'notification notification--' + notification.variant"
+      [attr.role]="notification.variant === 'error' ? 'alert' : 'status'"
+    >
+      <p>{{ notification.message }}</p>
+      @if (notification.dismissible) {
+        <button
+          type="button"
+          (click)="notifications.dismiss(notification.id)"
+          aria-label="Dismiss notification"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      }
+    </div>
+  }
+</div>
