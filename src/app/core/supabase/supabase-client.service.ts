@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
+import { Database } from './database.types';
 import { SupabaseConfigurationStatus } from './supabase.config';
 import { SUPABASE_CONFIG, SUPABASE_SAFE_LOGGER } from './supabase.tokens';
 
@@ -10,10 +11,10 @@ export class SupabaseClientService {
   private readonly config = inject(SUPABASE_CONFIG);
   private readonly logger = inject(SUPABASE_SAFE_LOGGER);
   private readonly platformId = inject(PLATFORM_ID);
-  private clientInstance: SupabaseClient | null | undefined;
+  private clientInstance: SupabaseClient<Database> | null | undefined;
   private warned = false;
 
-  get client(): SupabaseClient | null {
+  get client(): SupabaseClient<Database> | null {
     if (this.clientInstance !== undefined) {
       return this.clientInstance;
     }
@@ -30,7 +31,7 @@ export class SupabaseClientService {
     }
 
     const browser = isPlatformBrowser(this.platformId);
-    this.clientInstance = createClient(this.config.url, this.config.anonKey, {
+    this.clientInstance = createClient<Database>(this.config.url, this.config.anonKey, {
       auth: {
         persistSession: browser,
         autoRefreshToken: browser,

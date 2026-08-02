@@ -3,12 +3,12 @@ import { DestroyRef, inject, Injectable, PLATFORM_ID, signal } from '@angular/co
 import { AuthChangeEvent, Session, Subscription } from '@supabase/supabase-js';
 
 import { mapSupabaseAuthError } from './supabase-errors';
+import { Database } from './database.types';
 import {
   ActiveAdminProfile,
   AdminAuthErrorCode,
   AdminSessionState,
   AdminSessionStatus,
-  AdministratorRole,
 } from './supabase.models';
 import { SupabaseClientService } from './supabase-client.service';
 
@@ -281,12 +281,8 @@ export class AdminAuthService {
   }
 }
 
-interface AdminProfilePayload {
-  readonly user_id: string;
-  readonly display_name: string;
-  readonly role: AdministratorRole;
-  readonly is_active: boolean;
-}
+type AdminProfilePayload =
+  Database['public']['Functions']['current_admin_profile']['Returns'][number];
 
 function normalizeActiveAdminProfile(
   value: unknown,

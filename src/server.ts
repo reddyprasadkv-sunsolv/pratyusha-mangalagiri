@@ -9,6 +9,10 @@ import { join } from 'node:path';
 
 import { normalizePublicSiteUrl } from './app/core/config/public-site-url';
 import { generateRobots, generateSitemap } from './app/core/seo/seo-static';
+import {
+  resolveSupabaseConfig,
+  toPublicSupabaseRuntimePayload,
+} from './app/core/supabase/supabase.config';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -67,6 +71,17 @@ app.get('/robots.txt', (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+app.get('/api/supabase-config.js', (_req, res) => {
+  const payload = JSON.stringify(
+    toPublicSupabaseRuntimePayload(resolveSupabaseConfig(process.env)),
+  ).replace(/</g, '\\u003c');
+  res
+    .type('application/javascript')
+    .set('Cache-Control', 'private, no-store')
+    .set('X-Content-Type-Options', 'nosniff')
+    .send(`globalThis.__PRATYUSHA_SUPABASE_CONFIG__=${payload};`);
 });
 
 app.use((_req, res, next) => {

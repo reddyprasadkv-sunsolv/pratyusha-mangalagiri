@@ -1,7 +1,8 @@
 import { SupportedLanguage } from '../../features/public-site/content/public-content.model';
+import { Database } from './database.types';
 
-export type ContentStatus = 'draft' | 'client_review' | 'approved' | 'published' | 'archived';
-export type AdministratorRole = 'owner' | 'editor';
+export type ContentStatus = Database['public']['Enums']['content_status'];
+export type AdministratorRole = Database['public']['Enums']['administrator_role'];
 
 export interface ActiveAdminProfile {
   readonly userId: string;

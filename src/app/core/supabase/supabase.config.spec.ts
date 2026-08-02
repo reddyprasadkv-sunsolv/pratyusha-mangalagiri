@@ -1,4 +1,9 @@
-import { resolveSupabaseConfig } from './supabase.config';
+import {
+  DISABLED_SUPABASE_CONFIG,
+  parsePublicSupabaseRuntimePayload,
+  resolveSupabaseConfig,
+  toPublicSupabaseRuntimePayload,
+} from './supabase.config';
 
 describe('resolveSupabaseConfig', () => {
   it('defaults to disabled and requires no Supabase values', () => {
@@ -48,5 +53,37 @@ describe('resolveSupabaseConfig', () => {
       anonKey: 'public-key',
       status: 'ready',
     });
+  });
+});
+
+describe('public Supabase runtime payload', () => {
+  it('accepts only a complete enabled browser configuration', () => {
+    const config = parsePublicSupabaseRuntimePayload({
+      enabled: true,
+      url: 'https://project.example.test',
+      anonKey: 'public-key',
+    });
+
+    expect(config.status).toBe('ready');
+    expect(toPublicSupabaseRuntimePayload(config)).toEqual({
+      enabled: true,
+      url: 'https://project.example.test',
+      anonKey: 'public-key',
+    });
+  });
+
+  it('fails closed for malformed or incomplete endpoint data', () => {
+    expect(parsePublicSupabaseRuntimePayload(null)).toBe(DISABLED_SUPABASE_CONFIG);
+    expect(parsePublicSupabaseRuntimePayload({ enabled: true })).toMatchObject({
+      enabled: true,
+      status: 'missing',
+    });
+    expect(
+      parsePublicSupabaseRuntimePayload({
+        enabled: 'true',
+        url: 'https://project.example.test',
+        anonKey: 'public-key',
+      }),
+    ).toBe(DISABLED_SUPABASE_CONFIG);
   });
 });

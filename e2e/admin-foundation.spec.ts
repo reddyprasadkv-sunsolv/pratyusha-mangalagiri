@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
 test('renders a safe disabled administration login without backend requests', async ({ page }) => {
-  const backendRequests: string[] = [];
+  const privilegedBackendRequests: string[] = [];
   page.on('request', (request) => {
-    if (/supabase|\.supabase\.co/i.test(request.url())) {
-      backendRequests.push(request.url());
+    if (/\.supabase\.co/i.test(request.url())) {
+      privilegedBackendRequests.push(request.url());
     }
   });
 
@@ -18,7 +18,7 @@ test('renders a safe disabled administration login without backend requests', as
   await expect(page.getByLabel('Email address')).toBeDisabled();
   await expect(page.locator('#admin-password')).toBeDisabled();
   await expect(page.getByText(/create account/i)).toHaveCount(0);
-  expect(backendRequests).toEqual([]);
+  expect(privilegedBackendRequests).toEqual([]);
 });
 
 test('exposes accessible login constraints and password visibility control', async ({ page }) => {

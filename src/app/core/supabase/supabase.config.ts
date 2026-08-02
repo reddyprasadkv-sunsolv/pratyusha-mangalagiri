@@ -9,6 +9,12 @@ export interface SupabaseRuntimeConfig {
 
 export type SupabaseEnvironment = Readonly<Record<string, string | undefined>>;
 
+export interface PublicSupabaseRuntimePayload {
+  readonly enabled?: unknown;
+  readonly url?: unknown;
+  readonly anonKey?: unknown;
+}
+
 export const DISABLED_SUPABASE_CONFIG: SupabaseRuntimeConfig = {
   enabled: false,
   url: null,
@@ -41,4 +47,27 @@ export function resolveSupabaseConfig(environment: SupabaseEnvironment): Supabas
   } catch {
     return { enabled: true, url: null, anonKey: null, status: 'invalid-url' };
   }
+}
+
+export function parsePublicSupabaseRuntimePayload(value: unknown): SupabaseRuntimeConfig {
+  if (!value || typeof value !== 'object') {
+    return DISABLED_SUPABASE_CONFIG;
+  }
+
+  const payload = value as PublicSupabaseRuntimePayload;
+  return resolveSupabaseConfig({
+    SUPABASE_ENABLED: payload.enabled === true ? 'true' : 'false',
+    SUPABASE_URL: typeof payload.url === 'string' ? payload.url : undefined,
+    SUPABASE_ANON_KEY: typeof payload.anonKey === 'string' ? payload.anonKey : undefined,
+  });
+}
+
+export function toPublicSupabaseRuntimePayload(
+  config: SupabaseRuntimeConfig,
+): PublicSupabaseRuntimePayload {
+  return {
+    enabled: config.enabled,
+    url: config.url,
+    anonKey: config.anonKey,
+  };
 }

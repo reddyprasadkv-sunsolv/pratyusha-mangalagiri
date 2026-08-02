@@ -4,7 +4,14 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'coverage/**', 'output/**', 'playwright-report/**', 'test-results/**'],
+    ignores: [
+      'dist/**',
+      'coverage/**',
+      'output/**',
+      'playwright-report/**',
+      'test-results/**',
+      'src/app/core/supabase/database.types.ts',
+    ],
   },
   {
     files: ['**/*.ts'],

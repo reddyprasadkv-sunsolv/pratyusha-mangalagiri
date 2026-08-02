@@ -8,6 +8,10 @@ const migrations = readdirSync(migrationsDirectory)
   .map((file) => readFileSync(join(migrationsDirectory, file), 'utf8'))
   .join('\n')
   .toLowerCase();
+const recordSafePublicationMigration = readFileSync(
+  join(migrationsDirectory, '20260802151000_make_publication_validation_record_safe.sql'),
+  'utf8',
+).toLowerCase();
 
 const applicationTables = [
   'admin_profiles',
@@ -48,6 +52,11 @@ describe('Supabase migration security contract', () => {
     expect(migrations).toContain(
       'grant execute on function public.current_admin_profile() to authenticated',
     );
+  });
+
+  it('validates publication records without accessing table-specific record fields directly', () => {
+    expect(recordSafePublicationMigration).toContain('row_data jsonb := to_jsonb(new)');
+    expect(recordSafePublicationMigration).not.toMatch(/\b(new|old)\.[a-z_]/);
   });
 
   it('has no anonymous CMS, storage, or lead write policy', () => {
@@ -91,6 +100,19 @@ describe('Angular integration boundaries', () => {
     const source = productionFiles.map((file) => readFileSync(file, 'utf8')).join('\n');
 
     expect(source).not.toContain(forbiddenName);
+  });
+
+  it('loads browser-safe runtime configuration without TransferState or SSR HTML injection', () => {
+    const source = [
+      ...productionFiles,
+      join(workspace, 'src', 'main.ts'),
+      join(workspace, 'src', 'server.ts'),
+    ]
+      .map((file) => readFileSync(file, 'utf8'))
+      .join('\n');
+
+    expect(source).not.toContain('TransferState');
+    expect(source).toContain('/api/supabase-config.js');
   });
 
   it('keeps public presentation components independent of Supabase imports', () => {
