@@ -49,7 +49,7 @@ export const routes: Routes = [
       import('./features/public-site/public-sales-page/public-sales-page').then(
         (component) => component.PublicSalesPage,
       ),
-    title: 'Pratyusha Mangalagiri — Clarity, Presence & Growth',
+    title: 'Crystal Bracelets with 21-Day Guidance | Pratyusha',
   },
   {
     matcher: publicLegalMatcher,

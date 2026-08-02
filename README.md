@@ -1,6 +1,6 @@
 # Pratyusha Mangalagiri — Angular application
 
-Production-oriented Angular SSR website for Pratyusha Mangalagiri. Step 3 includes the complete bilingual English/Telugu public sales page, accessible route-aware language switching, local preference persistence, and a non-submitting reactive enquiry form.
+Production-oriented Angular SSR website for Pratyusha Mangalagiri. Step 3C includes the complete bilingual English/Telugu crystal sales page, four approved optimised product images, accessible route-aware language switching, local preference persistence, and a non-submitting reactive enquiry form.
 
 ## Runtime
 
@@ -54,7 +54,7 @@ src/app/
     settings/
 ```
 
-See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, `docs/react-reference-inventory.md` for the read-only reference inventory, and `docs/STEP_3_REPORT.md` for approved and pending content.
+See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for tokens and components, `docs/react-reference-inventory.md` for the read-only reference inventory, `docs/STEP_3_REPORT.md` for the original bilingual implementation, and `docs/STEP_3C_REPORT.md` for product-asset and crystal-page validation.
 
 ## Environment and secrets
 
@@ -65,5 +65,6 @@ See `src/app/ARCHITECTURE.md` for ownership rules, `docs/DESIGN_SYSTEM.md` for t
 - No React, Vite, Vinext, or Next.js runtime has been copied into this application.
 - The public UI serves English at `/` and Telugu at `/te`.
 - The reactive enquiry form validates locally and never submits, logs, or stores lead information.
+- Original promotional posters and future-product references remain outside Angular's public asset tree.
 - No document export or generation feature or dependency is included.
 - Local approval artifacts under `output/` remain ignored and uncommitted.

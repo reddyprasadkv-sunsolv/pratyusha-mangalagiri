@@ -40,7 +40,7 @@ export class EnquiryForm {
     }),
     city: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.maxLength(80)],
+      validators: [Validators.pattern(NON_WHITESPACE_PATTERN), Validators.maxLength(80)],
     }),
     requirement: new FormControl('', {
       nonNullable: true,
@@ -48,7 +48,7 @@ export class EnquiryForm {
     }),
     message: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.maxLength(1000)],
+      validators: [Validators.pattern(NON_WHITESPACE_PATTERN), Validators.maxLength(1000)],
     }),
     consent: new FormControl(false, {
       nonNullable: true,
@@ -58,6 +58,16 @@ export class EnquiryForm {
 
   protected submitPreview(): void {
     this.developmentMessage.set(null);
+    this.form.patchValue(
+      {
+        name: this.form.controls.name.value.trim(),
+        mobile: this.form.controls.mobile.value.trim(),
+        email: this.form.controls.email.value.trim(),
+        city: this.form.controls.city.value.trim(),
+        message: this.form.controls.message.value.trim(),
+      },
+      { emitEvent: false },
+    );
     this.form.markAllAsTouched();
 
     if (this.form.invalid) {

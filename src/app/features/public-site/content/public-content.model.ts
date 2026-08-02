@@ -2,15 +2,40 @@ import { FaqItem, NavigationItem } from '../../../shared/models/public-site.mode
 
 export type SupportedLanguage = 'en' | 'te';
 
-export interface BilingualText {
-  readonly en: string;
-  readonly te: string;
-}
-
 export interface NumberedContent {
   readonly number: string;
   readonly title: string;
   readonly text: string;
+}
+
+export interface SectionCopy {
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly supporting: string;
+  readonly body: string;
+  readonly bullets: readonly string[];
+}
+
+export interface ProductMedia {
+  readonly imageUrl: string;
+  readonly imageSrcSet: string;
+  readonly imageAltEn: string;
+  readonly imageAltTe: string;
+  readonly imageWidth: number;
+  readonly imageHeight: number;
+  readonly imageFocalX: number;
+  readonly imageFocalY: number;
+  readonly imageStatus: 'approved';
+}
+
+export interface ProductCopy extends ProductMedia {
+  readonly id: 'success' | 'evil-eye' | 'money-magnet' | 'pyrite';
+  readonly nameEn: string;
+  readonly nameTe: string;
+  readonly supporting: string;
+  readonly body: string;
+  readonly points: readonly string[];
+  readonly cta: string;
 }
 
 export interface EnquiryFormCopy {
@@ -56,74 +81,53 @@ export interface PublicPageCopy {
   readonly englishSwitchLabel: string;
   readonly teluguSwitchLabel: string;
   readonly studioLabel: string;
-  readonly heroLine1: string;
-  readonly heroEmphasis1: string;
-  readonly heroLine2: string;
-  readonly heroEmphasis2: string;
-  readonly heroLede: string;
+  readonly heroTitle: string;
+  readonly heroEmphasis: string;
+  readonly heroSupporting: string;
+  readonly heroBody: string;
   readonly heroPrimary: string;
   readonly heroSecondary: string;
-  readonly heroAlt: string;
-  readonly heroNoteTitle: string;
-  readonly heroNote: string;
-  readonly trustLabel: string;
-  readonly trustItems: readonly NumberedContent[];
-  readonly problemEyebrow: string;
-  readonly problemTitle: string;
-  readonly problemEmphasis: string;
-  readonly problemIntro: string;
-  readonly problems: readonly string[];
-  readonly problemBridge: string;
-  readonly problemBridgeStrong: string;
-  readonly solutionEyebrow: string;
-  readonly solutionTitle: string;
-  readonly solutionEmphasis: string;
-  readonly solutionBody: string;
-  readonly solutionQuote: string;
-  readonly servicesEyebrow: string;
-  readonly servicesTitle: string;
-  readonly servicesEmphasis: string;
-  readonly servicesIntro: string;
-  readonly services: readonly NumberedContent[];
-  readonly benefitEyebrow: string;
-  readonly benefitTitle: string;
-  readonly benefitEmphasis: string;
-  readonly benefitIntro: string;
-  readonly benefits: readonly NumberedContent[];
+  readonly differentiatorTitle: string;
+  readonly differentiatorSupporting: string;
+  readonly differentiatorBody: string;
+  readonly differentiators: readonly string[];
+  readonly challenge: SectionCopy;
+  readonly support: SectionCopy;
+  readonly collection: SectionCopy;
+  readonly products: readonly ProductCopy[];
+  readonly ritual: SectionCopy;
+  readonly ritualNote: string;
+  readonly audience: SectionCopy;
+  readonly experienceDifference: SectionCopy;
   readonly processEyebrow: string;
   readonly processTitle: string;
-  readonly processEmphasis: string;
+  readonly processSupporting: string;
   readonly process: readonly NumberedContent[];
   readonly aboutEyebrow: string;
   readonly aboutTitle: string;
-  readonly aboutEmphasis: string;
-  readonly aboutBody1: string;
-  readonly aboutBody2: string;
-  readonly aboutValues: readonly string[];
+  readonly aboutSupporting: string;
+  readonly aboutBody: string;
   readonly aboutBadge: string;
-  readonly testimonialsEyebrow: string;
-  readonly testimonialsTitle: string;
-  readonly testimonialsEmphasis: string;
-  readonly testimonialsPending: string;
+  readonly founderAlt: string;
   readonly faqEyebrow: string;
   readonly faqTitle: string;
-  readonly faqEmphasis: string;
+  readonly faqSupporting: string;
   readonly faqPrompt: string;
   readonly faqLink: string;
   readonly faqs: readonly FaqItem[];
+  readonly disclaimerTitle: string;
+  readonly disclaimerBody: string;
   readonly conversionEyebrow: string;
   readonly conversionTitle: string;
-  readonly conversionEmphasis: string;
   readonly conversionBody: string;
   readonly conversionCta: string;
   readonly contactEyebrow: string;
   readonly contactTitle: string;
-  readonly contactEmphasis: string;
+  readonly contactSupporting: string;
   readonly contactBody: string;
-  readonly locationLabel: string;
-  readonly location: string;
   readonly contactNote: string;
   readonly form: EnquiryFormCopy;
+  readonly imageFallback: string;
   readonly footerStatement: string;
   readonly footerNavigation: string;
   readonly footerLegal: string;
