@@ -16,7 +16,7 @@ The repository default is `SUPABASE_ENABLED=false`. `/admin/login` shows the app
 
 ## Enabled behaviour
 
-Only after an exact project is approved and migrated should the three public values be injected through the deployment's approved Angular runtime/build configuration. Missing or malformed enabled values disable login and display a generic incomplete-configuration message. The UI never prints the URL or key.
+The exact project is approved and migrated. For local development, place the three browser-safe values in ignored `.env.local` and load that file into the SSR process environment. The Express SSR server exposes only the validated public runtime payload through `/api/supabase-config.js` with `private, no-store`; the blocking script is loaded before Angular hydration. Missing or malformed values disable login and display a generic incomplete-configuration message. The UI never prints the URL or key, and no configured value is compiled into browser bundles or injected into SSR HTML/TransferState.
 
 An enabled client still grants no administration access by itself. Supabase Auth must return a valid session and `current_admin_profile()` must return the same user as an active `owner` or `editor`.
 
@@ -28,4 +28,4 @@ An enabled client still grants no administration access by itself. Supabase Auth
 - Approved first-owner Auth identity and controlled profile bootstrap
 - Deployment-specific public configuration injection and no-secret bundle inspection
 
-No project is linked and no owner exists at the end of Step 6A.
+The approved Mumbai project, migrations, generated types, and configured-login state are verified. No owner exists because the exact `FIRST_OWNER_EMAIL` has not been supplied. Keep owner invitation and live credential testing blocked until that secure input arrives.

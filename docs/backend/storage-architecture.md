@@ -2,6 +2,8 @@
 
 Both buckets are created private-by-default. Public delivery is allowed through an RLS SELECT policy only after a matching `media_assets` row is approved, published, and marked public. This prevents a merely uploaded draft from becoming reachable through an unrestricted public-bucket URL.
 
+Remote validation on 2 August 2026 confirmed both buckets, their size/MIME limits, and all five object policies. Synthetic upload/read checks passed inside a rolled-back pgTAP transaction; no test object remains.
+
 | Bucket                  |  Limit | Formats               | Read policy                                                         | Write policy             |
 | ----------------------- | -----: | --------------------- | ------------------------------------------------------------------- | ------------------------ |
 | `public-media`          |  5 MiB | JPEG, PNG, WebP, AVIF | Anonymous/authenticated only for matching published public metadata | Active editor/owner only |

@@ -2,7 +2,7 @@
 
 ## Source of truth
 
-Versioned files under `supabase/migrations/` are the only schema source of truth. The current foundation creates 15 application tables and keeps English and Telugu in explicit `_en` and `_te` columns. JSONB is limited to flexible lists, captions/metadata, credentials, and audit snapshots.
+Versioned files under `supabase/migrations/` are the only schema source of truth. All five migrations are applied to the approved Mumbai project. The live schema contains 15 application tables and keeps English and Telugu in explicit `_en` and `_te` columns. Generated TypeScript types mirror the remote schema. JSONB is limited to flexible lists, captions/metadata, credentials, validation-safe trigger records, and audit snapshots.
 
 ## Status types
 
@@ -52,6 +52,10 @@ Publication is rejected rather than silently cleaning data.
 
 `supabase/seed.sql` contains only one unpublished structural site setting and the four known reviewed product keys as hidden drafts. It contains no administrator, PII, contact information, price, availability, testimonial, credential, ritual inclusion, policy text, or published row.
 
+## Live validation
+
+Remote validation confirms 15 primary keys, 34 foreign keys, 32 checks, 47 indexes, 14 updated-at triggers, and 11 publication-validation triggers. The final publication helper converts polymorphic trigger records to JSONB before table-specific access; this preserves strict validation without referencing fields absent from another table.
+
 ## Future Step 6 mapping
 
-Step 6A adds `current_admin_profile()` for secure self-profile validation and typed repository contracts without enabling live editors. A future Step 6B may map approved rows into dedicated CMS forms and generated `Database` types. The public page remains on `PUBLIC_CONTENT`. Admin forms must preserve the separate bilingual fields, status transition, audit attribution, and nullable unapproved fields rather than flattening records into one JSON document.
+`current_admin_profile()` and generated `Database` types are active, but no CMS editor has been enabled. A future Step 6B may map approved rows into dedicated forms after first-owner authentication is verified. The public page remains on `PUBLIC_CONTENT`. Admin forms must preserve separate bilingual fields, status transitions, audit attribution, and nullable unapproved fields rather than flattening records into one JSON document.

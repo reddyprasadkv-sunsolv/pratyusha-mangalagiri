@@ -2,7 +2,7 @@
 
 ## Current status
 
-This repository is not linked to a Supabase project. No project was created or guessed, and no remote migration was applied.
+The approved `Pratyusha Crystal` project is active in South Asia (Mumbai, `ap-south-1`). Five migrations are applied and matched remotely, database lint passes, and the temporary CLI token was revoked after activation. Local link state under `supabase/.temp/` and real browser configuration under `.env.local` remain ignored. See `docs/STEP_5B_SUPABASE_ACTIVATION_REPORT.md` for the audited activation record.
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ The migration deliberately provides no anonymous/self-bootstrap function and see
 
 ## Type generation
 
-No `database.types.ts` is committed yet because neither a local Supabase stack nor an approved linked project is available. Do not hand-author an incomplete substitute. Application-facing interfaces under `core/supabase` cover only the current foundation. Generate authoritative types with the local command above after migrations pass.
+`src/app/core/supabase/database.types.ts` is generated from the migrated remote `public` schema and is now authoritative for database rows, inserts, updates, functions, and enums. Regenerate it after every approved migration; do not hand-edit it. Presentation-facing interfaces remain separate.
 
 ## Rollback guidance
 
@@ -73,3 +73,5 @@ Do not edit an already-applied migration or drop production data. Create a new f
 - No anonymous lead insert or admin self-promotion
 - No secrets, PII fixtures, source posters, or PDF support in the push
 - First owner identity explicitly approved
+
+The first-owner identity is still required. Do not repeat remote linking or migration application merely to complete owner bootstrap.

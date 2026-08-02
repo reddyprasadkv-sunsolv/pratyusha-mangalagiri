@@ -1,6 +1,6 @@
 # Row-Level Security and Grants Matrix
 
-RLS is enabled on every application table. PostgreSQL grants are restricted separately; an authenticated JWT alone never provides administrator access. All administrator policies call fixed-search-path helpers that require an active `admin_profiles` row.
+Remote validation confirms RLS on all 15 application tables and 49 table policies in the approved Mumbai project. PostgreSQL grants are restricted separately; an authenticated JWT alone never provides administrator access. All administrator policies call fixed-search-path helpers that require an active `admin_profiles` row.
 
 | Table                 | Anonymous select               | Anonymous insert | Authenticated non-admin | Editor      | Owner       | Notes                                                            |
 | --------------------- | ------------------------------ | ---------------- | ----------------------- | ----------- | ----------- | ---------------------------------------------------------------- |
@@ -33,3 +33,5 @@ RLS is enabled on every application table. PostgreSQL grants are restricted sepa
 `PUBLIC`, `anon`, and `authenticated` table privileges are revoked before the minimum grants are re-applied. Anonymous users receive SELECT only on potentially public CMS tables. Authenticated users receive CMS DML grants, but RLS still requires an active editor or owner profile. Leads grant authenticated SELECT/UPDATE only; email/audit logs grant SELECT only. UUID keys avoid application sequences.
 
 CMS records with approval history expose select/insert/update—not delete—to editor and owner clients. They are archived through status fields. Storage objects may be deleted by active administrators under the separate object policy, while database audit and content history remain protected.
+
+The live 30-case pgTAP run passed every anonymous, non-admin, inactive-admin, editor, owner, publication, audit, and policy-coverage assertion. Synthetic test identities and rows were transactionally rolled back.
