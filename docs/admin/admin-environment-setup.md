@@ -28,4 +28,4 @@ An enabled client still grants no administration access by itself. Supabase Auth
 - Approved first-owner Auth identity and controlled profile bootstrap
 - Deployment-specific public configuration injection and no-secret bundle inspection
 
-The approved Mumbai project, migrations, generated types, configured-login state, first-owner Auth invitation, and matching active owner profile are verified. The invited owner must accept the email and establish credentials privately before live credential, session-restoration, dashboard, and sign-out testing can be completed.
+The approved Mumbai project, migrations, generated types, configured-login state, confirmed first-owner Auth invitation, initial Auth sign-in, and matching active owner profile are verified. The owner must establish or recover a password privately before live Angular credential, session-restoration, dashboard, and sign-out testing can be completed.

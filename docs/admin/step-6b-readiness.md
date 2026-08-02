@@ -14,14 +14,15 @@
 - 30/30 live pgTAP assertions and generated remote TypeScript types
 - Browser-safe runtime configuration verified in configured and disabled modes
 - Supported first-owner invitation sent with a matching active `owner` profile
+- First-owner invitation confirmed and initial Supabase Auth sign-in recorded
 
 ## Modules to implement next
 
 Step 6B may implement approved editors one module at a time. It must not turn disabled navigation entries into links until each route, repository implementation, form validation, RLS verification, accessibility, audit behaviour, and automated test set is complete.
 
-## Pending acceptance and live verification
+## Pending live verification
 
-- Invited owner acceptance and private credential establishment
+- Private password establishment or recovery for Angular email/password login
 - Live owner login, profile RPC, dashboard, refresh restoration, sign-out, and back-navigation validation
 - Approved content/contact/legal/testimonial/credential inputs as applicable
 - Agreed audit-writing and cache-invalidation strategy
@@ -34,4 +35,4 @@ Public content must remain local until a separate approved live-content switchin
 
 ## Readiness decision
 
-**STEP 6B READY WITH INVITATION ACCEPTANCE PENDING.** The approved project, migrations, RLS, Storage, pgTAP suite, generated types, runtime configuration, Auth invitation, and matching active owner profile pass the readiness criteria. Invitation acceptance is now the only external owner-auth prerequisite. Complete the live owner session checks before relying on owner-only CMS operations.
+**STEP 6B READY FOR LIVE OWNER VERIFICATION.** The approved project, migrations, RLS, Storage, pgTAP suite, generated types, runtime configuration, confirmed Auth invitation, and matching active owner profile pass the readiness criteria. Complete the password-based Angular login and live owner session checks before relying on owner-only CMS operations.

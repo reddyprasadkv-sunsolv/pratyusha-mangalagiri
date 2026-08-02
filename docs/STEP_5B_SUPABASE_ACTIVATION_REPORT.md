@@ -12,7 +12,7 @@ Verified baseline: `d3550d3`
 
 The approved `Pratyusha Crystal` Supabase project is active in `ap-south-1` (South Asia, Mumbai). Five versioned migrations are applied, local and remote migration histories match, the live schema passes database lint, and all 30 pgTAP security and integrity assertions pass. TypeScript types were generated from the migrated remote schema and the Angular administrator login was verified locally in both configured and explicitly disabled modes.
 
-The exact first-owner identity was subsequently supplied through the approved execution channel. Supabase sent the supported invitation, created the Auth identity, and the matching `admin_profiles` row is active with role `owner`. Step 6B is **READY WITH INVITATION ACCEPTANCE PENDING**, which satisfies the documented readiness allowance where invitation completion is the only remaining owner-auth prerequisite. Real owner login, session restoration, dashboard access, and sign-out remain pending until the invitation is accepted.
+The exact first-owner identity was subsequently supplied through the approved execution channel. Supabase sent the supported invitation, created the Auth identity, and the matching `admin_profiles` row is active with role `owner`. Supabase now records the invitation as confirmed and records the first Auth sign-in at the same time. Step 6B is **READY FOR LIVE OWNER VERIFICATION**. Password-based login through the Angular administrator UI, session restoration, dashboard access, and sign-out still require a private owner credential and remain pending.
 
 ## Approved project and external actions
 
@@ -122,10 +122,12 @@ Docker was unavailable, so the exact repository SQL was executed as `postgres` i
 - First-owner identity: exact identity supplied securely; intentionally omitted from this report
 - Owner Auth invitation: sent through the supported Supabase dashboard flow
 - Owner Auth user: created and linked to the approved project
+- Invitation acceptance: confirmed by Supabase Auth
+- Initial Auth sign-in: recorded by Supabase at the confirmation time
 - Owner profile: created for the matching Auth UUID with `role = owner` and `is_active = true`
 - Password: not created or requested
 - Temporary bootstrap SQL: cleared from the dashboard editor after verification
-- Live owner credential login: pending invitation acceptance
+- Live owner credential login: pending private password establishment or recovery
 - Owner dashboard/session restoration/sign-out: pending
 
 No default/shared password, direct `auth.users` SQL, second owner, or public signup path was used.
@@ -152,8 +154,8 @@ Do not reset the remote database or edit applied migrations. If a defect is foun
 
 ## Remaining external requirements
 
-1. The invited owner must accept the Supabase email invitation and establish credentials privately.
-2. Complete live owner login, profile RPC, dashboard, refresh restoration, sign-out, and cache/back-navigation tests after acceptance.
+1. The owner must establish or recover a password privately before password-based Angular login testing.
+2. Complete live owner login, profile RPC, dashboard, refresh restoration, sign-out, and cache/back-navigation tests.
 3. Review the six moderate npm advisories in a separate dependency-maintenance step.
 
 No full CMS editor, live public-content query, enquiry submission, email delivery, payment, appointment, deployment, or PDF feature was added.
