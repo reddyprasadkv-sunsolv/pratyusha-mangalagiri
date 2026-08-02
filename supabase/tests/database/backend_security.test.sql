@@ -137,6 +137,8 @@ select results_eq(
 );
 select throws_ok(
   $$insert into public.page_sections (page_key, section_key) values ('test', 'anon-write')$$,
+  null::char(5),
+  null,
   'Anonymous users cannot modify page sections'
 );
 select results_eq(
@@ -151,21 +153,27 @@ select results_eq(
 );
 select throws_ok(
   $$insert into public.products (product_key, slug, name_en, name_te) values ('anon', 'anon', 'Anon', 'Anon')$$,
+  null::char(5),
+  null,
   'Anonymous users cannot insert products'
 );
-select results_eq(
+select throws_ok(
   $$select count(*)::bigint from public.leads$$,
-  array[0::bigint],
-  'Anonymous users cannot read leads'
+  null::char(5),
+  null,
+  'Anonymous users cannot read leads because the table is not granted to anon'
 );
 select throws_ok(
   $$insert into public.leads (full_name, mobile_number, requirement_key, preferred_language, consent_given, source_page) values ('Anon', '9876543211', 'test', 'en', true, '/')$$,
+  null::char(5),
+  null,
   'Anonymous users cannot insert leads directly'
 );
-select results_eq(
+select throws_ok(
   $$select count(*)::bigint from public.admin_profiles$$,
-  array[0::bigint],
-  'Anonymous users cannot read administrator profiles'
+  null::char(5),
+  null,
+  'Anonymous users cannot read administrator profiles because the table is not granted to anon'
 );
 reset role;
 
@@ -211,6 +219,8 @@ select results_eq(
 );
 select throws_ok(
   $$insert into public.admin_profiles (user_id, display_name, role) values ('10000000-0000-0000-0000-000000000004', 'Promoted User', 'owner')$$,
+  null::char(5),
+  null,
   'An editor cannot create owners'
 );
 reset role;
@@ -227,6 +237,8 @@ insert into public.testimonials (customer_name, testimonial_en, status)
 values ('Synthetic', 'Synthetic statement', 'approved');
 select throws_ok(
   $$update public.testimonials set is_visible = true, status = 'published', published_at = now() where customer_name = 'Synthetic'$$,
+  null::char(5),
+  null,
   'Testimonials cannot publish without consent'
 );
 
@@ -240,6 +252,8 @@ insert into public.legal_pages (
 values ('test-legal', 'test-legal', 'Test legal', 'Test legal body', 'draft');
 select throws_ok(
   $$update public.legal_pages set review_status = 'published', is_visible = true, is_indexable = true, published_at = now() where legal_key = 'test-legal'$$,
+  null::char(5),
+  null,
   'Legal pages cannot publish before approved review status'
 );
 
@@ -254,22 +268,30 @@ insert into public.seo_pages (
 values ('bad-local', '/', 'Title', 'Description', 'http://localhost:4200/', 'approved');
 select throws_ok(
   $$update public.seo_pages set is_indexable = true, is_visible = true, status = 'published', published_at = now() where route_key = 'bad-local'$$,
+  null::char(5),
+  null,
   'Indexable SEO rows using localhost cannot publish'
 );
 insert into public.page_sections (page_key, section_key, heading_en, status)
 values ('home', 'bad-marker', '[CLIENT INPUT REQUIRED: title]', 'approved');
 select throws_ok(
   $$update public.page_sections set is_visible = true, status = 'published', published_at = now() where section_key = 'bad-marker'$$,
+  null::char(5),
+  null,
   'Unresolved internal markers cannot publish'
 );
 select throws_ok(
   $$insert into public.media_assets (bucket_name, object_path, mime_type, status, is_public) values ('public-media', 'general/file.pdf', 'application/pdf', 'published', true)$$,
+  null::char(5),
+  null,
   'Public PDF media cannot publish'
 );
 
 set local role anon;
 select throws_ok(
   $$insert into storage.objects (bucket_id, name) values ('public-media', 'general/anon.webp')$$,
+  null::char(5),
+  null,
   'Public storage rejects anonymous uploads'
 );
 select results_eq(
@@ -291,10 +313,11 @@ select ok(
 );
 
 set local role anon;
-select results_eq(
+select throws_ok(
   $$select count(*)::bigint from public.audit_logs$$,
-  array[0::bigint],
-  'Public users cannot read audit logs'
+  null::char(5),
+  null,
+  'Public users cannot read audit logs because the table is not granted to anon'
 );
 reset role;
 
@@ -302,6 +325,8 @@ select set_config('request.jwt.claim.sub', '10000000-0000-0000-0000-000000000002
 set local role authenticated;
 select throws_ok(
   $$delete from public.audit_logs$$,
+  null::char(5),
+  null,
   'Editors cannot delete audit logs'
 );
 reset role;
