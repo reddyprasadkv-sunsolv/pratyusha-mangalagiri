@@ -16,6 +16,12 @@
 /playwright-report/
 /test-results/
 
+# Supabase CLI local state and branch workspaces
+/supabase/.temp/
+/supabase/.branches/
+/supabase/.env
+/supabase/.env.*
+
 # Local platform/build state
 /.openai/source-assets/
 /.vinext/
