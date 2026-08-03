@@ -112,7 +112,7 @@ describe('Angular integration boundaries', () => {
       .join('\n');
 
     expect(source).not.toContain('TransferState');
-    expect(source).toContain('/api/supabase-config.js');
+    expect(source).toContain('api/supabase-config.js');
   });
 
   it('keeps public presentation components independent of Supabase imports', () => {

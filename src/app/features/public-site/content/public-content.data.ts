@@ -4,9 +4,9 @@ const PRODUCT_MEDIA: Readonly<
   Record<'success' | 'evilEye' | 'moneyMagnet' | 'pyrite', ProductMedia>
 > = {
   success: {
-    imageUrl: '/assets/images/products/success-bracelet.webp',
+    imageUrl: 'assets/images/products/success-bracelet.webp',
     imageSrcSet:
-      '/assets/images/products/success-bracelet-640.webp 640w, /assets/images/products/success-bracelet.webp 700w',
+      'assets/images/products/success-bracelet-640.webp 640w, assets/images/products/success-bracelet.webp 700w',
     imageAltEn: 'Multicoloured crystal Success Bracelet displayed in a hand',
     imageAltTe: 'చేతిలో చూపించిన వివిధ రంగుల క్రిస్టల్ సక్సెస్ బ్రేస్‌లెట్',
     imageWidth: 700,
@@ -16,9 +16,9 @@ const PRODUCT_MEDIA: Readonly<
     imageStatus: 'approved',
   },
   evilEye: {
-    imageUrl: '/assets/images/products/evil-eye-protection-bracelet.webp',
+    imageUrl: 'assets/images/products/evil-eye-protection-bracelet.webp',
     imageSrcSet:
-      '/assets/images/products/evil-eye-protection-bracelet-640.webp 640w, /assets/images/products/evil-eye-protection-bracelet.webp 660w',
+      'assets/images/products/evil-eye-protection-bracelet-640.webp 640w, assets/images/products/evil-eye-protection-bracelet.webp 660w',
     imageAltEn: 'Blue, black and white crystal Evil Eye Protection Bracelet displayed in a hand',
     imageAltTe: 'చేతిలో చూపించిన నీలం, నలుపు మరియు తెలుపు రంగుల ఈవిల్ ఐ ప్రొటెక్షన్ బ్రేస్‌లెట్',
     imageWidth: 660,
@@ -28,9 +28,9 @@ const PRODUCT_MEDIA: Readonly<
     imageStatus: 'approved',
   },
   moneyMagnet: {
-    imageUrl: '/assets/images/products/money-magnet-bracelet.webp',
+    imageUrl: 'assets/images/products/money-magnet-bracelet.webp',
     imageSrcSet:
-      '/assets/images/products/money-magnet-bracelet-640.webp 640w, /assets/images/products/money-magnet-bracelet.webp 650w',
+      'assets/images/products/money-magnet-bracelet-640.webp 640w, assets/images/products/money-magnet-bracelet.webp 650w',
     imageAltEn: 'Mixed crystal Money Magnet Bracelet with yellow and dark beads',
     imageAltTe: 'పసుపు మరియు ముదురు రంగు పూసలతో ఉన్న మనీ మ్యాగ్నెట్ బ్రేస్‌లెట్',
     imageWidth: 650,
@@ -40,9 +40,9 @@ const PRODUCT_MEDIA: Readonly<
     imageStatus: 'approved',
   },
   pyrite: {
-    imageUrl: '/assets/images/products/pyrite-bracelet.webp',
+    imageUrl: 'assets/images/products/pyrite-bracelet.webp',
     imageSrcSet:
-      '/assets/images/products/pyrite-bracelet-640.webp 640w, /assets/images/products/pyrite-bracelet.webp 670w',
+      'assets/images/products/pyrite-bracelet-640.webp 640w, assets/images/products/pyrite-bracelet.webp 670w',
     imageAltEn: 'Metallic gold-tone Pyrite Bracelet displayed in a hand',
     imageAltTe: 'చేతిలో చూపించిన మెటాలిక్ గోల్డ్ రంగు పైరైట్ బ్రేస్‌లెట్',
     imageWidth: 670,

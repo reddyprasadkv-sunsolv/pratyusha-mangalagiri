@@ -19,19 +19,19 @@ export function normalizePublicSiteUrl(value: string): string {
 
 export function joinPublicUrl(siteUrl: string, path: string): string {
   const normalizedSiteUrl = normalizePublicSiteUrl(siteUrl);
-  const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}`;
+  const normalizedPath = path === '/' ? '' : path.replace(/^\/+|\/+$/g, '');
   return new URL(normalizedPath, `${normalizedSiteUrl}/`).toString();
 }
 
 function documentSiteUrl(): string {
   const document = inject(DOCUMENT);
-  const origin = document.location?.origin;
+  const baseUrl = document.baseURI;
 
-  if (!origin || origin === 'null') {
+  if (!baseUrl || baseUrl === 'null') {
     throw new Error('PUBLIC_SITE_URL is unavailable. Configure it for Angular SSR.');
   }
 
-  return normalizePublicSiteUrl(origin);
+  return normalizePublicSiteUrl(baseUrl);
 }
 
 export const PUBLIC_SITE_URL = new InjectionToken<string>('PUBLIC_SITE_URL', {

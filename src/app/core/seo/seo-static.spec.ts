@@ -23,6 +23,13 @@ describe('static SEO endpoints', () => {
     expect(robots).toContain('Sitemap: https://example.com/sitemap.xml');
   });
 
+  it('preserves a project-site base path in sitemap URLs', () => {
+    const sitemap = generateSitemap('https://example.github.io/project-name');
+
+    expect(sitemap).toContain('<loc>https://example.github.io/project-name/</loc>');
+    expect(sitemap).toContain('<loc>https://example.github.io/project-name/te</loc>');
+  });
+
   it('supports an environment-wide preview noindex policy', () => {
     expect(generateRobots('https://preview.example.com', false)).toContain('Disallow: /');
   });
