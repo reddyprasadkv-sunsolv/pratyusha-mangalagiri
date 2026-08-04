@@ -108,7 +108,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       title: 'A Daily Reminder for Your Intentions',
       supporting:
         'Crystal practices are intended to complement mindfulness, reflection, and personal action.',
-      body: 'A bracelet can serve as a visual cue to pause, remember your intention, and return to the habits you want to practise. It does not create a guaranteed result; the value comes from how consistently you combine reflection with practical action.',
+      body: 'A bracelet can serve as a visual cue to pause, remember your intention, and return to the habits you want to practise.',
       bullets: [
         'Supports intention-setting',
         'Encourages positive habits',
@@ -120,7 +120,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       eyebrow: 'Signature collection',
       title: 'The Signature Crystal Collection',
       supporting: 'Choose a bracelet that reflects the intention you want to practise.',
-      body: 'Each bracelet is presented as a symbolic reminder that can accompany mindfulness, positive habits, and consistent personal action. Individual experiences may vary.',
+      body: 'Each bracelet is presented as a symbolic reminder that can accompany mindfulness, positive habits, and consistent personal action.',
       bullets: [],
     },
     products: [
@@ -130,7 +130,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'సక్సెస్ బ్రేస్‌లెట్',
         supporting:
           'A daily reminder to stay connected to your goals and the actions that support them.',
-        body: 'Designed for people who want to practise confidence, motivation, goal focus, and a positive mindset. It may help you remember your intention; it does not guarantee career, business, academic, or personal success.',
+        body: 'Designed for people who want to practise confidence, motivation, goal focus, and a positive mindset.',
         points: ['Confidence', 'Motivation', 'Goal focus', 'Positive habits'],
         cta: 'Enquire About the Success Bracelet',
         ...PRODUCT_MEDIA.success,
@@ -141,7 +141,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'ఈవిల్ ఐ ప్రొటెక్షన్ బ్రేస్‌లెట్',
         supporting:
           'A traditional symbol and a personal reminder of calm, positive boundaries, and daily confidence.',
-        body: 'For people who connect with the Evil Eye symbol and want a visual cue for mindful boundaries and inner calm. The name reflects a traditional association; it does not assure protection from people, events, energy, or harm.',
+        body: 'For people who connect with the Evil Eye symbol and want a visual cue for mindful boundaries and inner calm.',
         points: ['Emotional balance', 'Calmness', 'Positive boundaries', 'Personal confidence'],
         cta: 'Enquire About the Evil Eye Bracelet',
         ...PRODUCT_MEDIA.evilEye,
@@ -152,7 +152,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'మనీ మ్యాగ్నెట్ బ్రేస్‌లెట్',
         supporting:
           'A reminder to strengthen an abundance mindset and stay focused on practical financial goals.',
-        body: 'Designed for adults who want to practise opportunity awareness, intentional financial habits, and consistent action. It does not promise wealth, income, investment performance, or business success.',
+        body: 'Designed for adults who want to practise opportunity awareness, intentional financial habits, and consistent action',
         points: [
           'Abundance mindset',
           'Opportunity awareness',
@@ -168,7 +168,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'పైరైట్ బ్రేస్‌లెట్',
         supporting:
           'Traditionally associated with confidence and prosperity, and used here as a reminder to stay action-oriented.',
-        body: 'Designed for entrepreneurs and professionals who want a visible cue for confidence, motivation, leadership, and productive action. Traditional associations are belief-based and do not guarantee prosperity or professional results.',
+        body: 'Designed for entrepreneurs and professionals who want a visible cue for confidence, motivation, leadership, and productive action.',
         points: ['Confidence', 'Motivation', 'Leadership mindset', 'Productivity'],
         cta: 'Enquire About the Pyrite Bracelet',
         ...PRODUCT_MEDIA.pyrite,
@@ -270,9 +270,9 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
           'The proposed experience focuses on intention-setting, affirmations, reflection, gratitude, and simple daily practices. Final inclusions and delivery methods will be confirmed before ordering is enabled.',
       },
     ],
-    disclaimerTitle: 'A Note About Crystal and Wellness Practices',
-    disclaimerBody:
-      'Crystal products and the 21-Day Crystal Ritual are intended to complement mindfulness, intention-setting, reflection, and personal-wellness practices. They are not medical treatments and are not substitutes for professional medical, psychological, legal, or financial advice. Individual experiences may vary. No financial, health, relationship, career, business, or protection outcome is guaranteed. Continue to take appropriate practical action and seek qualified professional help where necessary.',
+   // disclaimerTitle: 'A Note About Crystal and Wellness Practices',
+    //disclaimerBody:
+      //'Crystal products and the 21-Day Crystal Ritual are intended to complement mindfulness, intention-setting, reflection, and personal-wellness practices. They are not medical treatments and are not substitutes for professional medical, psychological, legal, or financial advice. Individual experiences may vary. No financial, health, relationship, career, business, or protection outcome is guaranteed. Continue to take appropriate practical action and seek qualified professional help where necessary.',
     conversionEyebrow: 'Begin with one intentional step',
     conversionTitle: 'Explore the bracelet that reflects the intention you want to practise.',
     conversionBody:
@@ -397,7 +397,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       eyebrow: 'సిగ్నేచర్ కలెక్షన్',
       title: 'సిగ్నేచర్ క్రిస్టల్ కలెక్షన్',
       supporting: 'మీరు సాధన చేయాలనుకునే ఉద్దేశాన్ని ప్రతిబింబించే బ్రేస్‌లెట్‌ను ఎంచుకోండి.',
-      body: 'ప్రతి బ్రేస్‌లెట్‌ను మైండ్‌ఫుల్‌నెస్, సానుకూల అలవాట్లు, క్రమమైన వ్యక్తిగత చర్యలకు తోడుగా ఉండే గుర్తుగా చూపుతున్నాం. ప్రతి వ్యక్తి అనుభవం భిన్నంగా ఉండవచ్చు.',
+      body: 'ప్రతి బ్రేస్‌లెట్‌ను మైండ్‌ఫుల్‌నెస్, సానుకూల అలవాట్లు, క్రమమైన వ్యక్తిగత చర్యలకు తోడుగా ఉండే గుర్తుగా చూపుతున్నాం.',
       bullets: [],
     },
     products: [
@@ -406,7 +406,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameEn: 'Success Bracelet',
         nameTe: 'సక్సెస్ బ్రేస్‌లెట్',
         supporting: 'మీ లక్ష్యాలు, వాటికి అవసరమైన చర్యలను గుర్తు చేసే రోజువారీ బ్రేస్‌లెట్.',
-        body: 'ఆత్మవిశ్వాసం, ప్రేరణ, లక్ష్యంపై దృష్టి, సానుకూల ఆలోచనలను సాధన చేయాలనుకునే వారి కోసం రూపొందించబడింది. ఇది మీ ఉద్దేశాన్ని గుర్తు చేయవచ్చు; కెరీర్, వ్యాపారం, చదువు లేదా వ్యక్తిగత విజయాన్ని హామీ ఇవ్వదు.',
+        body: 'ఆత్మవిశ్వాసం, ప్రేరణ, లక్ష్యంపై దృష్టి, సానుకూల ఆలోచనలను సాధన చేయాలనుకునే వారి కోసం రూపొందించబడింది. ',
         points: ['ఆత్మవిశ్వాసం', 'ప్రేరణ', 'లక్ష్యంపై దృష్టి', 'సానుకూల అలవాట్లు'],
         cta: 'Success Bracelet గురించి అడగండి',
         ...PRODUCT_MEDIA.success,
@@ -417,7 +417,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'ఈవిల్ ఐ ప్రొటెక్షన్ బ్రేస్‌లెట్',
         supporting:
           'ప్రశాంతత, సానుకూల హద్దులు, రోజువారీ ఆత్మవిశ్వాసాన్ని గుర్తు చేసే సాంప్రదాయ చిహ్నం.',
-        body: 'Evil Eye చిహ్నంతో అనుబంధం ఉన్నవారు, మైండ్‌ఫుల్ హద్దులు మరియు అంతరంగ ప్రశాంతతను గుర్తు చేసుకోవాలనుకునే వారి కోసం ఇది ఉద్దేశించబడింది. ఉత్పత్తి పేరు సాంప్రదాయ భావనను సూచిస్తుంది; వ్యక్తులు, సంఘటనలు, ఎనర్జీ లేదా హానినుంచి పూర్తి రక్షణను హామీ ఇవ్వదు.',
+        body: 'Evil Eye చిహ్నంతో అనుబంధం ఉన్నవారు, మైండ్‌ఫుల్ హద్దులు మరియు అంతరంగ ప్రశాంతతను గుర్తు చేసుకోవాలనుకునే వారి కోసం ఇది ఉద్దేశించబడింది.',
         points: ['భావోద్వేగ సమతుల్యత', 'ప్రశాంతత', 'సానుకూల హద్దులు', 'వ్యక్తిగత ఆత్మవిశ్వాసం'],
         cta: 'Evil Eye Bracelet గురించి అడగండి',
         ...PRODUCT_MEDIA.evilEye,
@@ -428,7 +428,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'మనీ మ్యాగ్నెట్ బ్రేస్‌లెట్',
         supporting:
           'అవకాశాలను గమనించే దృక్పథాన్ని పెంచుకుని, ఆచరణాత్మక ఆర్థిక లక్ష్యాలపై దృష్టి పెట్టడానికి గుర్తుగా ఉపయోగించుకోవచ్చు.',
-        body: 'అవకాశాలను గమనించడం, ఉద్దేశ్యపూర్వక ఆర్థిక అలవాట్లు, క్రమమైన చర్యలను సాధన చేయాలనుకునే పెద్దల కోసం రూపొందించబడింది. ఇది డబ్బు, ఆదాయం, పెట్టుబడి ఫలితం లేదా వ్యాపార విజయాన్ని హామీ ఇవ్వదు.',
+        body: 'అవకాశాలను గమనించడం, ఉద్దేశ్యపూర్వక ఆర్థిక అలవాట్లు, క్రమమైన చర్యలను సాధన చేయాలనుకునే పెద్దల కోసం రూపొందించబడింది. ',
         points: [
           'అవకాశాల దృక్పథం',
           'అవకాశాలపై అవగాహన',
@@ -444,7 +444,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
         nameTe: 'పైరైట్ బ్రేస్‌లెట్',
         supporting:
           'సాంప్రదాయంగా ఆత్మవిశ్వాసం, అభివృద్ధితో అనుబంధం ఉన్న బ్రేస్‌లెట్. ఇక్కడ చర్యపై దృష్టి పెట్టే గుర్తుగా ఉపయోగించబడుతుంది.',
-        body: 'ఆత్మవిశ్వాసం, ప్రేరణ, నాయకత్వం, పనిపై దృష్టిని గుర్తు చేసుకోవాలనుకునే వ్యాపారులు మరియు వృత్తి నిపుణుల కోసం రూపొందించబడింది. సాంప్రదాయ భావనలు నమ్మకాలపై ఆధారపడినవి; అభివృద్ధి లేదా వృత్తిపరమైన ఫలితాలను హామీ ఇవ్వవు.',
+        body: 'ఆత్మవిశ్వాసం, ప్రేరణ, నాయకత్వం, పనిపై దృష్టిని గుర్తు చేసుకోవాలనుకునే వ్యాపారులు మరియు వృత్తి నిపుణుల కోసం రూపొందించబడింది.',
         points: ['ఆత్మవిశ్వాసం', 'ప్రేరణ', 'నాయకత్వ దృక్పథం', 'పనిపై దృష్టి'],
         cta: 'Pyrite Bracelet గురించి అడగండి',
         ...PRODUCT_MEDIA.pyrite,
@@ -551,9 +551,9 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
           'ప్రతిపాదిత అనుభవం ఉద్దేశం, అఫర్మేషన్స్, ఆలోచన, కృతజ్ఞత, సులభమైన రోజువారీ సాధనలపై దృష్టి పెడుతుంది. ఆర్డరింగ్ ప్రారంభించే ముందు తుది అంశాలు మరియు పంపే విధానాన్ని నిర్ధారిస్తాం.',
       },
     ],
-    disclaimerTitle: 'క్రిస్టల్ మరియు వెల్‌నెస్ సాధనల గురించి ఒక గమనిక',
-    disclaimerBody:
-      'క్రిస్టల్ ఉత్పత్తులు మరియు 21-Day Crystal Ritualను మైండ్‌ఫుల్‌నెస్, ఉద్దేశం, ఆలోచన, వ్యక్తిగత వెల్‌నెస్ సాధనలకు తోడుగా ఉపయోగించవచ్చు. ఇవి వైద్య చికిత్సలు కావు. వైద్య, మానసిక, చట్టపరమైన లేదా ఆర్థిక నిపుణుల సలహాకు బదులు కావు. ప్రతి వ్యక్తి అనుభవం భిన్నంగా ఉండవచ్చు. డబ్బు, ఆరోగ్యం, సంబంధాలు, కెరీర్, వ్యాపారం లేదా రక్షణ విషయంలో ఎలాంటి ఖచ్చితమైన ఫలితాన్నీ ఇవి హామీ ఇవ్వవు. అవసరమైన ఆచరణాత్మక అడుగులు తీసుకుంటూ, అవసరమైనప్పుడు అర్హత కలిగిన నిపుణుల సహాయం పొందాలి.',
+   // disclaimerTitle: 'క్రిస్టల్ మరియు వెల్‌నెస్ సాధనల గురించి ఒక గమనిక',
+    //disclaimerBody:
+      //'క్రిస్టల్ ఉత్పత్తులు మరియు 21-Day Crystal Ritualను మైండ్‌ఫుల్‌నెస్, ఉద్దేశం, ఆలోచన, వ్యక్తిగత వెల్‌నెస్ సాధనలకు తోడుగా ఉపయోగించవచ్చు. ఇవి వైద్య చికిత్సలు కావు. వైద్య, మానసిక, చట్టపరమైన లేదా ఆర్థిక నిపుణుల సలహాకు బదులు కావు. ప్రతి వ్యక్తి అనుభవం భిన్నంగా ఉండవచ్చు. డబ్బు, ఆరోగ్యం, సంబంధాలు, కెరీర్, వ్యాపారం లేదా రక్షణ విషయంలో ఎలాంటి ఖచ్చితమైన ఫలితాన్నీ ఇవి హామీ ఇవ్వవు. అవసరమైన ఆచరణాత్మక అడుగులు తీసుకుంటూ, అవసరమైనప్పుడు అర్హత కలిగిన నిపుణుల సహాయం పొందాలి.',
     conversionEyebrow: 'ఒక ఉద్దేశ్యపూర్వక అడుగుతో ప్రారంభించండి',
     conversionTitle: 'మీరు సాధన చేయాలనుకునే ఉద్దేశాన్ని గుర్తు చేసే బ్రేస్‌లెట్‌ను చూడండి.',
     conversionBody:
