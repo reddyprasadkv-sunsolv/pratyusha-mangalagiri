@@ -1,0 +1,51 @@
+# Dependencies and build output
+/node_modules/
+/dist/
+/.angular/
+/coverage/
+
+# Environment files (the documented template is intentionally tracked)
+.env
+.env.*
+!.env.example
+
+# Generated reports and local approval artifacts
+/output/
+/output/pdf/
+*.pdf
+/playwright-report/
+/test-results/
+
+# Supabase CLI local state and branch workspaces
+/supabase/.temp/
+/supabase/.branches/
+/supabase/.env
+/supabase/.env.*
+
+# Local platform/build state
+/.openai/source-assets/
+/.vinext/
+/.wrangler/
+/.vercel/
+/.vscode/*
+!/.vscode/extensions.json
+!/.vscode/launch.json
+!/.vscode/tasks.json
+
+# Logs, caches, and temporary files
+*.log
+*.tsbuildinfo
+*.tmp
+*.temp
+.cache/
+.sass-cache/
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

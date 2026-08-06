@@ -1,0 +1,1 @@
+var n=/^\/admin(?:\/|$)/;function s(r){return!r||!n.test(r)||r.startsWith(`//`)||r.includes(`\\`)||r.includes(`://`)||r.startsWith(`/admin/login`)?`/admin/dashboard`:r}export{s as t};

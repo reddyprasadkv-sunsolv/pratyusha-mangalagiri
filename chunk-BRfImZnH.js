@@ -1,0 +1,1 @@
+import{In as um,Jn as y,L as M,p as Ee}from"./chunk-CUDtYBt0.js";function w(t){t||(t=y(Ee));let i=new M(e=>{if(t.destroyed){e.next();return}return t.onDestroy(e.next.bind(e))});return e=>e.pipe(um(i))}export{w as t};
