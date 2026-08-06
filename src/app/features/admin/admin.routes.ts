@@ -33,6 +33,24 @@ export const ADMIN_ROUTES: Routes = [
             (component) => component.AdminDashboardPage,
           ),
       },
+      {
+        path: 'leads',
+        canActivate: [adminNoindexGuard],
+        data: { title: 'Enquiries & Leads CRM' },
+        loadComponent: () =>
+          import('./pages/leads/admin-leads-page').then(
+            (component) => component.AdminLeadsPage,
+          ),
+      },
+      {
+        path: 'content',
+        canActivate: [adminNoindexGuard],
+        data: { title: 'Bilingual Content CRM' },
+        loadComponent: () =>
+          import('./pages/content/admin-content-page').then(
+            (component) => component.AdminContentPage,
+          ),
+      },
       { path: '**', redirectTo: 'dashboard' },
     ],
   },

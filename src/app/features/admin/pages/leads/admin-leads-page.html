@@ -1,0 +1,155 @@
+<header class="admin-leads__header">
+  <div>
+    <h1>Enquiries & Leads CRM</h1>
+    <p>View, manage, and contact clients who submitted public sales enquiries.</p>
+  </div>
+  <button type="button" class="admin-btn admin-btn--outline" (click)="exportCsv()" [disabled]="leads().length === 0">
+    📥 Export CSV
+  </button>
+</header>
+
+<div class="admin-leads__stats">
+  <div class="stat-card">
+    <small>Total Received</small>
+    <strong>{{ leads().length }}</strong>
+  </div>
+  <div class="stat-card stat-card--new">
+    <small>New Enquiries</small>
+    <strong>{{ countByStatus('new') }}</strong>
+  </div>
+  <div class="stat-card stat-card--contacted">
+    <small>Contacted</small>
+    <strong>{{ countByStatus('contacted') }}</strong>
+  </div>
+  <div class="stat-card stat-card--converted">
+    <small>Converted</small>
+    <strong>{{ countByStatus('converted') }}</strong>
+  </div>
+</div>
+
+<div class="admin-leads__toolbar">
+  <div class="admin-leads__filters">
+    <button
+      type="button"
+      class="filter-chip"
+      [class.filter-chip--active]="activeFilter() === 'all'"
+      (click)="activeFilter.set('all')"
+    >
+      All ({{ leads().length }})
+    </button>
+    <button
+      type="button"
+      class="filter-chip"
+      [class.filter-chip--active]="activeFilter() === 'new'"
+      (click)="activeFilter.set('new')"
+    >
+      New ({{ countByStatus('new') }})
+    </button>
+    <button
+      type="button"
+      class="filter-chip"
+      [class.filter-chip--active]="activeFilter() === 'contacted'"
+      (click)="activeFilter.set('contacted')"
+    >
+      Contacted ({{ countByStatus('contacted') }})
+    </button>
+    <button
+      type="button"
+      class="filter-chip"
+      [class.filter-chip--active]="activeFilter() === 'converted'"
+      (click)="activeFilter.set('converted')"
+    >
+      Converted ({{ countByStatus('converted') }})
+    </button>
+  </div>
+  <input
+    type="search"
+    class="admin-search"
+    placeholder="Search by name, mobile, city..."
+    [value]="searchQuery()"
+    (input)="searchQuery.set($any($event.target).value)"
+  />
+</div>
+
+@if (filteredLeads.length > 0) {
+  <div class="admin-leads__table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Submitted</th>
+          <th>Customer Name</th>
+          <th>Mobile / Contact</th>
+          <th>Requirement & City</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (lead of filteredLeads; track lead.id) {
+          <tr>
+            <td class="cell-date">
+              <small>{{ lead.submittedAt | date: 'short' }}</small>
+              <span class="lang-badge">{{ lead.preferredLanguage | uppercase }}</span>
+            </td>
+            <td class="cell-name">
+              <strong>{{ lead.fullName }}</strong>
+              @if (lead.emailAddress) {
+                <small>{{ lead.emailAddress }}</small>
+              }
+            </td>
+            <td class="cell-phone">
+              <a [href]="'tel:+91' + lead.mobileNumber" class="phone-link">
+                📞 +91 {{ lead.mobileNumber }}
+              </a>
+            </td>
+            <td>
+              <span class="req-badge">{{ lead.requirementKey }}</span>
+              <small class="city-text">{{ lead.city || 'Location N/A' }}</small>
+            </td>
+            <td class="cell-message">
+              <p>{{ lead.message || 'No additional notes.' }}</p>
+            </td>
+            <td>
+              <select
+                class="status-select"
+                [attr.data-status]="lead.status"
+                [ngModel]="lead.status"
+                (ngModelChange)="updateStatus(lead.id, $event)"
+              >
+                <option value="new">🆕 New</option>
+                <option value="contacted">📞 Contacted</option>
+                <option value="converted">✅ Converted</option>
+                <option value="closed">❌ Closed</option>
+              </select>
+            </td>
+            <td class="cell-actions">
+              <a
+                class="action-btn action-btn--whatsapp"
+                [href]="whatsappUrl(lead)"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Open WhatsApp chat with client"
+              >
+                💬 WhatsApp
+              </a>
+              <button
+                type="button"
+                class="action-btn action-btn--delete"
+                title="Delete enquiry record"
+                (click)="deleteLead(lead.id)"
+              >
+                🗑️
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <div class="admin-leads__empty">
+    <h3>No submitted enquiries found</h3>
+    <p>When customers fill out the enquiry form on the website, their details will appear here instantly.</p>
+  </div>
+}

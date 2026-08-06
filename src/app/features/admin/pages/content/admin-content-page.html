@@ -1,0 +1,98 @@
+<header class="admin-content__header">
+  <div>
+    <h1>Bilingual Content Editor CRM</h1>
+    <p>Update homepage copy, titles, and messaging live across English and Telugu views.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button
+      type="button"
+      [class.active]="selectedLang() === 'en'"
+      (click)="switchLang('en')"
+    >
+      🇬🇧 English
+    </button>
+    <button
+      type="button"
+      [class.active]="selectedLang() === 'te'"
+      (click)="switchLang('te')"
+    >
+      🇮🇳 Telugu (తెలుగు)
+    </button>
+  </div>
+</header>
+
+@if (savedNotice()) {
+  <div class="save-toast" role="status">
+    ✅ Content updated successfully! Changes are live on the public sales page.
+  </div>
+}
+
+<form class="content-editor-card" (ngSubmit)="saveChanges()">
+  <h2>Hero Section Copy ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h2>
+
+  <div class="form-group">
+    <label for="studioLabel">Studio / Tagline Label</label>
+    <input
+      id="studioLabel"
+      type="text"
+      class="admin-input"
+      [ngModel]="studioLabel()"
+      (ngModelChange)="studioLabel.set($event)"
+      name="studioLabel"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="heroTitle">Hero Title</label>
+    <input
+      id="heroTitle"
+      type="text"
+      class="admin-input"
+      [ngModel]="heroTitle()"
+      (ngModelChange)="heroTitle.set($event)"
+      name="heroTitle"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="heroEmphasis">Hero Emphasis Text</label>
+    <input
+      id="heroEmphasis"
+      type="text"
+      class="admin-input"
+      [ngModel]="heroEmphasis()"
+      (ngModelChange)="heroEmphasis.set($event)"
+      name="heroEmphasis"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="heroSupporting">Hero Supporting Statement</label>
+    <input
+      id="heroSupporting"
+      type="text"
+      class="admin-input"
+      [ngModel]="heroSupporting()"
+      (ngModelChange)="heroSupporting.set($event)"
+      name="heroSupporting"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="heroBody">Hero Body Paragraph</label>
+    <textarea
+      id="heroBody"
+      class="admin-input admin-textarea"
+      rows="4"
+      [ngModel]="heroBody()"
+      (ngModelChange)="heroBody.set($event)"
+      name="heroBody"
+    ></textarea>
+  </div>
+
+  <div class="content-editor-actions">
+    <button type="submit" class="admin-btn admin-btn--primary">
+      💾 Save Content Live
+    </button>
+  </div>
+</form>

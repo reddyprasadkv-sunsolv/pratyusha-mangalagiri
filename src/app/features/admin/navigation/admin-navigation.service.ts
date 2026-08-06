@@ -15,9 +15,9 @@ const NAVIGATION: readonly AdminNavigationItem[] = [
   {
     id: 'content',
     label: 'Page Content',
-    route: null,
+    route: '/admin/content',
     capability: 'manage-content',
-    enabled: false,
+    enabled: true,
   },
   { id: 'products', label: 'Products', route: null, capability: 'manage-products', enabled: false },
   {
@@ -46,7 +46,7 @@ const NAVIGATION: readonly AdminNavigationItem[] = [
   { id: 'seo', label: 'SEO', route: null, capability: 'manage-seo', enabled: false },
   { id: 'legal', label: 'Legal Pages', route: null, capability: 'manage-legal', enabled: false },
   { id: 'media', label: 'Media', route: null, capability: 'manage-media', enabled: false },
-  { id: 'leads', label: 'Leads', route: null, capability: 'manage-leads', enabled: false },
+  { id: 'leads', label: 'Leads & Enquiries', route: '/admin/leads', capability: 'manage-leads', enabled: true },
   {
     id: 'administrators',
     label: 'Administrators',
