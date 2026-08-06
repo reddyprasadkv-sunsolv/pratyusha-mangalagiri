@@ -1,0 +1,47 @@
+<header class="admin-page-header">
+  <div>
+    <h1>SEO & Meta Tags Manager</h1>
+    <p>Edit search engine page titles, meta descriptions, keywords, and OpenGraph social share cards.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="editor-grid">
+  <div class="form-card">
+    <h3>Search Engine Meta Tags</h3>
+    <div class="form-group">
+      <label>Brand Tagline (&lt;title&gt; brand suffix)</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="seo().brandTagline"
+        (change)="updateSeoField('brandTagline', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Page Title Tag</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="seo().title"
+        (change)="updateSeoField('heroTitle', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Meta Description</label>
+      <textarea
+        class="admin-input admin-textarea"
+        rows="3"
+        [value]="seo().description"
+        (change)="updateSeoField('heroSupporting', $any($event.target).value)"
+      ></textarea>
+    </div>
+  </div>
+</div>

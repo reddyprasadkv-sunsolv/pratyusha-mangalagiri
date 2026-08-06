@@ -1,0 +1,66 @@
+<header class="admin-page-header">
+  <div>
+    <h1>FAQ Accordion Manager</h1>
+    <p>Add new questions, edit answers live, or remove items from the client FAQ accordion.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="add-box">
+  <h3>➕ Add New FAQ Item</h3>
+  <div class="add-box__col">
+    <input
+      type="text"
+      class="admin-input"
+      placeholder="Question"
+      [ngModel]="newQuestion()"
+      (ngModelChange)="newQuestion.set($event)"
+    />
+    <textarea
+      class="admin-input admin-textarea"
+      rows="3"
+      placeholder="Answer"
+      [ngModel]="newAnswer()"
+      (ngModelChange)="newAnswer.set($event)"
+    ></textarea>
+    <button type="button" class="admin-btn admin-btn--primary" (click)="addFaq()">Add Question & Answer</button>
+  </div>
+</div>
+
+<div class="faq-cards-list">
+  @for (faq of faqs(); track $index) {
+    <div class="faq-item-card">
+      <div class="faq-item-card__header">
+        <strong>Question #{{ $index + 1 }}</strong>
+        <button type="button" class="del-btn" (click)="deleteFaq(faq.id, $index)">🗑️ Delete FAQ</button>
+      </div>
+      <div class="form-group">
+        <label>Question</label>
+        <input
+          type="text"
+          class="admin-input"
+          #qInput
+          [value]="faq.question"
+          (change)="updateFaq(faq.id, $index, qInput.value, aInput.value)"
+        />
+      </div>
+      <div class="form-group">
+        <label>Answer</label>
+        <textarea
+          class="admin-input admin-textarea"
+          rows="3"
+          #aInput
+          [value]="faq.answer"
+          (change)="updateFaq(faq.id, $index, qInput.value, aInput.value)"
+        ></textarea>
+      </div>
+    </div>
+  }
+</div>

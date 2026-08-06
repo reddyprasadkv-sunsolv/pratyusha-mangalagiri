@@ -1,0 +1,69 @@
+<header class="admin-page-header">
+  <div>
+    <h1>21-Day Ritual Manager</h1>
+    <p>Edit section headlines, ritual steps, commitment details, and outcome copy.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="editor-grid">
+  <div class="form-card">
+    <h3>Ritual Overview & Copy</h3>
+    <div class="form-group">
+      <label>Section Tagline (Eyebrow)</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="ritual().eyebrow"
+        (change)="updateRitualSection('eyebrow', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Ritual Headline Title</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="ritual().title"
+        (change)="updateRitualSection('title', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Supporting Line</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="ritual().supporting"
+        (change)="updateRitualSection('supporting', $any($event.target).value)"
+      />
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3>Ritual Instructions & Note</h3>
+    <div class="form-group">
+      <label>Ritual Body Description</label>
+      <textarea
+        class="admin-input admin-textarea"
+        rows="4"
+        [value]="ritual().body"
+        (change)="updateRitualSection('body', $any($event.target).value)"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label>Ritual Guarantee / Sacred Note</label>
+      <textarea
+        class="admin-input admin-textarea"
+        rows="3"
+        [value]="ritual().note"
+        (change)="updateRitualNote($any($event.target).value)"
+      ></textarea>
+    </div>
+  </div>
+</div>

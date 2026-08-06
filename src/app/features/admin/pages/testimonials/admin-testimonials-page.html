@@ -1,0 +1,40 @@
+<header class="admin-page-header">
+  <div>
+    <h1>Testimonials CRM</h1>
+    <p>Manage client reviews, ratings, client locations, and feedback quotes.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="testimonials-grid">
+  @for (t of testimonials(); track $index) {
+    <div class="form-card">
+      <h3>Review #{{ $index + 1 }}</h3>
+      <div class="form-group">
+        <label>Client Name</label>
+        <input
+          type="text"
+          class="admin-input"
+          [value]="t.author"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label>Review Quote</label>
+        <textarea
+          class="admin-input admin-textarea"
+          rows="3"
+          [value]="t.quote"
+          (change)="updateTestimonial($index, $any($event.target).value)"
+        ></textarea>
+      </div>
+    </div>
+  }
+</div>

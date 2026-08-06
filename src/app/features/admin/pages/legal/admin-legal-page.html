@@ -1,0 +1,45 @@
+<header class="admin-page-header">
+  <div>
+    <h1>Legal Pages Manager</h1>
+    <p>Edit Privacy Policy, Terms of Service, and Cancellation/Refund Policy copy.</p>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="editor-grid">
+  <div class="form-card">
+    <h3>Privacy Policy</h3>
+    <textarea
+      class="admin-input admin-textarea"
+      rows="4"
+      [ngModel]="privacyPolicy()"
+      (ngModelChange)="privacyPolicy.set($event)"
+    ></textarea>
+    <button type="button" class="admin-btn admin-btn--primary" (click)="saveLegal()">Save Privacy Policy</button>
+  </div>
+
+  <div class="form-card">
+    <h3>Terms of Service</h3>
+    <textarea
+      class="admin-input admin-textarea"
+      rows="4"
+      [ngModel]="termsOfService()"
+      (ngModelChange)="termsOfService.set($event)"
+    ></textarea>
+    <button type="button" class="admin-btn admin-btn--primary" (click)="saveLegal()">Save Terms</button>
+  </div>
+
+  <div class="form-card">
+    <h3>Refund & Cancellation Policy</h3>
+    <textarea
+      class="admin-input admin-textarea"
+      rows="4"
+      [ngModel]="refundPolicy()"
+      (ngModelChange)="refundPolicy.set($event)"
+    ></textarea>
+    <button type="button" class="admin-btn admin-btn--primary" (click)="saveLegal()">Save Refund Policy</button>
+  </div>
+</div>

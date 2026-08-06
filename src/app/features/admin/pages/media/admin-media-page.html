@@ -1,0 +1,26 @@
+<header class="admin-page-header">
+  <div>
+    <h1>Media Asset Library</h1>
+    <p>View, manage, and copy paths of active hero portrait images and product crystal photos.</p>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="media-grid">
+  @for (item of mediaAssets(); track item.url) {
+    <div class="media-card">
+      <div class="media-card__preview">
+        <img [src]="item.url" [alt]="item.name" loading="lazy" />
+      </div>
+      <div class="media-card__info">
+        <h4>{{ item.name }}</h4>
+        <span class="media-type">{{ item.type }}</span>
+        <code class="media-url">{{ item.url }}</code>
+        <button type="button" class="admin-btn admin-btn--secondary" (click)="copyPath(item.url)">📋 Copy Path</button>
+      </div>
+    </div>
+  }
+</div>

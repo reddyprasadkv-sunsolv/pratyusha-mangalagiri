@@ -1,0 +1,69 @@
+<header class="admin-page-header">
+  <div>
+    <h1>Founder Profile Manager</h1>
+    <p>Edit Pratyusha Mangalagiri's bio, credentials, badges, and background story.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="editor-grid">
+  <div class="form-card">
+    <h3>Bio & Identity</h3>
+    <div class="form-group">
+      <label>Founder Section Title</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="founder().title"
+        (change)="updateFounderField('aboutTitle', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Eyebrow Subtitle</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="founder().eyebrow"
+        (change)="updateFounderField('aboutEyebrow', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Badge Label</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="founder().badge"
+        (change)="updateFounderField('aboutBadge', $any($event.target).value)"
+      />
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3>Story & Credentials</h3>
+    <div class="form-group">
+      <label>Full Bio / Background Story</label>
+      <textarea
+        class="admin-input admin-textarea"
+        rows="5"
+        [value]="founder().body"
+        (change)="updateFounderField('aboutBody', $any($event.target).value)"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label>Portrait Image Alt Text</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="founder().founderAlt"
+        (change)="updateFounderField('founderAlt', $any($event.target).value)"
+      />
+    </div>
+  </div>
+</div>

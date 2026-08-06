@@ -1,0 +1,69 @@
+<header class="admin-page-header">
+  <div>
+    <h1>Contact & Location Manager</h1>
+    <p>Edit studio address, phone numbers, WhatsApp details, operating hours, and location guidance.</p>
+  </div>
+  <div class="lang-switch-pills">
+    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  </div>
+</header>
+
+@if (toastMessage(); as msg) {
+  <div class="save-toast" role="status">{{ msg }}</div>
+}
+
+<div class="editor-grid">
+  <div class="form-card">
+    <h3>Phone & WhatsApp Details</h3>
+    <div class="form-group">
+      <label>Contact Title</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="contact().title"
+        (change)="updateContactField('contactTitle', $any($event.target).value)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Primary Phone & WhatsApp Number</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="contact().phone"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label>Studio Email</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="contact().email"
+        readonly
+      />
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3>Studio Location Address & Hours</h3>
+    <div class="form-group">
+      <label>Studio Location Address</label>
+      <textarea
+        class="admin-input admin-textarea"
+        rows="3"
+        [value]="contact().supporting"
+        (change)="updateContactField('contactSupporting', $any($event.target).value)"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label>Operating Hours & Note</label>
+      <input
+        type="text"
+        class="admin-input"
+        [value]="contact().note"
+        (change)="updateContactField('contactNote', $any($event.target).value)"
+      />
+    </div>
+  </div>
+</div>
