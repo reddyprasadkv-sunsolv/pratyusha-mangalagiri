@@ -75,11 +75,9 @@ describe('Public crystal sales page configuration', () => {
     expect(serialized).not.toContain('crystal healer');
   });
 
-  it('uses the approved saree portrait and renders matched wellness disclaimers', () => {
+  it('uses the approved saree portrait', () => {
     expect(PUBLIC_CONTENT.en.founderAlt).toContain('traditional pink saree');
     expect(PUBLIC_CONTENT.te.founderAlt).toContain('గులాబీ రంగు చీరలో');
-    expect(PUBLIC_CONTENT.en.disclaimerBody).toContain('not medical treatments');
-    expect(PUBLIC_CONTENT.te.disclaimerBody).toContain('వైద్య చికిత్సలు కావు');
   });
 
   it('offers only approved products and safe guidance choices in the form', () => {

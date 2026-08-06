@@ -115,8 +115,8 @@ export interface PublicPageCopy {
   readonly faqPrompt: string;
   readonly faqLink: string;
   readonly faqs: readonly FaqItem[];
-  readonly disclaimerTitle: string;
-  readonly disclaimerBody: string;
+  readonly disclaimerTitle?: string;
+  readonly disclaimerBody?: string;
   readonly conversionEyebrow: string;
   readonly conversionTitle: string;
   readonly conversionBody: string;

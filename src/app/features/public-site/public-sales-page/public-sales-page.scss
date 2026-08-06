@@ -614,33 +614,6 @@ h2 {
   text-underline-offset: 0.2rem;
 }
 
-.disclaimer {
-  padding-block: 2.5rem;
-  background: #f4eadc;
-}
-
-.disclaimer__inner {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.2rem;
-}
-
-.disclaimer__inner > span {
-  color: var(--color-accent-700);
-  font-size: 1.5rem;
-}
-
-.disclaimer h2 {
-  font-size: var(--text-lg);
-}
-
-.disclaimer p {
-  max-width: 72rem;
-  margin-top: 0.5rem;
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
 .closing {
   padding-block: var(--section-space);
 }
