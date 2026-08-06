@@ -7,12 +7,31 @@ import { PUBLIC_CONTENT } from './public-content.data';
 import { ProductCopy, PublicPageCopy, SupportedLanguage } from './public-content.model';
 
 const CONTENT_STORAGE_KEY = 'pratyusha_custom_content';
+const MEDIA_STORAGE_KEY = 'pratyusha_custom_media';
+
+export interface MediaAsset {
+  id: string;
+  name: string;
+  url: string;
+  type: string;
+  updatedAt?: string;
+}
+
+const DEFAULT_MEDIA_ASSETS: MediaAsset[] = [
+  { id: 'm1', name: 'Pratyusha Portrait', url: 'assets/images/people/client-traditional-saree.webp', type: 'Hero Portrait' },
+  { id: 'm2', name: 'Pyrite Crystal Bracelet', url: 'assets/images/products/pyrite-bracelet.webp', type: 'Product Image' },
+  { id: 'm3', name: 'Money Magnet Bracelet', url: 'assets/images/products/money-magnet-bracelet.webp', type: 'Product Image' },
+  { id: 'm4', name: 'Evil Eye Protection', url: 'assets/images/products/evil-eye-protection-bracelet.webp', type: 'Product Image' },
+  { id: 'm5', name: 'Success Combination', url: 'assets/images/products/success-bracelet.webp', type: 'Product Image' },
+];
 
 @Injectable({ providedIn: 'root' })
 export class PublicContentService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly localeService = inject(LocaleService);
+
   private readonly overrides = signal<Record<string, Partial<PublicPageCopy>>>(this.loadSavedOverrides());
+  readonly mediaAssets = signal<MediaAsset[]>(this.loadSavedMedia());
 
   readonly content = computed(() => {
     const lang = this.localeService.language();
@@ -75,6 +94,39 @@ export class PublicContentService {
     this.updateContent(lang, { faqs: currentFaqs });
   }
 
+  // --- Media Asset Management ---
+  addMediaAsset(asset: Omit<MediaAsset, 'id'>): MediaAsset {
+    const newAsset: MediaAsset = {
+      ...asset,
+      id: `media-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      updatedAt: new Date().toISOString(),
+    };
+    this.mediaAssets.update((list) => {
+      const next = [newAsset, ...list];
+      this.persistMedia(next);
+      return next;
+    });
+    return newAsset;
+  }
+
+  updateMediaAsset(id: string, updates: Partial<MediaAsset>): void {
+    this.mediaAssets.update((list) => {
+      const next = list.map((item) =>
+        item.id === id ? { ...item, ...updates, updatedAt: new Date().toISOString() } : item,
+      );
+      this.persistMedia(next);
+      return next;
+    });
+  }
+
+  deleteMediaAsset(id: string): void {
+    this.mediaAssets.update((list) => {
+      const next = list.filter((item) => item.id !== id);
+      this.persistMedia(next);
+      return next;
+    });
+  }
+
   // --- Reset to default data ---
   resetToDefaults(lang: SupportedLanguage): void {
     this.overrides.update((current) => {
@@ -105,5 +157,27 @@ export class PublicContentService {
       }
     }
     return {};
+  }
+
+  private persistMedia(assets: MediaAsset[]): void {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        localStorage.setItem(MEDIA_STORAGE_KEY, JSON.stringify(assets));
+      } catch (err) {
+        console.warn('Failed to save media assets', err);
+      }
+    }
+  }
+
+  private loadSavedMedia(): MediaAsset[] {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        const raw = localStorage.getItem(MEDIA_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : DEFAULT_MEDIA_ASSETS;
+      } catch {
+        return DEFAULT_MEDIA_ASSETS;
+      }
+    }
+    return DEFAULT_MEDIA_ASSETS;
   }
 }

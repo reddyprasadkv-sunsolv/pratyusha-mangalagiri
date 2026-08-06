@@ -1,25 +1,93 @@
 <header class="admin-page-header">
   <div>
     <h1>Media Asset Library</h1>
-    <p>View, manage, and copy paths of active hero portrait images and product crystal photos.</p>
+    <p>Upload, change, update, scale, and delete product photos, hero portraits, and store media.</p>
   </div>
+  <button type="button" class="admin-btn admin-btn--primary" (click)="isAdding.set(!isAdding())">
+    {{ isAdding() ? '✕ Cancel' : '➕ Upload New Photo' }}
+  </button>
 </header>
 
 @if (toastMessage(); as msg) {
   <div class="save-toast" role="status">{{ msg }}</div>
 }
 
+@if (isAdding()) {
+  <section class="upload-panel">
+    <h3>Upload New Photo</h3>
+    <div class="upload-grid">
+      <div class="upload-dropzone">
+        @if (newMediaUrl(); as preview) {
+          <img [src]="preview" alt="Preview" class="upload-preview-img" />
+        } @else {
+          <div class="upload-placeholder">
+            <span>📷 Select or drag photo file</span>
+          </div>
+        }
+        <input type="file" accept="image/*" (change)="onUploadNewFile($event)" class="file-input" />
+      </div>
+
+      <div class="upload-fields">
+        <label>
+          Asset Name
+          <input type="text" class="form-control" [ngModel]="newMediaName()" (ngModelChange)="newMediaName.set($event)" placeholder="e.g. Pyrite Bracelet Alt View" />
+        </label>
+        <label>
+          Category / Usage
+          <select class="form-control" [ngModel]="newMediaType()" (ngModelChange)="newMediaType.set($event)">
+            <option value="Hero Portrait">Hero Portrait</option>
+            <option value="Product Image">Product Image</option>
+            <option value="Founder Photo">Founder Photo</option>
+            <option value="Testimonial Photo">Testimonial Photo</option>
+            <option value="General Asset">General Asset</option>
+          </select>
+        </label>
+        <button type="button" class="admin-btn admin-btn--primary" [disabled]="!newMediaUrl() || !newMediaName()" (click)="submitNewMedia()">
+          💾 Save Photo to Library
+        </button>
+      </div>
+    </div>
+  </section>
+}
+
 <div class="media-grid">
-  @for (item of mediaAssets(); track item.url) {
+  @for (item of mediaAssets(); track item.id) {
     <div class="media-card">
       <div class="media-card__preview">
         <img [src]="item.url" [alt]="item.name" loading="lazy" />
+        <label class="change-photo-overlay" title="Click to change photo">
+          <span>📸 Change Photo</span>
+          <input type="file" accept="image/*" (change)="onChangePhoto(item, $event)" class="file-input-overlay" />
+        </label>
       </div>
+
       <div class="media-card__info">
-        <h4>{{ item.name }}</h4>
-        <span class="media-type">{{ item.type }}</span>
-        <code class="media-url">{{ item.url }}</code>
-        <button type="button" class="admin-btn admin-btn--secondary" (click)="copyPath(item.url)">📋 Copy Path</button>
+        @if (editingId() === item.id) {
+          <input type="text" #nameInput class="form-control" [value]="item.name" placeholder="Asset Name" />
+          <select #typeSelect class="form-control">
+            <option value="Hero Portrait" [selected]="item.type === 'Hero Portrait'">Hero Portrait</option>
+            <option value="Product Image" [selected]="item.type === 'Product Image'">Product Image</option>
+            <option value="Founder Photo" [selected]="item.type === 'Founder Photo'">Founder Photo</option>
+            <option value="Testimonial Photo" [selected]="item.type === 'Testimonial Photo'">Testimonial Photo</option>
+            <option value="General Asset" [selected]="item.type === 'General Asset'">General Asset</option>
+          </select>
+          <div class="card-actions">
+            <button type="button" class="admin-btn admin-btn--primary admin-btn--sm" (click)="saveEditing(item, nameInput.value, typeSelect.value)">Save</button>
+            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" (click)="cancelEditing()">Cancel</button>
+          </div>
+        } @else {
+          <h4>{{ item.name }}</h4>
+          <span class="media-type">{{ item.type }}</span>
+          <div class="card-actions">
+            <label class="admin-btn admin-btn--secondary admin-btn--sm btn-file-label">
+              <span>📷 Replace</span>
+              <input type="file" accept="image/*" (change)="onChangePhoto(item, $event)" class="file-input-hidden" />
+            </label>
+            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" (click)="startEditing(item)">✏️ Edit</button>
+            <button type="button" class="admin-btn admin-btn--secondary admin-btn--sm" (click)="copyPath(item.url)">📋 Copy</button>
+            <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" (click)="deleteMedia(item)">🗑️ Delete</button>
+          </div>
+        }
       </div>
     </div>
   }

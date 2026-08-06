@@ -1,7 +1,7 @@
 <header class="admin-page-header">
   <div>
     <h1>Products Catalog CRM</h1>
-    <p>Add, edit, update prices/taglines, and delete products live on the website.</p>
+    <p>Add, edit, upload photos, update taglines, and delete products live on the website.</p>
   </div>
   <div class="lang-switch-pills">
     <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
@@ -37,6 +37,10 @@
       [ngModel]="newProductCta()"
       (ngModelChange)="newProductCta.set($event)"
     />
+    <label class="admin-btn admin-btn--secondary file-btn">
+      <span>📸 {{ newProductImageUrl() ? 'Photo Ready' : 'Choose Photo' }}</span>
+      <input type="file" accept="image/*" (change)="onUploadNewProductPhoto($event)" class="hidden-file-input" />
+    </label>
     <button type="button" class="admin-btn admin-btn--primary" (click)="addProduct()">Add Product</button>
   </div>
 </div>
@@ -48,6 +52,15 @@
         <span class="prod-id">{{ prod.id }}</span>
         <button type="button" class="del-btn" (click)="deleteProduct(prod.id)">🗑️ Delete</button>
       </div>
+
+      <div class="prod-img-preview">
+        <img [src]="prod.imageUrl" [alt]="prod.nameEn" loading="lazy" />
+        <label class="change-photo-overlay" title="Click to replace product photo">
+          <span>📸 Change Photo</span>
+          <input type="file" accept="image/*" (change)="onUploadProductPhoto(prod, $event)" class="hidden-file-input" />
+        </label>
+      </div>
+
       <div class="form-group">
         <label>Product Title</label>
         <input
