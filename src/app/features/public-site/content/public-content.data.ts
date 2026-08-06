@@ -270,9 +270,9 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
           'The proposed experience focuses on intention-setting, affirmations, reflection, gratitude, and simple daily practices. Final inclusions and delivery methods will be confirmed before ordering is enabled.',
       },
     ],
-   // disclaimerTitle: 'A Note About Crystal and Wellness Practices',
-    //disclaimerBody:
-      //'Crystal products and the 21-Day Crystal Ritual are intended to complement mindfulness, intention-setting, reflection, and personal-wellness practices. They are not medical treatments and are not substitutes for professional medical, psychological, legal, or financial advice. Individual experiences may vary. No financial, health, relationship, career, business, or protection outcome is guaranteed. Continue to take appropriate practical action and seek qualified professional help where necessary.',
+    disclaimerTitle: 'A Note About Crystal and Wellness Practices',
+    disclaimerBody:
+      'Crystal products and the 21-Day Crystal Ritual are intended to complement mindfulness, intention-setting, reflection, and personal-wellness practices. They are not medical treatments and are not substitutes for professional medical, psychological, legal, or financial advice. Individual experiences may vary. No financial, health, relationship, career, business, or protection outcome is guaranteed. Continue to take appropriate practical action and seek qualified professional help where necessary.',
     conversionEyebrow: 'Begin with one intentional step',
     conversionTitle: 'Explore the bracelet that reflects the intention you want to practise.',
     conversionBody:
@@ -551,9 +551,9 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
           'ప్రతిపాదిత అనుభవం ఉద్దేశం, అఫర్మేషన్స్, ఆలోచన, కృతజ్ఞత, సులభమైన రోజువారీ సాధనలపై దృష్టి పెడుతుంది. ఆర్డరింగ్ ప్రారంభించే ముందు తుది అంశాలు మరియు పంపే విధానాన్ని నిర్ధారిస్తాం.',
       },
     ],
-   // disclaimerTitle: 'క్రిస్టల్ మరియు వెల్‌నెస్ సాధనల గురించి ఒక గమనిక',
-    //disclaimerBody:
-      //'క్రిస్టల్ ఉత్పత్తులు మరియు 21-Day Crystal Ritualను మైండ్‌ఫుల్‌నెస్, ఉద్దేశం, ఆలోచన, వ్యక్తిగత వెల్‌నెస్ సాధనలకు తోడుగా ఉపయోగించవచ్చు. ఇవి వైద్య చికిత్సలు కావు. వైద్య, మానసిక, చట్టపరమైన లేదా ఆర్థిక నిపుణుల సలహాకు బదులు కావు. ప్రతి వ్యక్తి అనుభవం భిన్నంగా ఉండవచ్చు. డబ్బు, ఆరోగ్యం, సంబంధాలు, కెరీర్, వ్యాపారం లేదా రక్షణ విషయంలో ఎలాంటి ఖచ్చితమైన ఫలితాన్నీ ఇవి హామీ ఇవ్వవు. అవసరమైన ఆచరణాత్మక అడుగులు తీసుకుంటూ, అవసరమైనప్పుడు అర్హత కలిగిన నిపుణుల సహాయం పొందాలి.',
+    disclaimerTitle: 'క్రిస్టల్ మరియు వెల్‌నెస్ సాధనల గురించి ఒక గమనిక',
+    disclaimerBody:
+      'క్రిస్టల్ ఉత్పత్తులు మరియు 21-Day Crystal Ritualను మైండ్‌ఫుల్‌నెస్, ఉద్దేశం, ఆలోచన, వ్యక్తిగత వెల్‌నెస్ సాధనలకు తోడుగా ఉపయోగించవచ్చు. ఇవి వైద్య చికిత్సలు కావు. వైద్య, మానసిక, చట్టపరమైన లేదా ఆర్థిక నిపుణుల సలహాకు బదులు కావు. ప్రతి వ్యక్తి అనుభవం భిన్నంగా ఉండవచ్చు. డబ్బు, ఆరోగ్యం, సంబంధాలు, కెరీర్, వ్యాపారం లేదా రక్షణ విషయంలో ఎలాంటి ఖచ్చితమైన ఫలితాన్నీ ఇవి హామీ ఇవ్వవు. అవసరమైన ఆచరణాత్మక అడుగులు తీసుకుంటూ, అవసరమైనప్పుడు అర్హత కలిగిన నిపుణుల సహాయం పొందాలి.',
     conversionEyebrow: 'ఒక ఉద్దేశ్యపూర్వక అడుగుతో ప్రారంభించండి',
     conversionTitle: 'మీరు సాధన చేయాలనుకునే ఉద్దేశాన్ని గుర్తు చేసే బ్రేస్‌లెట్‌ను చూడండి.',
     conversionBody:
