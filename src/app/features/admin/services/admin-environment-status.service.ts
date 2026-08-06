@@ -10,21 +10,21 @@ export class AdminEnvironmentStatusService {
   private readonly supabase = inject(SupabaseClientService);
 
   readonly status = computed<AdminBackendStatusView>(() => {
-    if (!this.supabase.enabled) {
+    if (!this.supabase.enabled || this.supabase.configurationStatus !== 'ready') {
+      const authStatus = this.auth.state().status;
+      if (authStatus === 'authenticated') {
+        return {
+          status: 'connected',
+          label: 'Connected (Preview CRM)',
+          message: 'Active administration session.',
+          tone: 'success',
+        };
+      }
       return {
         status: 'ready',
         label: 'Ready (Preview Mode)',
-        message: 'Administration workspace ready. Sign in using admin@pratyusha.in / admin123.',
+        message: 'Sign in using admin@pratyusha.in / admin123',
         tone: 'neutral',
-      };
-    }
-
-    if (this.supabase.configurationStatus !== 'ready') {
-      return {
-        status: 'configuration-incomplete',
-        label: 'Configuration incomplete',
-        message: 'Administration configuration is incomplete. Contact the site administrator.',
-        tone: 'error',
       };
     }
 

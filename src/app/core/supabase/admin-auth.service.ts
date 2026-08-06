@@ -60,17 +60,8 @@ export class AdminAuthService {
       return;
     }
 
-    if (!this.supabase.enabled) {
-      this.setState('configuration-missing', 'configuration-incomplete', CONFIGURATION_MESSAGE);
-      return;
-    }
-
-    if (this.supabase.configurationStatus !== 'ready') {
-      this.setState(
-        'configuration-missing',
-        'configuration-incomplete',
-        INCOMPLETE_CONFIGURATION_MESSAGE,
-      );
+    if (!this.supabase.enabled || this.supabase.configurationStatus !== 'ready') {
+      this.setState('signed-out');
       return;
     }
 
