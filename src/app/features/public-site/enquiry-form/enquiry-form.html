@@ -124,11 +124,22 @@
   </div>
 
   <div class="enquiry-form__footer">
-    <app-ui-button [label]="copy().submit" type="submit" />
+    <app-ui-button [label]="isSubmitting() ? 'Saving...' : copy().submit" type="submit" />
     <p>{{ copy().privacy }}</p>
   </div>
 
-  @if (developmentMessage(); as notice) {
-    <p class="enquiry-form__notice" role="status">{{ notice }}</p>
+  @if (successLead(); as lead) {
+    <div class="enquiry-form__success" role="status">
+      <h4>✦ Thank you, {{ lead.fullName }}!</h4>
+      <p>Your enquiry has been saved successfully. We will get in touch with you at <strong>+91 70759 86432</strong>.</p>
+      <a
+        class="enquiry-form__whatsapp-btn"
+        [href]="whatsappUrlForSubmittedLead"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>Chat directly on WhatsApp</span> →
+      </a>
+    </div>
   }
 </form>

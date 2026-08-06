@@ -64,6 +64,47 @@ h3 {
   font-size: var(--text-sm);
 }
 
+.enquiry-form__success {
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(47, 107, 80, 0.3);
+  background: rgba(47, 107, 80, 0.08);
+  color: var(--color-text-strong);
+  display: grid;
+  gap: 0.5rem;
+
+  h4 {
+    color: var(--color-success);
+    font-size: var(--text-md);
+    font-weight: 700;
+  }
+
+  p {
+    font-size: var(--text-sm);
+  }
+}
+
+.enquiry-form__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-pill);
+  background: #25d366;
+  color: #ffffff;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  width: fit-content;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+
+  &:hover {
+    background: #20bd5a;
+    transform: translateY(-2px);
+  }
+}
+
 :host-context([data-locale='te']) h3 {
   font-family: var(--font-serif-te);
   line-height: 1.65;

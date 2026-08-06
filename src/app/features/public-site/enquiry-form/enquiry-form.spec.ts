@@ -54,7 +54,7 @@ describe('EnquiryForm', () => {
     expect(form.controls.message.invalid).toBe(true);
   });
 
-  it('trims text values before the development-safe submit action', () => {
+  it('trims text values and saves lead to storage on submit', async () => {
     const fixture = TestBed.createComponent(EnquiryForm);
     fixture.detectChanges();
     fixture.componentInstance.form.patchValue({
@@ -69,11 +69,15 @@ describe('EnquiryForm', () => {
 
     const formElement = fixture.nativeElement.querySelector('form') as HTMLFormElement;
     formElement.dispatchEvent(new Event('submit'));
+    await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.form.controls.name.value).toBe('Pratyusha');
-    expect(fixture.componentInstance.form.controls.city.value).toBe('Hyderabad');
-    expect(fixture.nativeElement.textContent).toContain('Your details were not sent or stored.');
+    const storedRaw = localStorage.getItem('pratyusha_submitted_leads');
+    expect(storedRaw).not.toBeNull();
+    const stored = JSON.parse(storedRaw!);
+    expect(stored[0].fullName).toBe('Pratyusha');
+    expect(stored[0].city).toBe('Hyderabad');
+    expect(fixture.nativeElement.textContent).toContain('Your enquiry has been saved successfully');
   });
 
   it('does not expose a real submission endpoint or log personal data', () => {

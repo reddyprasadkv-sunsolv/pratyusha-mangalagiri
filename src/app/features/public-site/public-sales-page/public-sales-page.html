@@ -15,29 +15,16 @@
         </div>
       </div>
 
-      @if (content().products[0]; as heroProduct) {
-        <div class="hero__visual">
-          <picture>
-            <source
-              type="image/webp"
-              [attr.srcset]="heroProduct.imageSrcSet"
-              sizes="(max-width: 768px) 88vw, 43vw"
-            />
-            <img
-              [ngSrc]="heroProduct.imageUrl"
-              [alt]="imageAlt(heroProduct)"
-              [width]="heroProduct.imageWidth"
-              [height]="heroProduct.imageHeight"
-              sizes="(max-width: 768px) 88vw, 43vw"
-              priority
-            />
-          </picture>
-          <div class="hero__seal" aria-hidden="true">
-            <span>21</span>
-            <small>DAY</small>
-          </div>
-        </div>
-      }
+      <div class="hero__visual">
+        <app-image-card
+          src="assets/images/people/client-traditional-saree.webp"
+          [alt]="content().founderAlt"
+          badge="21 DAY"
+          [width]="1086"
+          [height]="1448"
+          [priority]="true"
+        />
+      </div>
     </div>
   </section>
 

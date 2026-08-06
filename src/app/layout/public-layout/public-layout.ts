@@ -7,12 +7,20 @@ import { AnnouncementBar } from '../../shared/components/announcement-bar/announ
 import { CookieNotice } from '../../shared/components/cookie-notice/cookie-notice';
 import { PublicFooter } from '../../shared/components/public-footer/public-footer';
 import { PublicHeader } from '../../shared/components/public-header/public-header';
+import { WhatsappButton } from '../../shared/components/whatsapp-button/whatsapp-button';
 import { FooterLinkGroup } from '../../shared/models/public-site.models';
 
 @Component({
   selector: 'app-public-layout',
   standalone: true,
-  imports: [AnnouncementBar, CookieNotice, PublicFooter, PublicHeader, RouterOutlet],
+  imports: [
+    AnnouncementBar,
+    CookieNotice,
+    PublicFooter,
+    PublicHeader,
+    RouterOutlet,
+    WhatsappButton,
+  ],
   templateUrl: './public-layout.html',
   styleUrl: './public-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
