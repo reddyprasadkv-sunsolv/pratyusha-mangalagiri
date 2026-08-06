@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#4b2238" />
+      <stop offset="100%" stop-color="#2d1222" />
+    </radialGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e0b3" />
+      <stop offset="30%" stop-color="#d7bd8a" />
+      <stop offset="70%" stop-color="#b89456" />
+      <stop offset="100%" stop-color="#8f6b32" />
+    </linearGradient>
+    <linearGradient id="crystal-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#d7bd8a" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#b89456" stop-opacity="0.3" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#bg-grad)" stroke="url(#gold-grad)" stroke-width="12" />
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#gold-grad)" stroke-width="2" stroke-dasharray="6 8" opacity="0.6" />
+
+  <!-- Crystal Facet Diamond Icon -->
+  <g transform="translate(256, 175) scale(1.3)" filter="url(#glow)">
+    <!-- Top facets -->
+    <polygon points="0,-45 -35,-15 0,0" fill="url(#crystal-glow)" opacity="0.9" />
+    <polygon points="0,-45 35,-15 0,0" fill="url(#gold-grad)" opacity="0.8" />
+    <polygon points="-35,-15 -55,-15 -35,-45 0,-45" fill="url(#gold-grad)" opacity="0.65" />
+    <polygon points="35,-15 55,-15 35,-45 0,-45" fill="url(#crystal-glow)" opacity="0.75" />
+    <!-- Bottom facets -->
+    <polygon points="-35,-15 0,55 0,0" fill="url(#gold-grad)" opacity="0.95" />
+    <polygon points="35,-15 0,55 0,0" fill="url(#crystal-glow)" opacity="0.85" />
+    <polygon points="-55,-15 0,55 -35,-15" fill="url(#gold-grad)" opacity="0.7" />
+    <polygon points="55,-15 0,55 35,-15" fill="url(#gold-grad)" opacity="0.6" />
+  </g>
+
+  <!-- Brand Lettermark "P" -->
+  <text x="256" y="380" font-family="'Manrope', 'Georgia', serif" font-size="125" font-weight="700" fill="url(#gold-grad)" text-anchor="middle" letter-spacing="2">P</text>
+  
+  <!-- Subtle Sparkle Star -->
+  <path d="M256,60 L260,78 L278,82 L260,86 L256,104 L252,86 L234,82 L252,78 Z" fill="url(#gold-grad)" />
+</svg>
