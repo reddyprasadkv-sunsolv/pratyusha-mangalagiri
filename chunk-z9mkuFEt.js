@@ -1,0 +1,1 @@
+import{Ht as g,g as Ey,l as De,vt as _}from"./chunk-6DeYQmff.js";function w(t){t||(t=g(De));let i=new _(e=>{if(t.destroyed){e.next();return}return t.onDestroy(e.next.bind(e))});return e=>e.pipe(Ey(i))}export{w as t};
