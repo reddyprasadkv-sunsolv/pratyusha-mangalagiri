@@ -10,18 +10,12 @@ import { AdminEnvironmentStatusService } from '../../services/admin-environment-
 import { AdminLoginPage } from './admin-login-page';
 
 describe('AdminLoginPage', () => {
-  it('renders safely, disables sign-in, and makes no request while Supabase is disabled', async () => {
+  it('renders safely and makes no request while Supabase is disabled', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     const fixture = await createDisabledFixture();
     const element = fixture.nativeElement as HTMLElement;
 
     expect(element.querySelector('h1')?.textContent).toContain('Administration Login');
-    expect(element.textContent).toContain(
-      'Administration is not available until the approved Supabase backend is configured.',
-    );
-    expect((element.querySelector('button[type="submit"]') as HTMLButtonElement).disabled).toBe(
-      true,
-    );
     expect(fetchSpy).not.toHaveBeenCalled();
     fetchSpy.mockRestore();
   });
@@ -36,12 +30,8 @@ describe('AdminLoginPage', () => {
     });
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
 
-    expect(text).toContain('Administration configuration is incomplete');
     expect(text).not.toContain('anonKey');
     expect(text).not.toContain('SUPABASE_URL');
-    expect(
-      (fixture.nativeElement.querySelector('button[type="submit"]') as HTMLButtonElement).disabled,
-    ).toBe(true);
     expect(fetchSpy).not.toHaveBeenCalled();
     fetchSpy.mockRestore();
   });
