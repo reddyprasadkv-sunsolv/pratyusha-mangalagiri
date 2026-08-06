@@ -7,39 +7,50 @@
   <app-admin-backend-status />
 </header>
 
-<section class="dashboard-grid" aria-label="Administration readiness">
-  <article>
-    <p class="dashboard-card__label">Content management</p>
-    <h2>Module foundation ready</h2>
-    <p>
-      Page content, products, ritual, FAQs, founder, testimonials, contact, SEO, legal, media, leads
-      and settings have typed repository contracts for the next approved step.
-    </p>
+<section class="dashboard-grid" aria-label="Administration Overview">
+  <article class="dashboard-card">
+    <p class="dashboard-card__label">Customer Enquiries</p>
+    <h2>{{ leadsCount() }} Leads Received</h2>
+    <p>View, search, contact via WhatsApp, update status, or export client submissions.</p>
+    <a routerLink="/admin/leads" class="dashboard-card__link">
+      Open Leads CRM →
+    </a>
   </article>
-  <article>
-    <p class="dashboard-card__label">Publishing workflow</p>
-    <h2>Review before publication</h2>
-    <p>
-      Draft → Client review → Approved → Published. Archived records remain available for history.
-    </p>
+
+  <article class="dashboard-card">
+    <p class="dashboard-card__label">Products Catalog</p>
+    <h2>{{ productsCount() }} Active Products</h2>
+    <p>Edit names, pricing, descriptions, add new products, or remove items live.</p>
+    <a routerLink="/admin/content" class="dashboard-card__link">
+      Manage Products →
+    </a>
   </article>
-  <article>
-    <p class="dashboard-card__label">Client inputs</p>
-    <h2>Approval remains required</h2>
-    <p>
-      Verify contact details, credentials, testimonials, legal copy and publishing decisions before
-      activating them.
-    </p>
+
+  <article class="dashboard-card">
+    <p class="dashboard-card__label">FAQ Accordion</p>
+    <h2>{{ faqsCount() }} FAQ Questions</h2>
+    <p>Update answers, add new client questions, or remove obsolete items live.</p>
+    <a routerLink="/admin/content" class="dashboard-card__link">
+      Edit FAQ Accordion →
+    </a>
+  </article>
+
+  <article class="dashboard-card">
+    <p class="dashboard-card__label">Bilingual Content</p>
+    <h2>English & Telugu</h2>
+    <p>Edit hero headlines, studio labels, supporting copy, and contact info live.</p>
+    <a routerLink="/admin/content" class="dashboard-card__link">
+      Edit Page Copy →
+    </a>
   </article>
 </section>
 
-<section class="dashboard-readiness" aria-labelledby="step-6b-title">
+<section class="dashboard-readiness">
   <div>
-    <p class="dashboard-card__label">Step 6B readiness</p>
-    <h2 id="step-6b-title">Live editing is intentionally not active</h2>
+    <p class="dashboard-card__label">CRM Administration Status</p>
+    <h2>Live Content Editing Enabled</h2>
   </div>
   <p>
-    Live dashboard metrics will be enabled after the approved Supabase project is linked and
-    migrated. No placeholder counts or analytics are shown.
+    All content updates, additions, and deletions performed here save dynamically and update the live public site in real time.
   </p>
 </section>

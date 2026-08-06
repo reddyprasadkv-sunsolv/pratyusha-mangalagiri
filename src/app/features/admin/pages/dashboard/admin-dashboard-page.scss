@@ -61,6 +61,21 @@
   text-transform: uppercase;
 }
 
+.dashboard-card__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-brand-800);
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+
+  &:hover {
+    color: var(--color-brand-950);
+    transform: translateX(3px);
+  }
+}
+
 .dashboard-readiness {
   display: grid;
   margin-top: 1.25rem;

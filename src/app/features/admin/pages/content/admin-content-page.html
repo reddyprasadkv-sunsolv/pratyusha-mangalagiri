@@ -1,98 +1,269 @@
 <header class="admin-content__header">
   <div>
-    <h1>Bilingual Content Editor CRM</h1>
-    <p>Update homepage copy, titles, and messaging live across English and Telugu views.</p>
+    <h1>Bilingual Content Management CRM</h1>
+    <p>Edit, add, update, and delete website content live for English & Telugu views.</p>
   </div>
-  <div class="lang-switch-pills">
-    <button
-      type="button"
-      [class.active]="selectedLang() === 'en'"
-      (click)="switchLang('en')"
-    >
-      🇬🇧 English
-    </button>
-    <button
-      type="button"
-      [class.active]="selectedLang() === 'te'"
-      (click)="switchLang('te')"
-    >
-      🇮🇳 Telugu (తెలుగు)
+  <div class="header-actions">
+    <div class="lang-switch-pills">
+      <button
+        type="button"
+        [class.active]="selectedLang() === 'en'"
+        (click)="switchLang('en')"
+      >
+        🇬🇧 English
+      </button>
+      <button
+        type="button"
+        [class.active]="selectedLang() === 'te'"
+        (click)="switchLang('te')"
+      >
+        🇮🇳 Telugu (తెలుగు)
+      </button>
+    </div>
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset to original content">
+      🔄 Reset Defaults
     </button>
   </div>
 </header>
 
-@if (savedNotice()) {
+@if (savedNotice(); as notice) {
   <div class="save-toast" role="status">
-    ✅ Content updated successfully! Changes are live on the public sales page.
+    {{ notice }}
   </div>
 }
 
-<form class="content-editor-card" (ngSubmit)="saveChanges()">
-  <h2>Hero Section Copy ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h2>
+<nav class="content-tabs">
+  <button
+    type="button"
+    class="tab-btn"
+    [class.tab-btn--active]="activeTab() === 'hero'"
+    (click)="activeTab.set('hero')"
+  >
+    ✨ Hero & Headline Copy
+  </button>
+  <button
+    type="button"
+    class="tab-btn"
+    [class.tab-btn--active]="activeTab() === 'products'"
+    (click)="activeTab.set('products')"
+  >
+    🛍️ Products Catalog ({{ products().length }})
+  </button>
+  <button
+    type="button"
+    class="tab-btn"
+    [class.tab-btn--active]="activeTab() === 'faqs'"
+    (click)="activeTab.set('faqs')"
+  >
+    ❓ FAQ Accordion ({{ faqs().length }})
+  </button>
+</nav>
 
-  <div class="form-group">
-    <label for="studioLabel">Studio / Tagline Label</label>
-    <input
-      id="studioLabel"
-      type="text"
-      class="admin-input"
-      [ngModel]="studioLabel()"
-      (ngModelChange)="studioLabel.set($event)"
-      name="studioLabel"
-    />
-  </div>
+<!-- Tab 1: Hero & Copy Editor -->
+@if (activeTab() === 'hero') {
+  <form class="content-editor-card" (ngSubmit)="saveHeroChanges()">
+    <h2>Hero Section Copy ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h2>
 
-  <div class="form-group">
-    <label for="heroTitle">Hero Title</label>
-    <input
-      id="heroTitle"
-      type="text"
-      class="admin-input"
-      [ngModel]="heroTitle()"
-      (ngModelChange)="heroTitle.set($event)"
-      name="heroTitle"
-    />
-  </div>
+    <div class="form-group">
+      <label for="studioLabel">Studio / Tagline Label</label>
+      <input
+        id="studioLabel"
+        type="text"
+        class="admin-input"
+        [ngModel]="studioLabel()"
+        (ngModelChange)="studioLabel.set($event)"
+        name="studioLabel"
+      />
+    </div>
 
-  <div class="form-group">
-    <label for="heroEmphasis">Hero Emphasis Text</label>
-    <input
-      id="heroEmphasis"
-      type="text"
-      class="admin-input"
-      [ngModel]="heroEmphasis()"
-      (ngModelChange)="heroEmphasis.set($event)"
-      name="heroEmphasis"
-    />
-  </div>
+    <div class="form-group">
+      <label for="heroTitle">Hero Title</label>
+      <input
+        id="heroTitle"
+        type="text"
+        class="admin-input"
+        [ngModel]="heroTitle()"
+        (ngModelChange)="heroTitle.set($event)"
+        name="heroTitle"
+      />
+    </div>
 
-  <div class="form-group">
-    <label for="heroSupporting">Hero Supporting Statement</label>
-    <input
-      id="heroSupporting"
-      type="text"
-      class="admin-input"
-      [ngModel]="heroSupporting()"
-      (ngModelChange)="heroSupporting.set($event)"
-      name="heroSupporting"
-    />
-  </div>
+    <div class="form-group">
+      <label for="heroEmphasis">Hero Emphasis Text</label>
+      <input
+        id="heroEmphasis"
+        type="text"
+        class="admin-input"
+        [ngModel]="heroEmphasis()"
+        (ngModelChange)="heroEmphasis.set($event)"
+        name="heroEmphasis"
+      />
+    </div>
 
-  <div class="form-group">
-    <label for="heroBody">Hero Body Paragraph</label>
-    <textarea
-      id="heroBody"
-      class="admin-input admin-textarea"
-      rows="4"
-      [ngModel]="heroBody()"
-      (ngModelChange)="heroBody.set($event)"
-      name="heroBody"
-    ></textarea>
-  </div>
+    <div class="form-group">
+      <label for="heroSupporting">Hero Supporting Statement</label>
+      <input
+        id="heroSupporting"
+        type="text"
+        class="admin-input"
+        [ngModel]="heroSupporting()"
+        (ngModelChange)="heroSupporting.set($event)"
+        name="heroSupporting"
+      />
+    </div>
 
-  <div class="content-editor-actions">
-    <button type="submit" class="admin-btn admin-btn--primary">
-      💾 Save Content Live
-    </button>
+    <div class="form-group">
+      <label for="heroBody">Hero Body Paragraph</label>
+      <textarea
+        id="heroBody"
+        class="admin-input admin-textarea"
+        rows="4"
+        [ngModel]="heroBody()"
+        (ngModelChange)="heroBody.set($event)"
+        name="heroBody"
+      ></textarea>
+    </div>
+
+    <div class="content-editor-actions">
+      <button type="submit" class="admin-btn admin-btn--primary">
+        💾 Save Copy Live
+      </button>
+    </div>
+  </form>
+}
+
+<!-- Tab 2: Products Catalog Editor -->
+@if (activeTab() === 'products') {
+  <div class="products-editor-container">
+    <div class="add-box">
+      <h3>➕ Add New Product</h3>
+      <div class="add-box__row">
+        <input
+          type="text"
+          class="admin-input"
+          placeholder="Product Name"
+          [ngModel]="newProductName()"
+          (ngModelChange)="newProductName.set($event)"
+        />
+        <input
+          type="text"
+          class="admin-input"
+          placeholder="Supporting Tagline"
+          [ngModel]="newProductSupporting()"
+          (ngModelChange)="newProductSupporting.set($event)"
+        />
+        <input
+          type="text"
+          class="admin-input"
+          placeholder="CTA Button Label (e.g. Enquire Now)"
+          [ngModel]="newProductCta()"
+          (ngModelChange)="newProductCta.set($event)"
+        />
+        <button type="button" class="admin-btn admin-btn--primary" (click)="addProduct()">
+          Add Product
+        </button>
+      </div>
+    </div>
+
+    <div class="product-cards-grid">
+      @for (prod of products(); track prod.id) {
+        <div class="product-item-card">
+          <div class="product-item-card__header">
+            <span class="prod-id">{{ prod.id }}</span>
+            <button type="button" class="del-btn" (click)="deleteProduct(prod.id)" title="Delete Product">
+              🗑️ Delete
+            </button>
+          </div>
+          <div class="form-group">
+            <label>Product Name (English / Telugu)</label>
+            <input
+              type="text"
+              class="admin-input"
+              [value]="selectedLang() === 'en' ? prod.nameEn : prod.nameTe"
+              (change)="updateProductField(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', $any($event.target).value)"
+            />
+          </div>
+          <div class="form-group">
+            <label>Supporting Text</label>
+            <input
+              type="text"
+              class="admin-input"
+              [value]="prod.supporting"
+              (change)="updateProductField(prod, 'supporting', $any($event.target).value)"
+            />
+          </div>
+          <div class="form-group">
+            <label>CTA Button Label</label>
+            <input
+              type="text"
+              class="admin-input"
+              [value]="prod.cta"
+              (change)="updateProductField(prod, 'cta', $any($event.target).value)"
+            />
+          </div>
+        </div>
+      }
+    </div>
   </div>
-</form>
+}
+
+<!-- Tab 3: FAQ Accordion Editor -->
+@if (activeTab() === 'faqs') {
+  <div class="faqs-editor-container">
+    <div class="add-box">
+      <h3>➕ Add New FAQ</h3>
+      <div class="add-box__col">
+        <input
+          type="text"
+          class="admin-input"
+          placeholder="Question (e.g. How do I order a custom crystal?)"
+          [ngModel]="newFaqQuestion()"
+          (ngModelChange)="newFaqQuestion.set($event)"
+        />
+        <textarea
+          class="admin-input admin-textarea"
+          rows="2"
+          placeholder="Answer details..."
+          [ngModel]="newFaqAnswer()"
+          (ngModelChange)="newFaqAnswer.set($event)"
+        ></textarea>
+        <button type="button" class="admin-btn admin-btn--primary" (click)="addFaqItem()">
+          Add FAQ Item
+        </button>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      @for (faq of faqs(); track $index) {
+        <div class="faq-item-card">
+          <div class="faq-item-card__header">
+            <strong>Question #{{ $index + 1 }}</strong>
+            <button type="button" class="del-btn" (click)="deleteFaqItem(faq.id, $index)">
+              🗑️ Delete FAQ
+            </button>
+          </div>
+          <div class="form-group">
+            <label>Question</label>
+            <input
+              type="text"
+              class="admin-input"
+              #qInput
+              [value]="faq.question"
+              (change)="updateFaqItem(faq.id, $index, qInput.value, aInput.value)"
+            />
+          </div>
+          <div class="form-group">
+            <label>Answer</label>
+            <textarea
+              class="admin-input admin-textarea"
+              rows="3"
+              #aInput
+              [value]="faq.answer"
+              (change)="updateFaqItem(faq.id, $index, qInput.value, aInput.value)"
+            ></textarea>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}
