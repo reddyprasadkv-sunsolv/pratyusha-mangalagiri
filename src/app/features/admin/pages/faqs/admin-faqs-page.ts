@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
@@ -14,15 +15,23 @@ import { PublicContentService } from '../../../public-site/content/public-conten
 })
 export class AdminFaqsPage {
   private readonly contentService = inject(PublicContentService);
+
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly faqs = computed(() => this.contentService.content().faqs);
+  protected readonly faqs = computed(() => this.contentService.getContentFor(this.selectedLang()).faqs);
   protected readonly newQuestion = signal('');
   protected readonly newAnswer = signal('');
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset all ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} FAQ items back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.showToast('🔄 FAQs reset to default copy!');
+    }
   }
 
   protected updateFaq(faqId: string | undefined, index: number, question: string, answer: string): void {

@@ -177,29 +177,37 @@
           <div class="form-group">
             <label>Product Name (English / Telugu)</label>
             <input
+              #pNameInput
               type="text"
               class="admin-input"
               [value]="selectedLang() === 'en' ? prod.nameEn : prod.nameTe"
-              (change)="updateProductField(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', $any($event.target).value)"
+              (change)="updateProductField(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', pNameInput.value)"
             />
           </div>
           <div class="form-group">
             <label>Supporting Text</label>
             <input
+              #pSuppInput
               type="text"
               class="admin-input"
               [value]="prod.supporting"
-              (change)="updateProductField(prod, 'supporting', $any($event.target).value)"
+              (change)="updateProductField(prod, 'supporting', pSuppInput.value)"
             />
           </div>
           <div class="form-group">
             <label>CTA Button Label</label>
             <input
+              #pCtaInput
               type="text"
               class="admin-input"
               [value]="prod.cta"
-              (change)="updateProductField(prod, 'cta', $any($event.target).value)"
+              (change)="updateProductField(prod, 'cta', pCtaInput.value)"
             />
+          </div>
+          <div style="margin-top: 0.75rem; text-align: right;">
+            <button type="button" class="admin-btn admin-btn--primary" (click)="updateProductField(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', pNameInput.value); updateProductField(prod, 'supporting', pSuppInput.value); updateProductField(prod, 'cta', pCtaInput.value)">
+              💾 Save Product
+            </button>
           </div>
         </div>
       }
@@ -261,6 +269,11 @@
               [value]="faq.answer"
               (change)="updateFaqItem(faq.id, $index, qInput.value, aInput.value)"
             ></textarea>
+          </div>
+          <div style="margin-top: 0.75rem; text-align: right;">
+            <button type="button" class="admin-btn admin-btn--primary" (click)="updateFaqItem(faq.id, $index, qInput.value, aInput.value)">
+              💾 Save FAQ
+            </button>
           </div>
         </div>
       }

@@ -1,11 +1,16 @@
 <header class="admin-page-header">
   <div>
     <h1>Contact & Location Manager</h1>
-    <p>Edit studio address, phone numbers, WhatsApp details, operating hours, and location guidance.</p>
+    <p>Edit studio address, phone numbers, WhatsApp details, operating hours, and location guidance ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset contact overrides to default copy">
+      🔄 Reset Defaults
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
@@ -15,14 +20,14 @@
 
 <div class="editor-grid">
   <div class="form-card">
-    <h3>Phone & WhatsApp Details</h3>
+    <h3>Phone & WhatsApp Details ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h3>
     <div class="form-group">
       <label>Contact Title</label>
       <input
         type="text"
         class="admin-input"
-        [value]="contact().title"
-        (change)="updateContactField('contactTitle', $any($event.target).value)"
+        [ngModel]="title()"
+        (ngModelChange)="title.set($event)"
       />
     </div>
     <div class="form-group">
@@ -30,7 +35,7 @@
       <input
         type="text"
         class="admin-input"
-        [value]="contact().phone"
+        [ngModel]="phone()"
         readonly
       />
     </div>
@@ -39,7 +44,7 @@
       <input
         type="text"
         class="admin-input"
-        [value]="contact().email"
+        [ngModel]="email()"
         readonly
       />
     </div>
@@ -52,8 +57,8 @@
       <textarea
         class="admin-input admin-textarea"
         rows="3"
-        [value]="contact().supporting"
-        (change)="updateContactField('contactSupporting', $any($event.target).value)"
+        [ngModel]="supporting()"
+        (ngModelChange)="supporting.set($event)"
       ></textarea>
     </div>
     <div class="form-group">
@@ -61,9 +66,16 @@
       <input
         type="text"
         class="admin-input"
-        [value]="contact().note"
-        (change)="updateContactField('contactNote', $any($event.target).value)"
+        [ngModel]="note()"
+        (ngModelChange)="note.set($event)"
       />
     </div>
   </div>
 </div>
+
+<div class="admin-actions-bar" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+  <button type="button" class="admin-btn admin-btn-primary" (click)="saveContactChanges()">
+    💾 Save Changes
+  </button>
+</div>
+

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
 import { ProductCopy, SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
@@ -14,10 +15,11 @@ import { PublicContentService } from '../../../public-site/content/public-conten
 })
 export class AdminProductsPage {
   private readonly contentService = inject(PublicContentService);
+
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly products = computed(() => this.contentService.content().products);
+  protected readonly products = computed(() => this.contentService.getContentFor(this.selectedLang()).products);
   protected readonly newProductName = signal('');
   protected readonly newProductSupporting = signal('');
   protected readonly newProductCta = signal('');
@@ -25,6 +27,13 @@ export class AdminProductsPage {
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset all ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} product catalog settings back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.showToast('🔄 Products reset to default copy!');
+    }
   }
 
   protected updateProduct(prod: ProductCopy, field: keyof ProductCopy, value: string): void {
