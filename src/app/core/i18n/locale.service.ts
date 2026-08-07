@@ -51,6 +51,12 @@ export class LocaleService {
   mapEquivalentUrl(url: string, language: SupportedLanguage): string {
     const [pathAndQuery, fragment = ''] = (url || '/').split('#', 2);
     const [path = '/', query = ''] = pathAndQuery.split('?', 2);
+
+    if (path.startsWith('/admin') || path.startsWith('/te/admin')) {
+      const cleanAdminPath = path.replace(/^\/te\/admin/, '/admin');
+      return `${cleanAdminPath}${query ? `?${query}` : ''}${fragment ? `#${fragment}` : ''}`;
+    }
+
     const segments = path.split('/').filter(Boolean);
     const withoutLanguage = segments[0] === 'te' ? segments.slice(1) : segments;
     const mappedSegments = language === 'te' ? ['te', ...withoutLanguage] : withoutLanguage;

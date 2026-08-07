@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { LocaleService } from '../../../../core/i18n/locale.service';
+
 import { ProductCopy, SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
@@ -15,7 +15,7 @@ import { PublicContentService } from '../../../public-site/content/public-conten
 })
 export class AdminContentPage {
   private readonly contentService = inject(PublicContentService);
-  private readonly localeService = inject(LocaleService);
+
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly savedNotice = signal<string | null>(null);
 
@@ -44,7 +44,6 @@ export class AdminContentPage {
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
-    this.localeService.setLocale(lang);
     this.loadCurrentContent();
   }
 

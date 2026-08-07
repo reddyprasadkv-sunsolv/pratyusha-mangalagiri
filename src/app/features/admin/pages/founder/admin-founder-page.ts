@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { LocaleService } from '../../../../core/i18n/locale.service';
+
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService, translateDesignationToTelugu } from '../../../public-site/content/public-content.service';
 
@@ -15,7 +15,7 @@ import { PublicContentService, translateDesignationToTelugu } from '../../../pub
 })
 export class AdminFounderPage {
   private readonly contentService = inject(PublicContentService);
-  private readonly localeService = inject(LocaleService);
+
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
@@ -32,7 +32,6 @@ export class AdminFounderPage {
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
-    this.localeService.setLocale(lang);
     this.loadContent();
   }
 
