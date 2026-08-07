@@ -1,11 +1,14 @@
 <header class="admin-page-header">
   <div>
     <h1>Founder Profile Manager</h1>
-    <p>Edit Pratyusha Mangalagiri's bio, credentials, badges, and background story.</p>
+    <p>Edit Pratyusha Mangalagiri's bio, credentials, badges, and background story ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
   <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
     <button type="button" class="admin-btn admin-btn-secondary" (click)="autoTranslateDesignation()" title="Convert English designation (Founder) automatically to Telugu">
       ✨ Auto-Translate Designation to Telugu
+    </button>
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset to original default copy for this language">
+      🔄 Reset Defaults
     </button>
     <div class="lang-switch-pills">
       <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
@@ -20,14 +23,14 @@
 
 <div class="editor-grid">
   <div class="form-card">
-    <h3>Bio & Identity</h3>
+    <h3>Bio & Identity ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h3>
     <div class="form-group">
       <label>Founder Section Title</label>
       <input
         type="text"
         class="admin-input"
-        [value]="founder().title"
-        (change)="updateFounderField('aboutTitle', $any($event.target).value)"
+        [ngModel]="aboutTitle()"
+        (ngModelChange)="aboutTitle.set($event)"
       />
     </div>
     <div class="form-group">
@@ -35,8 +38,8 @@
       <input
         type="text"
         class="admin-input"
-        [value]="founder().eyebrow"
-        (change)="updateFounderField('aboutEyebrow', $any($event.target).value)"
+        [ngModel]="aboutEyebrow()"
+        (ngModelChange)="aboutEyebrow.set($event)"
       />
     </div>
     <div class="form-group">
@@ -44,8 +47,8 @@
       <input
         type="text"
         class="admin-input"
-        [value]="founder().badge"
-        (change)="updateFounderField('aboutBadge', $any($event.target).value)"
+        [ngModel]="aboutBadge()"
+        (ngModelChange)="aboutBadge.set($event)"
         placeholder="e.g. Founder / PERSONAL GUIDANCE"
       />
     </div>
@@ -58,8 +61,8 @@
       <textarea
         class="admin-input admin-textarea"
         rows="5"
-        [value]="founder().body"
-        (change)="updateFounderField('aboutBody', $any($event.target).value)"
+        [ngModel]="aboutBody()"
+        (ngModelChange)="aboutBody.set($event)"
       ></textarea>
     </div>
     <div class="form-group">
@@ -67,8 +70,8 @@
       <input
         type="text"
         class="admin-input"
-        [value]="founder().founderAlt"
-        (change)="updateFounderField('founderAlt', $any($event.target).value)"
+        [ngModel]="founderAlt()"
+        (ngModelChange)="founderAlt.set($event)"
       />
     </div>
   </div>
@@ -79,4 +82,5 @@
     💾 Save Changes
   </button>
 </div>
+
 

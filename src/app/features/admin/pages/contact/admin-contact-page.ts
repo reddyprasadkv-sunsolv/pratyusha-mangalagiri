@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { LocaleService } from '../../../../core/i18n/locale.service';
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
@@ -14,34 +15,54 @@ import { PublicContentService } from '../../../public-site/content/public-conten
 })
 export class AdminContactPage {
   private readonly contentService = inject(PublicContentService);
+  private readonly localeService = inject(LocaleService);
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly contact = computed(() => {
-    const lang = this.selectedLang();
-    const c = this.contentService.getContentFor(lang);
-    return {
-      title: c.contactTitle,
-      supporting: c.contactSupporting,
-      body: c.contactBody,
-      note: c.contactNote,
-      phone: '+91 70759 86432',
-      whatsapp: '+91 70759 86432',
-      email: 'pratyushamangalagiri@gmail.com',
-    };
-  });
+  protected readonly title = signal('');
+  protected readonly supporting = signal('');
+  protected readonly body = signal('');
+  protected readonly note = signal('');
+
+  protected readonly phone = signal('+91 70759 86432');
+  protected readonly whatsapp = signal('+91 70759 86432');
+  protected readonly email = signal('pratyushamangalagiri@gmail.com');
+
+  constructor() {
+    this.loadContent();
+  }
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+    this.localeService.setLocale(lang);
+    this.loadContent();
   }
 
-  protected updateContactField(field: 'contactTitle' | 'contactSupporting' | 'contactBody' | 'contactNote', value: string): void {
-    this.contentService.updateContent(this.selectedLang(), { [field]: value });
-    this.showToast('✅ Contact information updated live!');
+  protected loadContent(): void {
+    const c = this.contentService.getContentFor(this.selectedLang());
+    this.title.set(c.contactTitle);
+    this.supporting.set(c.contactSupporting);
+    this.body.set(c.contactBody);
+    this.note.set(c.contactNote);
   }
 
   protected saveContactChanges(): void {
+    const lang = this.selectedLang();
+    this.contentService.updateContent(lang, {
+      contactTitle: this.title(),
+      contactSupporting: this.supporting(),
+      contactBody: this.body(),
+      contactNote: this.note(),
+    });
     this.showToast('✅ Contact information saved successfully!');
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} contact settings back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.loadContent();
+      this.showToast('🔄 Contact settings reset to defaults!');
+    }
   }
 
   private showToast(msg: string): void {

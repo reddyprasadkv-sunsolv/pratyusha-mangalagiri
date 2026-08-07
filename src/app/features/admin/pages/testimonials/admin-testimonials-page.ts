@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
+import { LocaleService } from '../../../../core/i18n/locale.service';
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
@@ -12,6 +13,7 @@ import { PublicContentService } from '../../../public-site/content/public-conten
 })
 export class AdminTestimonialsPage {
   private readonly contentService = inject(PublicContentService);
+  private readonly localeService = inject(LocaleService);
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
@@ -27,6 +29,14 @@ export class AdminTestimonialsPage {
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+    this.localeService.setLocale(lang);
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} testimonials back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.showToast('🔄 Testimonials reset to defaults!');
+    }
   }
 
   protected updateTestimonial(index: number, value: string): void {

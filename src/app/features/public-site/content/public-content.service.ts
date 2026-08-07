@@ -41,7 +41,21 @@ export class PublicContentService {
   getContentFor(lang: SupportedLanguage): PublicPageCopy {
     const base = PUBLIC_CONTENT[lang];
     const custom = this.overrides()[lang];
-    return custom ? { ...base, ...custom } : base;
+    if (!custom) return base;
+
+    // Clean up stale overrides where Telugu key was saved with English default text
+    const cleanedCustom = { ...custom };
+    if (lang === 'te') {
+      const enBase = PUBLIC_CONTENT['en'];
+      for (const key of Object.keys(cleanedCustom) as (keyof PublicPageCopy)[]) {
+        const val = cleanedCustom[key];
+        if (typeof val === 'string' && val === (enBase as any)[key]) {
+          delete cleanedCustom[key];
+        }
+      }
+    }
+
+    return { ...base, ...cleanedCustom };
   }
 
   updateContent(lang: SupportedLanguage, updates: Partial<PublicPageCopy>): void {

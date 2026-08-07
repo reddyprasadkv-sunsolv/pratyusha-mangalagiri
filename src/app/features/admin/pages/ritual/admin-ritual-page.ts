@@ -1,51 +1,73 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { LocaleService } from '../../../../core/i18n/locale.service';
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService } from '../../../public-site/content/public-content.service';
 
 @Component({
   selector: 'app-admin-ritual-page',
   standalone: true,
+  imports: [FormsModule],
   templateUrl: './admin-ritual-page.html',
   styleUrl: './admin-ritual-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminRitualPage {
   private readonly contentService = inject(PublicContentService);
+  private readonly localeService = inject(LocaleService);
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly ritual = computed(() => {
-    const lang = this.selectedLang();
-    const c = this.contentService.getContentFor(lang);
-    const r = c.ritual;
-    return {
-      eyebrow: r.eyebrow,
-      title: r.title,
-      supporting: r.supporting,
-      body: r.body,
-      note: c.ritualNote,
-    };
-  });
+  protected readonly eyebrow = signal('');
+  protected readonly title = signal('');
+  protected readonly supporting = signal('');
+  protected readonly body = signal('');
+  protected readonly note = signal('');
+
+  constructor() {
+    this.loadContent();
+  }
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+    this.localeService.setLocale(lang);
+    this.loadContent();
   }
 
-  protected updateRitualSection(field: 'eyebrow' | 'title' | 'supporting' | 'body', value: string): void {
-    const current = this.contentService.getContentFor(this.selectedLang()).ritual;
-    const updated = { ...current, [field]: value };
-    this.contentService.updateContent(this.selectedLang(), { ritual: updated });
-    this.showToast('✅ 21-Day Ritual copy updated live!');
-  }
-
-  protected updateRitualNote(value: string): void {
-    this.contentService.updateContent(this.selectedLang(), { ritualNote: value });
-    this.showToast('✅ Ritual Note updated live!');
+  protected loadContent(): void {
+    const c = this.contentService.getContentFor(this.selectedLang());
+    const r = c.ritual;
+    this.eyebrow.set(r.eyebrow);
+    this.title.set(r.title);
+    this.supporting.set(r.supporting);
+    this.body.set(r.body);
+    this.note.set(c.ritualNote);
   }
 
   protected saveRitualChanges(): void {
+    const lang = this.selectedLang();
+    const currentRitual = this.contentService.getContentFor(lang).ritual;
+    const updatedRitual = {
+      ...currentRitual,
+      eyebrow: this.eyebrow(),
+      title: this.title(),
+      supporting: this.supporting(),
+      body: this.body(),
+    };
+    this.contentService.updateContent(lang, {
+      ritual: updatedRitual,
+      ritualNote: this.note(),
+    });
     this.showToast('✅ 21-Day Ritual changes saved successfully!');
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} ritual settings back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.loadContent();
+      this.showToast('🔄 Ritual content reset to defaults!');
+    }
   }
 
   private showToast(msg: string): void {

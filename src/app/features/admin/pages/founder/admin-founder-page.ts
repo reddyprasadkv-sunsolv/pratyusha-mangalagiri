@@ -1,46 +1,74 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { LocaleService } from '../../../../core/i18n/locale.service';
 import { SupportedLanguage } from '../../../public-site/content/public-content.model';
 import { PublicContentService, translateDesignationToTelugu } from '../../../public-site/content/public-content.service';
 
 @Component({
   selector: 'app-admin-founder-page',
   standalone: true,
+  imports: [FormsModule],
   templateUrl: './admin-founder-page.html',
   styleUrl: './admin-founder-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminFounderPage {
   private readonly contentService = inject(PublicContentService);
+  private readonly localeService = inject(LocaleService);
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly founder = computed(() => {
-    const lang = this.selectedLang();
-    const c = this.contentService.getContentFor(lang);
-    return {
-      title: c.aboutTitle,
-      eyebrow: c.aboutEyebrow,
-      supporting: c.aboutSupporting,
-      body: c.aboutBody,
-      badge: c.aboutBadge,
-      founderAlt: c.founderAlt,
-    };
-  });
+  protected readonly aboutTitle = signal('');
+  protected readonly aboutEyebrow = signal('');
+  protected readonly aboutSupporting = signal('');
+  protected readonly aboutBody = signal('');
+  protected readonly aboutBadge = signal('');
+  protected readonly founderAlt = signal('');
+
+  constructor() {
+    this.loadContent();
+  }
 
   protected switchLang(lang: SupportedLanguage): void {
     this.selectedLang.set(lang);
+    this.localeService.setLocale(lang);
+    this.loadContent();
   }
 
-  protected updateFounderField(field: 'aboutTitle' | 'aboutEyebrow' | 'aboutSupporting' | 'aboutBody' | 'aboutBadge' | 'founderAlt', value: string): void {
-    const lang = this.selectedLang();
-    this.contentService.updateContent(lang, { [field]: value });
+  protected loadContent(): void {
+    const c = this.contentService.getContentFor(this.selectedLang());
+    this.aboutTitle.set(c.aboutTitle);
+    this.aboutEyebrow.set(c.aboutEyebrow);
+    this.aboutSupporting.set(c.aboutSupporting);
+    this.aboutBody.set(c.aboutBody);
+    this.aboutBadge.set(c.aboutBadge);
+    this.founderAlt.set(c.founderAlt);
+  }
 
-    if (field === 'aboutBadge') {
-      if (lang === 'en') {
-        const teBadge = translateDesignationToTelugu(value);
-        this.contentService.updateContent('te', { aboutBadge: teBadge });
-      }
+  protected saveFounderProfile(): void {
+    const lang = this.selectedLang();
+    this.contentService.updateContent(lang, {
+      aboutTitle: this.aboutTitle(),
+      aboutEyebrow: this.aboutEyebrow(),
+      aboutSupporting: this.aboutSupporting(),
+      aboutBody: this.aboutBody(),
+      aboutBadge: this.aboutBadge(),
+      founderAlt: this.founderAlt(),
+    });
+
+    if (lang === 'en' && this.aboutBadge()) {
+      const teBadge = translateDesignationToTelugu(this.aboutBadge());
+      this.contentService.updateContent('te', { aboutBadge: teBadge });
+    }
+    this.showToast('✅ Founder profile saved successfully!');
+  }
+
+  protected resetDefaults(): void {
+    if (confirm(`Reset all ${this.selectedLang() === 'en' ? 'English' : 'Telugu'} founder settings back to default copy?`)) {
+      this.contentService.resetToDefaults(this.selectedLang());
+      this.loadContent();
+      this.showToast('🔄 Founder profile reset to default copy!');
     }
   }
 
@@ -48,17 +76,10 @@ export class AdminFounderPage {
     const currentEnBadge = this.contentService.getContentFor('en').aboutBadge;
     const translatedTeBadge = translateDesignationToTelugu(currentEnBadge);
     this.contentService.updateContent('te', { aboutBadge: translatedTeBadge });
-    this.showToast(`✨ Auto-converted designation "${currentEnBadge}" -> "${translatedTeBadge}" in Telugu!`);
-  }
-
-  protected saveFounderProfile(): void {
-    const lang = this.selectedLang();
-    const current = this.founder();
-    if (lang === 'en' && current.badge) {
-      const teBadge = translateDesignationToTelugu(current.badge);
-      this.contentService.updateContent('te', { aboutBadge: teBadge });
+    if (this.selectedLang() === 'te') {
+      this.aboutBadge.set(translatedTeBadge);
     }
-    this.showToast('✅ Founder profile saved successfully!');
+    this.showToast(`✨ Auto-converted designation "${currentEnBadge}" -> "${translatedTeBadge}" in Telugu!`);
   }
 
   private showToast(msg: string): void {

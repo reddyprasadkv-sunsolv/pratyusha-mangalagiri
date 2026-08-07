@@ -1,11 +1,16 @@
 <header class="admin-page-header">
   <div>
     <h1>FAQ Accordion Manager</h1>
-    <p>Add new questions, edit answers live, or remove items from the client FAQ accordion.</p>
+    <p>Add new questions, edit answers live, or remove items from the client FAQ accordion ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset FAQ overrides to default copy">
+      🔄 Reset Defaults
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
