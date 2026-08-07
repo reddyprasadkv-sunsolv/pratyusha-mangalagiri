@@ -35,10 +35,14 @@ export class PublicContentService {
 
   readonly content = computed(() => {
     const lang = this.localeService.language();
+    return this.getContentFor(lang);
+  });
+
+  getContentFor(lang: SupportedLanguage): PublicPageCopy {
     const base = PUBLIC_CONTENT[lang];
     const custom = this.overrides()[lang];
     return custom ? { ...base, ...custom } : base;
-  });
+  }
 
   updateContent(lang: SupportedLanguage, updates: Partial<PublicPageCopy>): void {
     this.overrides.update((current) => {
@@ -51,7 +55,7 @@ export class PublicContentService {
 
   // --- Product CRUD ---
   updateProduct(lang: SupportedLanguage, updatedProduct: ProductCopy): void {
-    const currentProducts = [...this.content().products];
+    const currentProducts = [...this.getContentFor(lang).products];
     const index = currentProducts.findIndex((p) => p.id === updatedProduct.id);
     if (index !== -1) {
       currentProducts[index] = updatedProduct;
@@ -62,18 +66,18 @@ export class PublicContentService {
   }
 
   addProduct(lang: SupportedLanguage, newProduct: ProductCopy): void {
-    const currentProducts = [...this.content().products, newProduct];
+    const currentProducts = [...this.getContentFor(lang).products, newProduct];
     this.updateContent(lang, { products: currentProducts });
   }
 
   deleteProduct(lang: SupportedLanguage, productId: string): void {
-    const currentProducts = this.content().products.filter((p) => p.id !== productId);
+    const currentProducts = this.getContentFor(lang).products.filter((p) => p.id !== productId);
     this.updateContent(lang, { products: currentProducts });
   }
 
   // --- FAQ CRUD ---
   updateFaq(lang: SupportedLanguage, indexOrId: number | string, question: string, answer: string): void {
-    const currentFaqs = this.content().faqs.map((f, i) =>
+    const currentFaqs = this.getContentFor(lang).faqs.map((f, i) =>
       (f.id === indexOrId || String(i) === String(indexOrId)) ? { ...f, question, answer } : f,
     );
     this.updateContent(lang, { faqs: currentFaqs });
@@ -85,12 +89,12 @@ export class PublicContentService {
       question,
       answer,
     };
-    const currentFaqs = [...this.content().faqs, newFaq];
+    const currentFaqs = [...this.getContentFor(lang).faqs, newFaq];
     this.updateContent(lang, { faqs: currentFaqs });
   }
 
   deleteFaq(lang: SupportedLanguage, indexOrId: number | string): void {
-    const currentFaqs = this.content().faqs.filter((f, i) => f.id !== indexOrId && String(i) !== String(indexOrId));
+    const currentFaqs = this.getContentFor(lang).faqs.filter((f, i) => f.id !== indexOrId && String(i) !== String(indexOrId));
     this.updateContent(lang, { faqs: currentFaqs });
   }
 
@@ -181,3 +185,37 @@ export class PublicContentService {
     return DEFAULT_MEDIA_ASSETS;
   }
 }
+
+export function translateDesignationToTelugu(enText: string): string {
+  if (!enText) return 'స్థాపకురాలు';
+  const trimmed = enText.trim();
+  const lower = trimmed.toLowerCase();
+
+  const exactMap: Record<string, string> = {
+    founder: 'స్థాపకురాలు',
+    'co-founder': 'సహ-స్థాపకురాలు',
+    cofounder: 'సహ-స్థాపకురాలు',
+    'personal guidance': 'వ్యక్తిగత మార్గదర్శనం',
+    'founder & crystal practitioner': 'స్థాపకురాలు & క్రిస్టల్ ప్రాక్టీషనర్',
+    'founder & practitioner': 'స్థాపకురాలు & ప్రాక్టీషనర్',
+    'founder & guide': 'స్థాపకురాలు & గైడ్',
+    'founder & ceo': 'స్థాపకురాలు & సీఈఓ',
+    ceo: 'సీఈఓ',
+    director: 'డైరెక్టర్',
+    practitioner: 'ప్రాక్టీషనర్',
+  };
+
+  if (exactMap[lower]) {
+    return exactMap[lower];
+  }
+
+  let result = trimmed;
+  result = result.replace(/\bfounder\b/gi, 'స్థాపకురాలు');
+  result = result.replace(/\bco-founder\b/gi, 'సహ-స్థాపకురాలు');
+  result = result.replace(/\bpersonal guidance\b/gi, 'వ్యక్తిగత మార్గదర్శనం');
+  result = result.replace(/\bpractitioner\b/gi, 'ప్రాక్టీషనర్');
+  result = result.replace(/\bceo\b/gi, 'సీఈఓ');
+  result = result.replace(/\bdirector\b/gi, 'డైరెక్టర్');
+  return result;
+}
+

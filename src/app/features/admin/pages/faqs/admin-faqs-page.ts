@@ -17,7 +17,7 @@ export class AdminFaqsPage {
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly faqs = computed(() => this.contentService.content().faqs);
+  protected readonly faqs = computed(() => this.contentService.getContentFor(this.selectedLang()).faqs);
   protected readonly newQuestion = signal('');
   protected readonly newAnswer = signal('');
 

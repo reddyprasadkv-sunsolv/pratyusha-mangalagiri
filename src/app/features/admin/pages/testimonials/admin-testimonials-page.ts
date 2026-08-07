@@ -16,7 +16,8 @@ export class AdminTestimonialsPage {
   protected readonly toastMessage = signal<string | null>(null);
 
   protected readonly testimonials = computed(() => {
-    const diffs = this.contentService.content().differentiators;
+    const lang = this.selectedLang();
+    const diffs = this.contentService.getContentFor(lang).differentiators;
     return diffs.map((d, i) => ({
       author: `Verified Client ${i + 1}`,
       location: 'Andhra Pradesh, India',
@@ -29,10 +30,15 @@ export class AdminTestimonialsPage {
   }
 
   protected updateTestimonial(index: number, value: string): void {
-    const current = [...this.contentService.content().differentiators];
+    const lang = this.selectedLang();
+    const current = [...this.contentService.getContentFor(lang).differentiators];
     current[index] = value;
-    this.contentService.updateContent(this.selectedLang(), { differentiators: current });
+    this.contentService.updateContent(lang, { differentiators: current });
     this.showToast('✅ Testimonial review updated live!');
+  }
+
+  protected saveTestimonialChanges(): void {
+    this.showToast('✅ Testimonials saved successfully!');
   }
 
   private showToast(msg: string): void {

@@ -26,13 +26,13 @@ export class AdminContentPage {
   protected readonly activeTab = signal<'hero' | 'products' | 'faqs'>('hero');
 
   // Products
-  protected readonly products = computed(() => this.contentService.content().products);
+  protected readonly products = computed(() => this.contentService.getContentFor(this.selectedLang()).products);
   protected readonly newProductName = signal('');
   protected readonly newProductSupporting = signal('');
   protected readonly newProductCta = signal('');
 
   // FAQs
-  protected readonly faqs = computed(() => this.contentService.content().faqs);
+  protected readonly faqs = computed(() => this.contentService.getContentFor(this.selectedLang()).faqs);
   protected readonly newFaqQuestion = signal('');
   protected readonly newFaqAnswer = signal('');
 
@@ -148,7 +148,7 @@ export class AdminContentPage {
   }
 
   private loadCurrentContent(): void {
-    const current = this.contentService.content();
+    const current = this.contentService.getContentFor(this.selectedLang());
     this.heroTitle.set(current.heroTitle);
     this.heroEmphasis.set(current.heroEmphasis);
     this.heroSupporting.set(current.heroSupporting);

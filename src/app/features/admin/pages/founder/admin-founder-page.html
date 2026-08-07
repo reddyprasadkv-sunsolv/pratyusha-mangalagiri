@@ -3,9 +3,14 @@
     <h1>Founder Profile Manager</h1>
     <p>Edit Pratyusha Mangalagiri's bio, credentials, badges, and background story.</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="admin-btn admin-btn-secondary" (click)="autoTranslateDesignation()" title="Convert English designation (Founder) automatically to Telugu">
+      ✨ Auto-Translate Designation to Telugu
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
@@ -35,12 +40,13 @@
       />
     </div>
     <div class="form-group">
-      <label>Badge Label</label>
+      <label>Badge / Designation Label</label>
       <input
         type="text"
         class="admin-input"
         [value]="founder().badge"
         (change)="updateFounderField('aboutBadge', $any($event.target).value)"
+        placeholder="e.g. Founder / PERSONAL GUIDANCE"
       />
     </div>
   </div>
@@ -67,3 +73,10 @@
     </div>
   </div>
 </div>
+
+<div class="admin-actions-bar" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+  <button type="button" class="admin-btn admin-btn-primary" (click)="saveFounderProfile()">
+    💾 Save Changes
+  </button>
+</div>
+

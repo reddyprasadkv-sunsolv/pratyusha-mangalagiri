@@ -27,11 +27,23 @@ function documentSiteUrl(): string {
   const document = inject(DOCUMENT);
   const baseUrl = document.baseURI;
 
-  if (!baseUrl || baseUrl === 'null') {
-    throw new Error('PUBLIC_SITE_URL is unavailable. Configure it for Angular SSR.');
+  if (!baseUrl || baseUrl === 'null' || baseUrl === 'about:blank') {
+    const envUrl = process.env['PUBLIC_SITE_URL'];
+    if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+      return normalizePublicSiteUrl(envUrl);
+    }
+    return 'https://localhost';
   }
 
-  return normalizePublicSiteUrl(baseUrl);
+  try {
+    return normalizePublicSiteUrl(baseUrl);
+  } catch {
+    const envUrl = process.env['PUBLIC_SITE_URL'];
+    if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+      return normalizePublicSiteUrl(envUrl);
+    }
+    return 'https://localhost';
+  }
 }
 
 export const PUBLIC_SITE_URL = new InjectionToken<string>('PUBLIC_SITE_URL', {

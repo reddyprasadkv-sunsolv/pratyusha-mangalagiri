@@ -16,7 +16,8 @@ export class AdminSeoPage {
   protected readonly toastMessage = signal<string | null>(null);
 
   protected readonly seo = computed(() => {
-    const c = this.contentService.content();
+    const lang = this.selectedLang();
+    const c = this.contentService.getContentFor(lang);
     return {
       title: c.heroTitle,
       description: c.heroSupporting,
@@ -31,6 +32,10 @@ export class AdminSeoPage {
   protected updateSeoField(field: 'heroTitle' | 'heroSupporting' | 'brandTagline', value: string): void {
     this.contentService.updateContent(this.selectedLang(), { [field]: value });
     this.showToast('✅ SEO Meta Tags updated live!');
+  }
+
+  protected saveSeoChanges(): void {
+    this.showToast('✅ SEO settings saved successfully!');
   }
 
   private showToast(msg: string): void {

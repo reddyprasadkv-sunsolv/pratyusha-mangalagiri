@@ -17,7 +17,7 @@ export class AdminProductsPage {
   protected readonly selectedLang = signal<SupportedLanguage>('en');
   protected readonly toastMessage = signal<string | null>(null);
 
-  protected readonly products = computed(() => this.contentService.content().products);
+  protected readonly products = computed(() => this.contentService.getContentFor(this.selectedLang()).products);
   protected readonly newProductName = signal('');
   protected readonly newProductSupporting = signal('');
   protected readonly newProductCta = signal('');

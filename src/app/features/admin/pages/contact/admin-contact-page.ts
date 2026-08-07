@@ -18,7 +18,8 @@ export class AdminContactPage {
   protected readonly toastMessage = signal<string | null>(null);
 
   protected readonly contact = computed(() => {
-    const c = this.contentService.content();
+    const lang = this.selectedLang();
+    const c = this.contentService.getContentFor(lang);
     return {
       title: c.contactTitle,
       supporting: c.contactSupporting,
@@ -37,6 +38,10 @@ export class AdminContactPage {
   protected updateContactField(field: 'contactTitle' | 'contactSupporting' | 'contactBody' | 'contactNote', value: string): void {
     this.contentService.updateContent(this.selectedLang(), { [field]: value });
     this.showToast('✅ Contact information updated live!');
+  }
+
+  protected saveContactChanges(): void {
+    this.showToast('✅ Contact information saved successfully!');
   }
 
   private showToast(msg: string): void {

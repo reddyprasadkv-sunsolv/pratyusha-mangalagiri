@@ -61,6 +61,11 @@
           (change)="updateFaq(faq.id, $index, qInput.value, aInput.value)"
         ></textarea>
       </div>
+      <div style="margin-top: 0.75rem; text-align: right;">
+        <button type="button" class="admin-btn admin-btn--primary" (click)="updateFaq(faq.id, $index, qInput.value, aInput.value)">
+          💾 Save FAQ
+        </button>
+      </div>
     </div>
   }
 </div>
