@@ -34,10 +34,21 @@ export class PublicLayout {
 
   protected readonly footerGroups = computed<readonly FooterLinkGroup[]>(() => {
     const copy = this.content();
+    const isTe = this.localeService.isTelugu();
+    const prefix = isTe ? '/te' : '';
     return [
       {
         heading: copy.footerNavigation,
         links: copy.nav,
+      },
+      {
+        heading: copy.footerLegal,
+        links: [
+          { label: isTe ? 'గోప్యతా విధానం' : 'Privacy Policy', href: `${prefix}/privacy-policy` },
+          { label: isTe ? 'నిబంధనలు & షరతులు' : 'Terms & Conditions', href: `${prefix}/terms-and-conditions` },
+          { label: isTe ? 'రిఫండ్ విధానం' : 'Refund Policy', href: `${prefix}/refund-cancellation-policy` },
+          { label: isTe ? 'నిరాకరణ ప్రకటన' : 'Disclaimer', href: `${prefix}/disclaimer` },
+        ],
       },
     ];
   });
