@@ -246,7 +246,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     aboutSupporting: 'A thoughtful approach to crystals, intention, and consistent daily practice.',
     aboutBody:
       'Pratyusha created this experience for people who want more than a bracelet. Her intended role is to help customers choose an intention and follow a structured 21-day practice.',
-    aboutBadge: 'PERSONAL GUIDANCE',
+    aboutBadge: '',
     founderAlt: 'Pratyusha wearing a traditional pink saree in a warm indoor setting',
     faqEyebrow: 'Frequently asked questions',
     faqTitle: 'Clear Answers Before You Choose',
@@ -527,7 +527,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     aboutSupporting: 'క్రిస్టల్స్, ఉద్దేశం, క్రమమైన రోజువారీ సాధనపై శ్రద్ధతో కూడిన విధానం.',
     aboutBody:
       'బ్రేస్‌లెట్ కంటే ఎక్కువ మార్గదర్శనం కోరుకునేవారి కోసం Pratyusha ఈ అనుభవాన్ని రూపొందించారు. ఒక ఉద్దేశాన్ని ఎంచుకుని, 21 రోజుల క్రమమైన సాధనను కొనసాగించడంలో సహాయం చేయడం ఆమె ఉద్దేశించిన పాత్ర.',
-    aboutBadge: 'వ్యక్తిగత మార్గదర్శనం',
+    aboutBadge: '',
     founderAlt: 'వెచ్చని ఇండోర్ వాతావరణంలో సాంప్రదాయ గులాబీ రంగు చీరలో Pratyusha',
     faqEyebrow: 'సాధారణ ప్రశ్నలు',
     faqTitle: 'ఎంచుకునే ముందు స్పష్టమైన సమాధానాలు',
