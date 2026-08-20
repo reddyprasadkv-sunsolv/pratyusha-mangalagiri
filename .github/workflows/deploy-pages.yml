@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
           PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
-        run: npm run build -- --output-mode static --base-href "${{ steps.pages.outputs.base_path }}/"
+        run: npm run build -- --output-mode static --base-href "/"
 
       - name: Prepare Pages fallback
         run: |
