@@ -68,4 +68,35 @@ export class PublicLayout {
       event.preventDefault();
     }
   }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+    const isOptionOrAlt = event.altKey;
+    const isShift = event.shiftKey;
+    const key = event.key.toLowerCase();
+
+    // Block F12 (DevTools)
+    if (event.key === 'F12') {
+      event.preventDefault();
+      return;
+    }
+
+    // Block Ctrl+U / Cmd+Alt+U (View Page Source)
+    if ((isCmdOrCtrl && key === 'u') || (isCmdOrCtrl && isOptionOrAlt && key === 'u')) {
+      event.preventDefault();
+      return;
+    }
+
+    // Block Ctrl+Shift+I / Cmd+Alt+I (Inspect Element)
+    // Block Ctrl+Shift+J / Cmd+Alt+J (Console)
+    // Block Ctrl+Shift+C / Cmd+Alt+C (Inspect Element selection)
+    if (
+      (isCmdOrCtrl && isShift && (key === 'i' || key === 'j' || key === 'c')) ||
+      (isCmdOrCtrl && isOptionOrAlt && (key === 'i' || key === 'j' || key === 'c'))
+    ) {
+      event.preventDefault();
+      return;
+    }
+  }
 }
