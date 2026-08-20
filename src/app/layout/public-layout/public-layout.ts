@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { LocaleService } from '../../core/i18n/locale.service';
@@ -52,4 +52,20 @@ export class PublicLayout {
       },
     ];
   });
+
+  @HostListener('document:contextmenu', ['$event'])
+  onContextMenu(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (target && (target.tagName === 'IMG' || target.closest('img') || target.classList.contains('image-card__frame'))) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('document:dragstart', ['$event'])
+  onDragStart(event: DragEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (target && (target.tagName === 'IMG' || target.closest('img'))) {
+      event.preventDefault();
+    }
+  }
 }
