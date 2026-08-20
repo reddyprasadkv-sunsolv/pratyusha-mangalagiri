@@ -12,7 +12,11 @@
       <nav [attr.aria-label]="group.heading">
         <strong>{{ group.heading }}</strong>
         @for (link of group.links; track link.href) {
-          <a [href]="link.href">{{ link.label }}</a>
+          @if (link.href.startsWith('#')) {
+            <a [href]="link.href">{{ link.label }}</a>
+          } @else {
+            <a [routerLink]="link.href">{{ link.label }}</a>
+          }
         }
       </nav>
     }
