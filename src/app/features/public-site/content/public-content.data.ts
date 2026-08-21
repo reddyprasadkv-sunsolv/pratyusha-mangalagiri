@@ -341,7 +341,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     nav: [
       { label: 'హోమ్', href: '#home' },
       { label: 'కలెక్షన్', href: '#collection' },
-      { label: '21-Day Crystal Rituals', href: '#ritual' },
+      { label: '21 రోజుల క్రిస్టల్ సాధన', href: '#ritual' },
       { label: 'మా గురించి', href: '#about' },
       { label: 'ప్రశ్నలు', href: '#faq' },
       { label: 'సంప్రదించండి', href: '#contact' },
