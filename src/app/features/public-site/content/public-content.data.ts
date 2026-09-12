@@ -281,8 +281,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     contactEyebrow: 'Enquiry',
     contactTitle: 'Ready to Ask About a Bracelet?',
     contactSupporting: 'Share the bracelet name, your city, and your question.',
-    contactBody:
-      'Secure submission will be enabled during backend integration. Prices, availability, payment, shipping, and delivery details are not yet published.',
+    contactBody: 'Submit your enquiry and we will respond using the contact details you provide.',
     contactNote: 'No contact details are displayed until the client verifies and approves them.',
     form: {
       heading: 'Your enquiry',
@@ -309,7 +308,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       consent: 'I agree that my details may be used to respond to this enquiry.',
       submit: 'Submit enquiry',
       optional: 'Optional',
-      privacy: 'This preview does not send, store, or log your information.',
+      privacy: 'Your enquiry details are saved in our private Google Sheet so we can respond.',
       required: 'Please complete this required field.',
       mobileInvalid: 'Enter a valid 10-digit Indian mobile number.',
       emailInvalid: 'Enter a valid email address.',
@@ -562,8 +561,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     contactEyebrow: 'ఎంక్వైరీ',
     contactTitle: 'బ్రేస్‌లెట్ గురించి అడగాలనుకుంటున్నారా?',
     contactSupporting: 'బ్రేస్‌లెట్ పేరు, మీ నగరం, మీ ప్రశ్నను పంచుకోండి.',
-    contactBody:
-      'బ్యాకెండ్ ఇంటిగ్రేషన్ సమయంలో సురక్షిత సబ్మిషన్ ప్రారంభిస్తాం. ధరలు, స్టాక్, చెల్లింపు, షిప్పింగ్, డెలివరీ వివరాలు ఇంకా ప్రచురించలేదు.',
+    contactBody: 'మీ విచారణను పంపండి. మీరు ఇచ్చిన సంప్రదింపు వివరాల ద్వారా మేము స్పందిస్తాము.',
     contactNote: 'క్లయింట్ నిర్ధారించి ఆమోదించిన తర్వాత మాత్రమే సంప్రదింపు వివరాలు చూపుతాం.',
     form: {
       heading: 'మీ ఎంక్వైరీ',
@@ -590,7 +588,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       consent: 'ఈ ఎంక్వైరీకి సమాధానం ఇవ్వడానికి నా వివరాలను ఉపయోగించవచ్చని అంగీకరిస్తున్నాను.',
       submit: 'ఎంక్వైరీ పంపండి',
       optional: 'ఐచ్చికం',
-      privacy: 'ఈ ప్రివ్యూ మీ సమాచారాన్ని పంపదు, నిల్వ చేయదు లేదా లాగ్ చేయదు.',
+      privacy: 'మీకు స్పందించడానికి మీ విచారణ వివరాలను మా ప్రైవేట్ Google Sheetలో నిల్వ చేస్తాము.',
       required: 'దయచేసి ఈ అవసరమైన ఫీల్డ్‌ను పూర్తి చేయండి.',
       mobileInvalid: 'సరైన 10 అంకెల భారతీయ మొబైల్ నంబర్ నమోదు చేయండి.',
       emailInvalid: 'సరైన ఇమెయిల్ అడ్రస్ నమోదు చేయండి.',

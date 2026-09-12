@@ -21,11 +21,14 @@ export class EnquiryForm {
   private readonly draftService = inject(EnquiryDraftService);
   protected readonly copy = computed(() => this.contentService.content().form);
   protected readonly isSubmitting = signal(false);
+  protected readonly saveError = signal<string | null>(null);
   protected readonly successLead = signal<SubmittedLead | null>(null);
 
   readonly form = this.draftService.form;
 
   protected async submitPreview(): Promise<void> {
+    if (this.isSubmitting()) return;
+    this.saveError.set(null);
     this.successLead.set(null);
     this.form.patchValue(
       {
@@ -48,6 +51,22 @@ export class EnquiryForm {
       const lead = await this.draftService.saveEnquiry(this.localeService.language());
       this.successLead.set(lead);
       this.form.reset();
+      // saveEnquiry resolves only after Google Sheets acknowledges this request ID.
+      try {
+        const analyticsWindow = window as Window & {
+          dataLayer?: Record<string, unknown>[];
+        };
+        analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+        analyticsWindow.dataLayer.push({ event: 'crystal_enquiry_success' });
+      } catch {
+        // Analytics must not change the outcome of a successful enquiry save.
+      }
+    } catch {
+      this.saveError.set(
+        this.localeService.isTelugu()
+          ? 'మీ విచారణ సేవ్ అయిందని నిర్ధారించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.'
+          : 'We could not confirm your enquiry was saved. Please try again.',
+      );
     } finally {
       this.isSubmitting.set(false);
     }
