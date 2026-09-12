@@ -1,11 +1,16 @@
 <header class="admin-page-header">
   <div>
     <h1>Testimonials CRM</h1>
-    <p>Manage client reviews, ratings, client locations, and feedback quotes.</p>
+    <p>Manage client reviews, ratings, client locations, and feedback quotes ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset testimonial overrides to default copy">
+      🔄 Reset Defaults
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
@@ -37,4 +42,10 @@
       </div>
     </div>
   }
+</div>
+
+<div class="admin-actions-bar" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+  <button type="button" class="admin-btn admin-btn-primary" (click)="saveTestimonialChanges()">
+    💾 Save Changes
+  </button>
 </div>

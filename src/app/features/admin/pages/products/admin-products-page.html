@@ -1,11 +1,16 @@
 <header class="admin-page-header">
   <div>
     <h1>Products Catalog CRM</h1>
-    <p>Add, edit, upload photos, update taglines, and delete products live on the website.</p>
+    <p>Add, edit, upload photos, update taglines, and delete products live on the website ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset product overrides to default copy">
+      🔄 Reset Defaults
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
@@ -64,29 +69,37 @@
       <div class="form-group">
         <label>Product Title</label>
         <input
+          #prodTitleInput
           type="text"
           class="admin-input"
           [value]="selectedLang() === 'en' ? prod.nameEn : prod.nameTe"
-          (change)="updateProduct(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', $any($event.target).value)"
+          (change)="updateProduct(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', prodTitleInput.value)"
         />
       </div>
       <div class="form-group">
         <label>Supporting Line</label>
         <input
+          #prodSuppInput
           type="text"
           class="admin-input"
           [value]="prod.supporting"
-          (change)="updateProduct(prod, 'supporting', $any($event.target).value)"
+          (change)="updateProduct(prod, 'supporting', prodSuppInput.value)"
         />
       </div>
       <div class="form-group">
         <label>CTA Button Text</label>
         <input
+          #prodCtaInput
           type="text"
           class="admin-input"
           [value]="prod.cta"
-          (change)="updateProduct(prod, 'cta', $any($event.target).value)"
+          (change)="updateProduct(prod, 'cta', prodCtaInput.value)"
         />
+      </div>
+      <div style="margin-top: 0.75rem; text-align: right;">
+        <button type="button" class="admin-btn admin-btn--primary" (click)="updateProduct(prod, selectedLang() === 'en' ? 'nameEn' : 'nameTe', prodTitleInput.value); updateProduct(prod, 'supporting', prodSuppInput.value); updateProduct(prod, 'cta', prodCtaInput.value)">
+          💾 Save Product
+        </button>
       </div>
     </div>
   }

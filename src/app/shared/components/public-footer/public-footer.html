@@ -12,13 +12,21 @@
       <nav [attr.aria-label]="group.heading">
         <strong>{{ group.heading }}</strong>
         @for (link of group.links; track link.href) {
-          <a [href]="link.href">{{ link.label }}</a>
+          @if (link.href.startsWith('#')) {
+            <a [href]="link.href">{{ link.label }}</a>
+          } @else {
+            <a [routerLink]="link.href">{{ link.label }}</a>
+          }
         }
       </nav>
     }
   </div>
   <div class="footer__bottom container">
     <p>© 2026 Pratyusha. {{ note() }}</p>
-    <a href="#home">{{ backToTop() }} <span aria-hidden="true">↑</span></a>
+    <div class="footer__partner">
+      <span>Technology Partner:</span>
+      <a href="https://www.sunsolv.in/" target="_blank" rel="noopener noreferrer">SUNSOLV TECHNOLOGIES</a>
+    </div>
+    <a href="#home" class="footer__back-to-top">{{ backToTop() }} <span aria-hidden="true">↑</span></a>
   </div>
 </footer>

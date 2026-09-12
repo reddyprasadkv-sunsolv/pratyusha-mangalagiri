@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { LocaleService } from '../../core/i18n/locale.service';
@@ -34,11 +34,69 @@ export class PublicLayout {
 
   protected readonly footerGroups = computed<readonly FooterLinkGroup[]>(() => {
     const copy = this.content();
+    const isTe = this.localeService.isTelugu();
+    const prefix = isTe ? '/te' : '';
     return [
       {
         heading: copy.footerNavigation,
         links: copy.nav,
       },
+      {
+        heading: copy.footerLegal,
+        links: [
+          { label: isTe ? 'గోప్యతా విధానం' : 'Privacy Policy', href: `${prefix}/privacy-policy` },
+          { label: isTe ? 'నిబంధనలు & షరతులు' : 'Terms & Conditions', href: `${prefix}/terms-and-conditions` },
+          { label: isTe ? 'రిఫండ్ విధానం' : 'Refund Policy', href: `${prefix}/refund-cancellation-policy` },
+          { label: isTe ? 'నిరాకరణ ప్రకటన' : 'Disclaimer', href: `${prefix}/disclaimer` },
+        ],
+      },
     ];
   });
+
+  @HostListener('document:contextmenu', ['$event'])
+  onContextMenu(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (target && (target.tagName === 'IMG' || target.closest('img') || target.classList.contains('image-card__frame'))) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('document:dragstart', ['$event'])
+  onDragStart(event: DragEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (target && (target.tagName === 'IMG' || target.closest('img'))) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+    const isOptionOrAlt = event.altKey;
+    const isShift = event.shiftKey;
+    const key = event.key.toLowerCase();
+
+    // Block F12 (DevTools)
+    if (event.key === 'F12') {
+      event.preventDefault();
+      return;
+    }
+
+    // Block Ctrl+U / Cmd+Alt+U (View Page Source)
+    if ((isCmdOrCtrl && key === 'u') || (isCmdOrCtrl && isOptionOrAlt && key === 'u')) {
+      event.preventDefault();
+      return;
+    }
+
+    // Block Ctrl+Shift+I / Cmd+Alt+I (Inspect Element)
+    // Block Ctrl+Shift+J / Cmd+Alt+J (Console)
+    // Block Ctrl+Shift+C / Cmd+Alt+C (Inspect Element selection)
+    if (
+      (isCmdOrCtrl && isShift && (key === 'i' || key === 'j' || key === 'c')) ||
+      (isCmdOrCtrl && isOptionOrAlt && (key === 'i' || key === 'j' || key === 'c'))
+    ) {
+      event.preventDefault();
+      return;
+    }
+  }
 }

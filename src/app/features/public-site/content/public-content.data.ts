@@ -65,7 +65,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     nav: [
       { label: 'Home', href: '#home' },
       { label: 'Collection', href: '#collection' },
-      { label: '21-Day Ritual', href: '#ritual' },
+      { label: '21-Day Crystal Rituals', href: '#ritual' },
       { label: 'About', href: '#about' },
       { label: 'FAQs', href: '#faq' },
       { label: 'Contact', href: '#contact' },
@@ -246,7 +246,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     aboutSupporting: 'A thoughtful approach to crystals, intention, and consistent daily practice.',
     aboutBody:
       'Pratyusha created this experience for people who want more than a bracelet. Her intended role is to help customers choose an intention and follow a structured 21-day practice.',
-    aboutBadge: 'PERSONAL GUIDANCE',
+    aboutBadge: '',
     founderAlt: 'Pratyusha wearing a traditional pink saree in a warm indoor setting',
     faqEyebrow: 'Frequently asked questions',
     faqTitle: 'Clear Answers Before You Choose',
@@ -281,8 +281,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     contactEyebrow: 'Enquiry',
     contactTitle: 'Ready to Ask About a Bracelet?',
     contactSupporting: 'Share the bracelet name, your city, and your question.',
-    contactBody:
-      'Secure submission will be enabled during backend integration. Prices, availability, payment, shipping, and delivery details are not yet published.',
+    contactBody: 'Submit your enquiry and we will respond using the contact details you provide.',
     contactNote: 'No contact details are displayed until the client verifies and approves them.',
     form: {
       heading: 'Your enquiry',
@@ -309,7 +308,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       consent: 'I agree that my details may be used to respond to this enquiry.',
       submit: 'Submit enquiry',
       optional: 'Optional',
-      privacy: 'This preview does not send, store, or log your information.',
+      privacy: 'Your enquiry details are saved in our private Google Sheet so we can respond.',
       required: 'Please complete this required field.',
       mobileInvalid: 'Enter a valid 10-digit Indian mobile number.',
       emailInvalid: 'Enter a valid email address.',
@@ -341,7 +340,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     nav: [
       { label: 'హోమ్', href: '#home' },
       { label: 'కలెక్షన్', href: '#collection' },
-      { label: '21-Day Ritual', href: '#ritual' },
+      { label: '21 రోజుల క్రిస్టల్ సాధన', href: '#ritual' },
       { label: 'మా గురించి', href: '#about' },
       { label: 'ప్రశ్నలు', href: '#faq' },
       { label: 'సంప్రదించండి', href: '#contact' },
@@ -527,7 +526,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     aboutSupporting: 'క్రిస్టల్స్, ఉద్దేశం, క్రమమైన రోజువారీ సాధనపై శ్రద్ధతో కూడిన విధానం.',
     aboutBody:
       'బ్రేస్‌లెట్ కంటే ఎక్కువ మార్గదర్శనం కోరుకునేవారి కోసం Pratyusha ఈ అనుభవాన్ని రూపొందించారు. ఒక ఉద్దేశాన్ని ఎంచుకుని, 21 రోజుల క్రమమైన సాధనను కొనసాగించడంలో సహాయం చేయడం ఆమె ఉద్దేశించిన పాత్ర.',
-    aboutBadge: 'వ్యక్తిగత మార్గదర్శనం',
+    aboutBadge: '',
     founderAlt: 'వెచ్చని ఇండోర్ వాతావరణంలో సాంప్రదాయ గులాబీ రంగు చీరలో Pratyusha',
     faqEyebrow: 'సాధారణ ప్రశ్నలు',
     faqTitle: 'ఎంచుకునే ముందు స్పష్టమైన సమాధానాలు',
@@ -562,8 +561,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
     contactEyebrow: 'ఎంక్వైరీ',
     contactTitle: 'బ్రేస్‌లెట్ గురించి అడగాలనుకుంటున్నారా?',
     contactSupporting: 'బ్రేస్‌లెట్ పేరు, మీ నగరం, మీ ప్రశ్నను పంచుకోండి.',
-    contactBody:
-      'బ్యాకెండ్ ఇంటిగ్రేషన్ సమయంలో సురక్షిత సబ్మిషన్ ప్రారంభిస్తాం. ధరలు, స్టాక్, చెల్లింపు, షిప్పింగ్, డెలివరీ వివరాలు ఇంకా ప్రచురించలేదు.',
+    contactBody: 'మీ విచారణను పంపండి. మీరు ఇచ్చిన సంప్రదింపు వివరాల ద్వారా మేము స్పందిస్తాము.',
     contactNote: 'క్లయింట్ నిర్ధారించి ఆమోదించిన తర్వాత మాత్రమే సంప్రదింపు వివరాలు చూపుతాం.',
     form: {
       heading: 'మీ ఎంక్వైరీ',
@@ -590,7 +588,7 @@ export const PUBLIC_CONTENT: Readonly<Record<SupportedLanguage, PublicPageCopy>>
       consent: 'ఈ ఎంక్వైరీకి సమాధానం ఇవ్వడానికి నా వివరాలను ఉపయోగించవచ్చని అంగీకరిస్తున్నాను.',
       submit: 'ఎంక్వైరీ పంపండి',
       optional: 'ఐచ్చికం',
-      privacy: 'ఈ ప్రివ్యూ మీ సమాచారాన్ని పంపదు, నిల్వ చేయదు లేదా లాగ్ చేయదు.',
+      privacy: 'మీకు స్పందించడానికి మీ విచారణ వివరాలను మా ప్రైవేట్ Google Sheetలో నిల్వ చేస్తాము.',
       required: 'దయచేసి ఈ అవసరమైన ఫీల్డ్‌ను పూర్తి చేయండి.',
       mobileInvalid: 'సరైన 10 అంకెల భారతీయ మొబైల్ నంబర్ నమోదు చేయండి.',
       emailInvalid: 'సరైన ఇమెయిల్ అడ్రస్ నమోదు చేయండి.',

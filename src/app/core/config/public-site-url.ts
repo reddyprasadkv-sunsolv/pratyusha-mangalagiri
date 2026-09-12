@@ -27,11 +27,24 @@ function documentSiteUrl(): string {
   const document = inject(DOCUMENT);
   const baseUrl = document.baseURI;
 
-  if (!baseUrl || baseUrl === 'null') {
-    throw new Error('PUBLIC_SITE_URL is unavailable. Configure it for Angular SSR.');
+  if (baseUrl && baseUrl.startsWith('http')) {
+    try {
+      return normalizePublicSiteUrl(baseUrl);
+    } catch {
+      // Fall through to env / default fallback
+    }
   }
 
-  return normalizePublicSiteUrl(baseUrl);
+  const envUrl = process.env['PUBLIC_SITE_URL'];
+  if (envUrl && (envUrl.startsWith('http://') || envUrl.startsWith('https://'))) {
+    try {
+      return normalizePublicSiteUrl(envUrl);
+    } catch {
+      // Fall through
+    }
+  }
+
+  return 'https://reddyprasadkv-sunsolv.github.io/pratyusha-mangalagiri';
 }
 
 export const PUBLIC_SITE_URL = new InjectionToken<string>('PUBLIC_SITE_URL', {

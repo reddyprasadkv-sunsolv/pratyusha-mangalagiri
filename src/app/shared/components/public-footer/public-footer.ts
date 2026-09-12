@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { FooterLinkGroup } from '../../models/public-site.models';
 
 @Component({
   selector: 'app-public-footer',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './public-footer.html',
   styleUrl: './public-footer.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18446582027"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'AW-18446582027');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TTW9HS8C');
+    </script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <title>Pratyusha</title>
     <base href="/" />
@@ -11,12 +35,26 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Sans+Telugu:wght@400;500;600;700&amp;family=Noto+Serif+Telugu:wght@600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v=3" />
-    <link rel="shortcut icon" href="favicon.svg?v=3" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=10" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=10" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=10" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=10" />
+    <link rel="shortcut icon" href="/favicon.ico?v=10" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=10" />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TTW9HS8C"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <app-root></app-root>
     <script src="api/supabase-config.js"></script>
+    <script src="api/enquiry-config.js"></script>
   </body>
 </html>

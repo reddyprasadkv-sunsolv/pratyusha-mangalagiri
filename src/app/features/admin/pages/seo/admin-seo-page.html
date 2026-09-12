@@ -1,11 +1,16 @@
 <header class="admin-page-header">
   <div>
     <h1>SEO & Meta Tags Manager</h1>
-    <p>Edit search engine page titles, meta descriptions, keywords, and OpenGraph social share cards.</p>
+    <p>Edit search engine page titles, meta descriptions, keywords, and OpenGraph social share cards ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }} view).</p>
   </div>
-  <div class="lang-switch-pills">
-    <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
-    <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+  <div class="header-actions" style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="button" class="reset-btn" (click)="resetDefaults()" title="Reset SEO overrides to default copy">
+      🔄 Reset Defaults
+    </button>
+    <div class="lang-switch-pills">
+      <button type="button" [class.active]="selectedLang() === 'en'" (click)="switchLang('en')">🇬🇧 English</button>
+      <button type="button" [class.active]="selectedLang() === 'te'" (click)="switchLang('te')">🇮🇳 Telugu</button>
+    </div>
   </div>
 </header>
 
@@ -15,14 +20,14 @@
 
 <div class="editor-grid">
   <div class="form-card">
-    <h3>Search Engine Meta Tags</h3>
+    <h3>Search Engine Meta Tags ({{ selectedLang() === 'en' ? 'English' : 'Telugu' }})</h3>
     <div class="form-group">
       <label>Brand Tagline (&lt;title&gt; brand suffix)</label>
       <input
         type="text"
         class="admin-input"
-        [value]="seo().brandTagline"
-        (change)="updateSeoField('brandTagline', $any($event.target).value)"
+        [ngModel]="brandTagline()"
+        (ngModelChange)="brandTagline.set($event)"
       />
     </div>
     <div class="form-group">
@@ -30,8 +35,8 @@
       <input
         type="text"
         class="admin-input"
-        [value]="seo().title"
-        (change)="updateSeoField('heroTitle', $any($event.target).value)"
+        [ngModel]="title()"
+        (ngModelChange)="title.set($event)"
       />
     </div>
     <div class="form-group">
@@ -39,9 +44,16 @@
       <textarea
         class="admin-input admin-textarea"
         rows="3"
-        [value]="seo().description"
-        (change)="updateSeoField('heroSupporting', $any($event.target).value)"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
       ></textarea>
     </div>
   </div>
 </div>
+
+<div class="admin-actions-bar" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+  <button type="button" class="admin-btn admin-btn-primary" (click)="saveSeoChanges()">
+    💾 Save Changes
+  </button>
+</div>
+
